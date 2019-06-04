@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { UsuariosListarComponent } from './usuarios-listar/usuarios-listar.component';
 import { UsuariosListarRoutingModule} from './usuarios-listar/usuarios-listar-routing.module';
 import { RouterModule } from '@angular/router';
+import { MatPaginatorModule, MatSortModule, MatTableModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,10 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule,
-    UsuariosListarRoutingModule
+    UsuariosListarRoutingModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule
   ],
   exports: [
     UsuariosListarComponent
