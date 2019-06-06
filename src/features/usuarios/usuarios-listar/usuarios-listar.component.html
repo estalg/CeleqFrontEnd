@@ -1,3 +1,61 @@
-<p>
-  usuarios-listar works!
-</p>
+<div class="container">
+
+  <h2>Usuarios</h2>
+
+  <div style="margin-top: -3rem">
+  <button mat-button class="botonAgregar">Agregar</button>
+
+  <mat-form-field class="barraBusqueda">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+  </mat-form-field>
+
+  <div class="mat-elevation-z2">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="cedula">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Cédula</th>
+          <td mat-cell *matCellDef="let usuario">{{usuario.cedula}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="correo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+          <td mat-cell *matCellDef="let usuario">{{usuario.correo}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="telefono">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+          <td mat-cell *matCellDef="let usuario">{{usuario.telefono}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell *matCellDef="let usuario">{{usuario.nombre}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="apellido1">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido 1</th>
+          <td mat-cell *matCellDef="let usuario">{{usuario.apellido1}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="apellido2">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido 2</th>
+          <td mat-cell *matCellDef="let usuario">{{usuario.apellido2}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let usuario">
+            <button mat-button class="botonesTabla">Detalles</button>
+            <button mat-button class="botonesTabla">Editar</button>
+            <button mat-button class="botonesTabla">Eliminar</button>
+          </td>
+
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+
+</div>

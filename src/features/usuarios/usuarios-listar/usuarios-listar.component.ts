@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {UsuarioEntidad} from '../../../shared/entidades/usuarioEntidad';
-import {MatDialogConfig, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {UsuariosService} from '../../../shared/servicios/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-usuarios-listar',
@@ -15,13 +16,26 @@ export class UsuariosListarComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<UsuarioEntidad>();
 
-  @ViewChild(MatSort, {read: true, static: false}) sort: MatSort;
-  @ViewChild(MatPaginator, {read: true, static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  dialogConfig: MatDialogConfig;
-  constructor() { }
+  constructor(private usuariosService: UsuariosService) { }
 
   ngOnInit() {
+    this.consultarUsuarios();
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  private consultarUsuarios = () => {
+    this.usuariosService.consultar().subscribe(usuarios => {
+      this.dataSource.data = usuarios as UsuarioEntidad[];
+      this.usuarios = this.dataSource.data;
+    })
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

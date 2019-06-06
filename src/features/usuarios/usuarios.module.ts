@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { UsuariosListarComponent } from './usuarios-listar/usuarios-listar.component';
 import { UsuariosListarRoutingModule} from './usuarios-listar/usuarios-listar-routing.module';
 import { RouterModule } from '@angular/router';
-import { MatPaginatorModule, MatSortModule, MatTableModule} from '@angular/material';
+import { MatPaginatorModule, MatSortModule, MatTableModule, MatInputModule, MatButtonModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,10 @@ import { MatPaginatorModule, MatSortModule, MatTableModule} from '@angular/mater
     UsuariosListarRoutingModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatButtonModule
   ],
   exports: [
     UsuariosListarComponent
