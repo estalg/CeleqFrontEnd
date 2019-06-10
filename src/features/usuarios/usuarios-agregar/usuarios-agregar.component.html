@@ -1,0 +1,92 @@
+<div class="container">
+  <form [formGroup]="formUsuario">
+
+    <h2>{{titulo}}</h2>
+    <mat-card>
+      <mat-grid-list cols="3" rowHeight="6rem">
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field>
+            <input matInput placeholder="Cédula" formControlName="cedula" required>
+            <mat-error *ngIf="cedula.errors?.required && cedula.touched">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="cedula.errors?.pattern && cedula.touched">
+              La cédula solo puede contener números
+            </mat-error>
+            <mat-error *ngIf="(cedula.errors?.minlength || cedula.errors?.maxlength) && cedula.touched">
+              La cédula debe ser de 9 dígitos
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field>
+            <input matInput placeholder="Correo" formControlName="correo" required>
+            <mat-error *ngIf="correo.errors?.required && correo.touched">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="correo.errors?.email && correo.touched">
+              El correo no cumple con un formto válido
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field>
+            <input matInput placeholder="Teléfono" formControlName="telefono">
+            <mat-error *ngIf="telefono.errors?.pattern && telefono.touched">
+              El teléfono solo puede contener números
+            </mat-error>
+            <mat-error *ngIf="(telefono.errors?.minlength || telefono.errors?.maxlength) && telefono.touched">
+              El teléfono debe ser de 8 dígitos
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field>
+            <input matInput placeholder="Nombre" formControlName="nombre" required>
+            <mat-error *ngIf="nombre.errors?.invalid && nombre.touched">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="nombre.errors?.pattern && nombre.touched">
+              Este campo solo puede contener letras
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field>
+            <input matInput placeholder="Primer apellido" formControlName="apellido1" required>
+            <mat-error *ngIf="apellido1.errors?.invalid && apellido1.touched">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="apellido1.errors?.pattern && apellido1.touched">
+              Este campo solo puede contener letras
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field>
+            <input matInput placeholder="Segundo apellido" formControlName="apellido2" required>
+            <mat-error *ngIf="apellido2.errors?.invalid && apellido2.touched">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="apellido2.errors?.pattern && apellido2.touched">
+              Este campo solo puede contener letras
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+
+    </mat-card>
+
+    <button mat-button type="submit" (click)="modificar()" *ngIf="modoForm === 'editar'" [disabled]="formUsuario.invalid">Aceptar</button>
+    <button mat-button type="submit" (click)="agregar()" *ngIf="modoForm === 'agregar'" [disabled]="formUsuario.invalid">Aceptar</button>
+
+    <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+  </form>
+</div>

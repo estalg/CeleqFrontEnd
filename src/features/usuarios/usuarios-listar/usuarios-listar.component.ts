@@ -9,6 +9,7 @@ import {UsuariosService} from '../../../shared/servicios/usuarios/usuarios.servi
   styleUrls: ['./usuarios-listar.component.css']
 })
 export class UsuariosListarComponent implements OnInit {
+  usuarioSeleccionado: UsuarioEntidad;
 
   usuarios: Array<UsuarioEntidad>;
 
@@ -36,6 +37,12 @@ export class UsuariosListarComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  private eliminar(cedula: string){
+    this.usuariosService.eliminar(cedula).subscribe(res => {
+      this.consultarUsuarios();
+    });
   }
 
 }
