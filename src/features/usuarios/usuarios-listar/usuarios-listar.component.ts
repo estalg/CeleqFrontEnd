@@ -1,7 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {UsuarioEntidad} from '../../../shared/entidades/usuarioEntidad';
-import { MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {UsuariosService} from '../../../shared/servicios/usuarios/usuarios.service';
+
+import {DialogoConfirmacionComponent} from '../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
 
 @Component({
   selector: 'app-usuarios-listar',
@@ -20,7 +22,8 @@ export class UsuariosListarComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private usuariosService: UsuariosService) { }
+  constructor(private usuariosService: UsuariosService,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     this.consultarUsuarios();
@@ -43,6 +46,20 @@ export class UsuariosListarComponent implements OnInit {
     this.usuariosService.eliminar(cedula).subscribe(res => {
       this.consultarUsuarios();
     });
+  }
+
+  private abrirDialogoConfirmacion(cedula: string) {
+    const dialogRef = this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: '¿Seguro que desea eliminar el usuario?'
+      });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.eliminar(cedula);
+      }
+    })
   }
 
 }

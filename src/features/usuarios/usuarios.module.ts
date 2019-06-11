@@ -4,7 +4,7 @@ import { UsuariosListarComponent } from './usuarios-listar/usuarios-listar.compo
 import { UsuariosListarRoutingModule} from './usuarios-listar/usuarios-listar-routing.module';
 import { RouterModule } from '@angular/router';
 import { MatPaginatorModule, MatSortModule, MatTableModule, MatInputModule, MatButtonModule,
-         MatFormFieldModule, MatGridListModule, MatCardModule } from '@angular/material';
+         MatFormFieldModule, MatGridListModule, MatCardModule, MatDialogModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsuariosAgregarComponent } from './usuarios-agregar/usuarios-agregar.component';
@@ -31,7 +31,8 @@ import { UsuariosAgregarRoutingModule } from './usuarios-agregar/usuarios-agrega
     MatGridListModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule
   ],
   exports: [
     UsuariosListarComponent,

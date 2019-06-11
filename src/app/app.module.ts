@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { UsuariosModule } from '../features/usuarios/usuarios.module';
+import { DialogoConfirmacionModule } from '../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.module';
 import { AppRoutingModule} from './app-routing.module';
 
 @NgModule({
@@ -13,7 +14,8 @@ import { AppRoutingModule} from './app-routing.module';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    UsuariosModule
+    UsuariosModule,
+    DialogoConfirmacionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
