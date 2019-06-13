@@ -49,7 +49,7 @@ export class UsuariosAgregarComponent implements OnInit {
       ]],
       nombre: ['', [
         Validators.required,
-        Validators.pattern('[A-Za-záéíóú]*')
+        Validators.pattern('[A-Za-záéíóúÁÉÍÓÚ]*')
       ]],
       apellido1: ['', [
         Validators.required,
@@ -116,6 +116,7 @@ export class UsuariosAgregarComponent implements OnInit {
     usuarioNuevo.nombre = this.formUsuario.controls.nombre.value;
     usuarioNuevo.apellido1 = this.formUsuario.controls.apellido1.value;
     usuarioNuevo.apellido2 = this.formUsuario.controls.apellido2.value;
+    usuarioNuevo.contrasenna = '';
 
     this.usuarioService.agregar(usuarioNuevo).subscribe(result => {
       this._routeService.navigate(['/usuarios']);

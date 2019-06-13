@@ -1,0 +1,48 @@
+<div class="container">
+  <form [formGroup]="formCristaleria">
+    <h2>{{titulo}}</h2>
+    <mat-card class="formContainer">
+
+      <mat-form-field>
+        <input matInput placeholder="Nombre" formControlName="nombre" required>
+        <mat-error *ngIf="nombre.errors?.required && nombre.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Material" formControlName="material" required>
+        <mat-error *ngIf="material.errors?.required && material.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Capacidad" formControlName="capacidad" required>
+        <mat-error *ngIf="capacidad.errors?.required && capacidad.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Cantidad" formControlName="cantidad" required>
+        <mat-error *ngIf="cantidad.errors?.required && cantidad.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Caja" formControlName="caja" required>
+        <mat-error *ngIf="caja.errors?.required && caja.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+    </mat-card>
+
+    <button mat-button type="submit" (click)="modificar()" *ngIf="modoForm === 'editar'" [disabled]="formCristaleria.invalid">Aceptar</button>
+    <button mat-button type="submit" (click)="agregar()" *ngIf="modoForm === 'agregar'" [disabled]="formCristaleria.invalid">Aceptar</button>
+
+    <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+  </form>
+</div>
