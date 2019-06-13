@@ -1,0 +1,55 @@
+table {
+  text-align: center !important;
+  width: 100%;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-header-cell {
+  text-align: center;
+}
+
+.barraBusqueda {
+  display: flex;
+  justify-content: flex-end;
+  right: 10px;
+}
+
+.botonesTabla {
+  margin-right: 5px;
+}
+
+.botonAgregar {
+  position: relative;
+  top: 50px;
+  z-index: 2;
+}
+
+.mat-column-nombre{
+  width: 15%;
+}
+
+.mat-column-pureza{
+  width: 15%;
+}
+
+.mat-column-cantidad{
+  width: 15%;
+}
+
+.mat-column-estado{
+  width: 15%;
+}
+
+.mat-column-estante{
+  width: 15%;
+}
+
+mat-column-acciones{
+  width: 15%;
+  display: flex;
+  align-items: center;
+}

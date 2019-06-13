@@ -1,0 +1,7 @@
+export class ReactivoEntidad {
+  nombre: string;
+  pureza: string;
+  cantidad: number;
+  estado: string;
+  estante: string;
+}

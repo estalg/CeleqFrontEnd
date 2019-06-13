@@ -1,0 +1,62 @@
+<div class="container">
+  <form [formGroup]="formReactivo">
+
+    <h2>{{titulo}}</h2>
+    <mat-card>
+      <mat-grid-list cols="3" rowHeight="6rem">
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field>
+            <input matInput placeholder="Nombre" formControlName="nombre" required>
+            <mat-error *ngIf="nombre.errors?.required && nombre.touched">
+              Este campo es obligatorio
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field>
+            <input matInput placeholder="Pureza" formControlName="pureza" required>
+            <mat-error *ngIf="pureza.errors?.required && pureza.touched">
+              Este campo es obligatorio
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field>
+            <input matInput placeholder="Cantidad" formControlName="cantidad">
+            <mat-error *ngIf="cantidad.errors?.pattern && cantidad.touched">
+              La cantidad solo puede contener números
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field>
+            <input matInput placeholder="Estado" formControlName="estado" required>
+            <mat-error *ngIf="estado.errors?.pattern && estado.touched">
+              Este campo solo puede contener letras
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field>
+            <input matInput placeholder="Estante" formControlName="estante" required>
+            <mat-error *ngIf="estante.errors?.pattern && estante.touched">
+              Este campo solo puede contener letras
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+
+    </mat-card>
+
+    <button mat-button type="submit" (click)="modificar()" *ngIf="modoForm === 'editar'" [disabled]="formReactivo.invalid">Aceptar</button>
+    <button mat-button type="submit" (click)="agregar()" *ngIf="modoForm === 'agregar'" [disabled]="formReactivo.invalid">Aceptar</button>
+
+    <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+  </form>
+</div>
