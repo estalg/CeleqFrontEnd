@@ -6,6 +6,8 @@ import { UsuariosModule } from '../features/usuarios/usuarios.module';
 import { DialogoConfirmacionModule } from '../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.module';
 import { AppRoutingModule} from './app-routing.module';
 import { CristaleriaModule } from '../features/regencia/cristaleria/cristaleria.module';
+import { HeaderModule } from '../features/header/header.module';
+import { MenuModule } from '../features/menu/menu.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { CristaleriaModule } from '../features/regencia/cristaleria/cristaleria.
     AppRoutingModule,
     UsuariosModule,
     CristaleriaModule,
-    DialogoConfirmacionModule
+    DialogoConfirmacionModule,
+    HeaderModule,
+    MenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
