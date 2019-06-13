@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { UsuariosModule } from '../features/usuarios/usuarios.module';
 import { DialogoConfirmacionModule } from '../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.module';
 import { AppRoutingModule} from './app-routing.module';
+import { CristaleriaModule } from '../features/regencia/cristaleria/cristaleria.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { AppRoutingModule} from './app-routing.module';
     HttpClientModule,
     AppRoutingModule,
     UsuariosModule,
+    CristaleriaModule,
     DialogoConfirmacionModule
   ],
   providers: [],

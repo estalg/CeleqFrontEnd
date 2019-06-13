@@ -49,7 +49,7 @@ export class UsuariosAgregarComponent implements OnInit {
       ]],
       nombre: ['', [
         Validators.required,
-        Validators.pattern('[A-Za-záéíóú]*')
+        Validators.pattern('[A-Za-záéíóúÁÉÍÓÚ]*')
       ]],
       apellido1: ['', [
         Validators.required,

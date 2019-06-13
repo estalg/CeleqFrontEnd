@@ -1,0 +1,57 @@
+<div class="container">
+
+  <h2>Cristalería</h2>
+
+  <div style="margin-top: -3rem">
+
+    <button mat-button class="botonAgregar" [routerLink]="['/regencia/cristaleria', 'agregar', 'nuevo', 'nuevo', 'nuevo']">Agregar</button>
+
+    <mat-form-field class="barraBusqueda">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+    </mat-form-field>
+
+    <div class="mat-elevation-z2">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell *matCellDef="let cristaleria">{{cristaleria.nombre}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="material">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Material</th>
+          <td mat-cell *matCellDef="let cristaleria">{{cristaleria.material}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="capacidad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Capacidad</th>
+          <td mat-cell *matCellDef="let cristaleria">{{cristaleria.capacidad}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="cantidad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad disponible</th>
+          <td mat-cell *matCellDef="let cristaleria">{{cristaleria.cantidad}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="caja">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Caja</th>
+          <td mat-cell *matCellDef="let cristaleria">{{cristaleria.caja}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let cristaleria">
+            <button mat-button class="botonesTabla" [routerLink]="['/regencia/cristaleria', 'visualizar', cristaleria.nombre, cristaleria.material, cristaleria.capacidad]">Detalles</button>
+            <button mat-button class="botonesTabla" [routerLink]="['/regencia/cristaleria', 'editar', cristaleria.nombre, cristaleria.material, cristaleria.capacidad]">Editar</button>
+            <button mat-button class="botonesTabla" (click)="abrirDialogoConfirmacion(cristaleria.nombre, cristaleria.material, cristaleria.capacidad)">Eliminar</button>
+          </td>
+
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+  </div>
+</div>
