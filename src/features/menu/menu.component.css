@@ -1,0 +1,13 @@
+.buttonContainer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.buttonContainer>* {
+  flex: 1 1 160px;
+}
+
+button{
+  margin-right: 5px;
+}
