@@ -8,6 +8,7 @@ import { AppRoutingModule} from './app-routing.module';
 import { CristaleriaModule } from '../features/regencia/cristaleria/cristaleria.module';
 import { HeaderModule } from '../features/header/header.module';
 import { MenuModule } from '../features/menu/menu.module';
+import {ReactivosModule} from '../features/regencia/reactivos/reactivos.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { MenuModule } from '../features/menu/menu.module';
     AppRoutingModule,
     UsuariosModule,
     CristaleriaModule,
+    ReactivosModule,
     DialogoConfirmacionModule,
     HeaderModule,
     MenuModule
