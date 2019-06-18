@@ -9,6 +9,7 @@ import { MatPaginatorModule, MatSortModule, MatTableModule, MatInputModule, MatB
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
+import { SolicitudesRegenciaReactivos } from '../solicitudes-regencia/solicitudes-regencia-agregar/solicitudes-regencia-agregar.component';
 
 @NgModule({
   declarations: [
