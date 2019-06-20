@@ -34,27 +34,27 @@ export class ReactivosAgregarComponent implements OnInit {
     this.formReactivo = this.fb.group({
       nombre: ['', [
         Validators.required,
-        Validators.pattern('[A-Za-záéíóúÁÉÍÓÚ]*')
+        Validators.pattern('[A-Za-z0-9áéíóúÁÉÍÓÚ[ \-\-\(\)\.\%\+\:\,]*')
       ]],
       pureza: ['', [
         Validators.required,
-        Validators.pattern('[A-Za-záéíóúÁÉÍÓÚ]*')
+        Validators.pattern('[A-Za-z0-9áéíóúÁÉÍÓÚ[ \.\%]*')
       ]],
       cantidad: ['', [
-        Validators.pattern('[0-9]*\.?[0-9]+?')
+        Validators.pattern('[0-9]*')
       ]],
       estado: ['', [
         Validators.required,
-        Validators.pattern('[A-Za-záéíóúÁÉÍÓÚ]*')
+        Validators.pattern('[A-Za-záéíóúÁÉÍÓÚ[\.\/]*')
       ]],
       estante: ['', [
         Validators.required,
-        Validators.pattern('[A-Za-záéíóúÁÉÍÓÚ]*')
+        Validators.pattern('[[A-Za-z]*[0-9]*]*')
       ]],
     });
 
     if (this.modoForm === 'agregar') {
-      this.titulo = 'Agregar Usuarios';
+      this.titulo = 'Agregar Reactivos';
     } else {
 
       this.reactivoService.consultarReactivo(this.route.snapshot.params.nombre, this.route.snapshot.params.pureza).then(res => {

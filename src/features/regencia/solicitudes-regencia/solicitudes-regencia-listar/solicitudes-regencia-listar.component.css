@@ -1,0 +1,84 @@
+table {
+  text-align: center !important;
+  width: 100%;
+}
+
+tr.mat-header-row {
+  background-color: #78909C !important;
+}
+
+th.mat-header-cell {
+  color: white !important;
+}
+
+.mat-row:nth-child(even){
+  background-color:white;
+  font-size: medium;
+}
+
+.mat-row:nth-child(odd){
+  background-color: #ECEFF1;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-header-cell {
+  text-align: center;
+}
+
+.barraBusqueda {
+  display: flex;
+  justify-content: flex-end;
+  right: 10px;
+}
+
+.botonesTabla {
+  margin-right: 5px;
+  background-color: #78909C;
+  color: white;
+}
+
+.botonAgregar {
+  position: relative;
+  top: 50px;
+  z-index: 2;
+  background-color: #78909C;
+  color: white;
+}
+
+.mat-column-consecutivo{
+  width: 15%;
+}
+
+.mat-column-fechaSolicitud{
+  width: 15%;
+}
+
+.mat-column-nombresolicitante{
+  width: 15%;
+}
+
+.mat-column-nombreEncargado{
+  width: 15%;
+}
+
+.mat-column-correoSolicitante{
+  width: 15%;
+}
+
+.mat-column-unidad{
+  width: 10%;
+}
+
+.mat-column-estado{
+  width: 15%;
+}
+
+mat-column-acciones{
+  width: 0%;
+  display: flex;
+  align-items: center;
+}
