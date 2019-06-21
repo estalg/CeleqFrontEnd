@@ -41,40 +41,32 @@ th.mat-header-cell {
   color: white;
 }
 
-.botonAgregar {
-  position: relative;
-  top: 50px;
-  z-index: 2;
-  background-color: #78909C;
-  color: white;
-}
-
 .mat-column-consecutivo{
-  width: 15%;
+  width: auto;
 }
 
 .mat-column-fechaSolicitud{
-  width: 15%;
+  width: auto;
 }
 
 .mat-column-nombresolicitante{
-  width: 15%;
+  width: auto;
 }
 
 .mat-column-nombreEncargado{
-  width: 15%;
+  width: auto;
 }
 
 .mat-column-correoSolicitante{
-  width: 15%;
+  width: auto;
 }
 
 .mat-column-unidad{
-  width: 10%;
+  width: auto;
 }
 
 .mat-column-estado{
-  width: 15%;
+  width: auto;
 }
 
 mat-column-acciones{
