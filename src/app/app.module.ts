@@ -10,6 +10,7 @@ import { HeaderModule } from '../features/header/header.module';
 import { MenuModule } from '../features/menu/menu.module';
 import { SolicitudesRegenciaModule } from '../features/regencia/solicitudes-regencia/solicitudes-regencia.module';
 import {ReactivosModule} from '../features/regencia/reactivos/reactivos.module';
+import { LocalizacionesModule } from '../features/vinculo externo/localizaciones/localizaciones.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,8 @@ import {ReactivosModule} from '../features/regencia/reactivos/reactivos.module';
     UsuariosModule,
     CristaleriaModule,
     ReactivosModule,
+    ReactivosModule,
+    LocalizacionesModule,
     DialogoConfirmacionModule,
     HeaderModule,
     MenuModule,

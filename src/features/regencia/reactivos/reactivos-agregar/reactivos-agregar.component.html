@@ -1,56 +1,42 @@
 <div class="container">
   <form [formGroup]="formReactivo">
-
     <h2>{{titulo}}</h2>
-    <mat-card>
-      <mat-grid-list cols="3" rowHeight="6rem">
+    <mat-card class="formContainer">
 
-        <mat-grid-tile colspan="1" rowspan="1">
           <mat-form-field>
             <input matInput placeholder="Nombre" formControlName="nombre" required>
             <mat-error *ngIf="nombre.errors?.required && nombre.touched">
               Este campo es obligatorio
             </mat-error>
           </mat-form-field>
-        </mat-grid-tile>
 
-        <mat-grid-tile colspan="1" rowspan="1">
           <mat-form-field>
             <input matInput placeholder="Pureza" formControlName="pureza" required>
             <mat-error *ngIf="pureza.errors?.required && pureza.touched">
               Este campo es obligatorio
             </mat-error>
           </mat-form-field>
-        </mat-grid-tile>
 
-        <mat-grid-tile colspan="1" rowspan="1">
           <mat-form-field>
             <input matInput placeholder="Cantidad" formControlName="cantidad">
             <mat-error *ngIf="cantidad.errors?.pattern && cantidad.touched">
-              La cantidad solo puede contener números
+              El formato no es correcto
             </mat-error>
           </mat-form-field>
-        </mat-grid-tile>
 
-        <mat-grid-tile colspan="1" rowspan="1">
           <mat-form-field>
             <input matInput placeholder="Estado" formControlName="estado" required>
             <mat-error *ngIf="estado.errors?.pattern && estado.touched">
-              Este campo solo puede contener letras
+              El fromato no es correcto
             </mat-error>
           </mat-form-field>
-        </mat-grid-tile>
 
-        <mat-grid-tile colspan="1" rowspan="1">
           <mat-form-field>
             <input matInput placeholder="Estante" formControlName="estante" required>
             <mat-error *ngIf="estante.errors?.pattern && estante.touched">
-              Este campo solo puede contener letras
+              El formato no es correcto
             </mat-error>
           </mat-form-field>
-        </mat-grid-tile>
-
-      </mat-grid-list>
 
     </mat-card>
 

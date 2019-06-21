@@ -4,9 +4,9 @@ export class SolicitudRegenciaEntidad {
   fechaSolicitud: Date;
   fechaAprobacion: Date;
   estado: string;
+  nombreSolicitante: string;
+  nombreEncargado: string;
+  correoSolicitante: string;
   observacion: string;
-  solicitante: string;
-  encargado: string;
-  regente: string;
   unidad: string;
 }
