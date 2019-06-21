@@ -16,4 +16,8 @@ export class SolicitudesRegenciaService {
   consultar(): Observable<SolicitudRegenciaEntidad[]> {
     return this.http.get<SolicitudRegenciaEntidad[]>(this.urlEndPoint + '/consultar-solicitudes');
   }
+
+  consultarPendientes(): Observable<SolicitudRegenciaEntidad[]> {
+    return this.http.get<SolicitudRegenciaEntidad[]>(this.urlEndPoint + '/consultar-solicitudes-pendientes');
+  }
 }

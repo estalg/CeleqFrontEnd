@@ -4,7 +4,7 @@ import {SolicitudesRegenciaListarComponent} from './solicitudes-regencia-listar.
 
 const routes: Routes = [
   {
-    path: 'regencia/solicitudes',
+    path: 'regencia/solicitudes/:modo',
     component: SolicitudesRegenciaListarComponent,
   }
 ];
