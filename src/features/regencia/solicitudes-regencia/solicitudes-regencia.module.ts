@@ -11,12 +11,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UsuariosAgregarRoutingModule} from '../../usuarios/usuarios-agregar/usuarios-agregar-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SolicitudesRegenciaReactivos} from './solicitudes-regencia-agregar/solicitudes-regencia-agregar.component';
+import {SolicitudesRegenciaCristaleria} from './solicitudes-regencia-agregar/solicitudes-regencia-agregar.component';
 
 @NgModule({
   declarations: [
     SolicitudesRegenciaListarComponent,
     SolicitudesRegenciaAgregarComponent,
-    SolicitudesRegenciaReactivos
+    SolicitudesRegenciaReactivos,
+    SolicitudesRegenciaCristaleria
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ import {SolicitudesRegenciaReactivos} from './solicitudes-regencia-agregar/solic
     SolicitudesRegenciaAgregarComponent
   ],
   entryComponents: [
-    SolicitudesRegenciaReactivos
+    SolicitudesRegenciaReactivos,
+    SolicitudesRegenciaCristaleria
   ]
 })
 export class SolicitudesRegenciaModule { }

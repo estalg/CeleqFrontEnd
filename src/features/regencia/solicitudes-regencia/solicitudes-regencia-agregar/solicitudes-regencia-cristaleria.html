@@ -11,7 +11,7 @@
                     (change)="$event ? selection.toggle(row) : null"
                     [checked]="selection.isSelected(row)"
                     [aria-label]="checkboxLabel(row)"
-      color="primary">
+                    color="primary">
 
       </mat-checkbox>
     </td>
@@ -19,27 +19,27 @@
 
   <ng-container matColumnDef="nombre">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
-    <td mat-cell *matCellDef="let reactivo">{{reactivo.nombre}}</td>
+    <td mat-cell *matCellDef="let cristaleria">{{cristaleria.nombre}}</td>
   </ng-container>
 
-  <ng-container matColumnDef="pureza">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Pureza</th>
-    <td mat-cell *matCellDef="let reactivo">{{reactivo.pureza}}</td>
+  <ng-container matColumnDef="material">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Material</th>
+    <td mat-cell *matCellDef="let cristaleria">{{cristaleria.material}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="capacidad">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Capacidad</th>
+    <td mat-cell *matCellDef="let cristaleria">{{cristaleria.capacidad}}</td>
   </ng-container>
 
   <ng-container matColumnDef="cantidad">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
-    <td mat-cell *matCellDef="let reactivo">{{reactivo.cantidad}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="estado">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
-    <td mat-cell *matCellDef="let reactivo">{{reactivo.estado}}</td>
+    <td mat-cell *matCellDef="let cristaleria">{{cristaleria.cantidad}}</td>
   </ng-container>
 
-  <ng-container matColumnDef="estante">
+  <ng-container matColumnDef="caja">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Estante</th>
-    <td mat-cell *matCellDef="let reactivo">{{reactivo.estante}}</td>
+    <td mat-cell *matCellDef="let cristaleria">{{cristaleria.caja}}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

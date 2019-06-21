@@ -34,11 +34,11 @@ export class ReactivosAgregarComponent implements OnInit {
     this.formReactivo = this.fb.group({
       nombre: ['', [
         Validators.required,
-        Validators.pattern('[A-Za-záéíóúÁÉÍÓÚ]*')
+        Validators.pattern('[A-Za-záéíóúÁÉÍÓÚ \- \( \)]*')
       ]],
       pureza: ['', [
         Validators.required,
-        Validators.pattern('[A-Za-záéíóúÁÉÍÓÚ]*')
+        Validators.pattern('[A-Za-záéíóúÁÉÍÓÚ\.\, ]*')
       ]],
       cantidad: ['', [
         Validators.pattern('[0-9]*\.?[0-9]+?')
@@ -49,7 +49,7 @@ export class ReactivosAgregarComponent implements OnInit {
       ]],
       estante: ['', [
         Validators.required,
-        Validators.pattern('[A-Za-záéíóúÁÉÍÓÚ]*')
+        Validators.pattern('[A-Za-záéíóúÁÉÍÓÚ0-9\,]*')
       ]],
     });
 

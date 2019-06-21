@@ -2,11 +2,39 @@
 
   <h2>{{titulo}}</h2>
 
+  <form [formGroup]="formSolicitud">
+    <mat-card class="formContainer">
+      <mat-form-field>
+        <input matInput placeholder="Nombre solicitante" formControlName="nombreSolicitante" required>
+        <mat-error *ngIf="nombreSolicitante.errors?.required && nombreSolicitante.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Correo solicitante" formControlName="correoSolicitante" required>
+        <mat-error *ngIf="correoSolicitante.errors?.required && correoSolicitante.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="correoSolicitante.errors?.email && correoSolicitante.touched">
+          El correo no cumple con un formto válido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Nombre encargado" formControlName="nombreEncargado">
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea matInput placeholder="Observaciones"></textarea>
+      </mat-form-field>
+    </mat-card>
+  </form>
 
   <h3>Reactivos a solicitar</h3>
 
   <button mat-stroked-button class="botonAgregar" (click)="openDialogReactivos()">Agregar reactivos</button>
-  <table mat-table [dataSource]="dataSourceReactivos" matSort>
+  <table mat-table [dataSource]="dataSourceReactivos" matSort *ngIf="dataSourceReactivos.data.length > 0">
 
     <ng-container matColumnDef="nombre">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
@@ -20,17 +48,58 @@
 
     <ng-container matColumnDef="cantidad">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
-      <td mat-cell>0</td>
+      <td mat-cell *matCellDef="let reactivo">
+        <input matInput placeholder="Seleccione la cantidad" (keyup)="onKey($event, reactivo)" type="number">
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef>Acciones</th>
-      <td mat-cell *matCellDef="let usuario">
-        <button mat-stroked-button class="botonesTabla">Eliminar</button>
+      <td mat-cell *matCellDef="let reactivo">
+        <button mat-stroked-button class="botonesTabla" (click)="borrarReactivo(reactivo)">Eliminar</button>
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="reactivosColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: reactivosColumns;"></tr>
+
+  </table>
+
+
+  <h3>Cristalería a solicitar</h3>
+
+  <button mat-stroked-button class="botonAgregar" (click)="openDialogCristaleria()">Agregar cristaleria</button>
+  <table mat-table [dataSource]="dataSourceCristaleria" matSort *ngIf="dataSourceCristaleria.data.length > 0">
+
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+      <td mat-cell *matCellDef="let cristaleria">{{cristaleria.nombre}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="material">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Material</th>
+      <td mat-cell *matCellDef="let cristaleria">{{cristaleria.material}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="capacidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Capacidad</th>
+      <td mat-cell *matCellDef="let cristaleria">{{cristaleria.capacidad}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="cantidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
+      <td mat-cell *matCellDef="let cristaleria">
+        <input matInput placeholder="Seleccione la cantidad" (keyup)="onKey($event, cristaleria)" type="number">
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let cristaleria">
+        <button mat-stroked-button class="botonesTabla" (click)="borrarCristaleria(cristaleria)">Eliminar</button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="cristaleriaColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: cristaleriaColumns;"></tr>
 
   </table>
 </div>
