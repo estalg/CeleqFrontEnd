@@ -55,7 +55,8 @@ export class CristaleriaAgregarComponent implements OnInit {
       this.titulo = 'Agregar Cristalería';
     } else {
 
-      this.cristaleriaService.consultarCristaleria(this._route.snapshot.params.nombre, this._route.snapshot.params.material, this._route.snapshot.params.capacidad).then(res =>{
+      // tslint:disable-next-line:max-line-length
+      this.cristaleriaService.consultarCristaleria(this._route.snapshot.params.nombre, this._route.snapshot.params.material, this._route.snapshot.params.capacidad).then(res => {
         this.cristaleria = res;
         this.formCristaleria.controls.nombre.setValue(this.cristaleria.nombre);
         this.formCristaleria.controls.material.setValue(this.cristaleria.material);
@@ -106,7 +107,7 @@ export class CristaleriaAgregarComponent implements OnInit {
 
     this.cristaleriaService.agregar(cristaleriaNueva).subscribe(result => {
       this._routeService.navigate(['/regencia/cristaleria']);
-    })
+    });
   }
 
   async modificar() {
@@ -119,6 +120,6 @@ export class CristaleriaAgregarComponent implements OnInit {
 
     this.cristaleriaService.modificar(cristaleriaModificada).subscribe(result => {
       this._routeService.navigate(['/regencia/cristaleria']);
-    })
+    });
   }
 }

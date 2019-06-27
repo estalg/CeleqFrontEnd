@@ -52,7 +52,7 @@ export class ReactivosListarComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogoConfirmacionComponent,
       {
         width: '350px',
-        data: '¿Seguro que desea eliminar el reactivo?'
+        data: {mensaje: '¿Seguro que desea eliminar el reactivo?', tipoMensaje: 'confirmacion'}
       });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -61,4 +61,5 @@ export class ReactivosListarComponent implements OnInit {
       }
     });
   }
+
 }

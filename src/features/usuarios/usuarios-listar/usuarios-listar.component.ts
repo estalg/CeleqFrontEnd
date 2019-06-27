@@ -35,7 +35,7 @@ export class UsuariosListarComponent implements OnInit {
     this.usuariosService.consultar().subscribe(usuarios => {
       this.dataSource.data = usuarios as UsuarioEntidad[];
       this.usuarios = this.dataSource.data;
-    })
+    });
   }
 
   applyFilter(filterValue: string) {
@@ -52,14 +52,14 @@ export class UsuariosListarComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogoConfirmacionComponent,
       {
         width: '350px',
-        data: '¿Seguro que desea eliminar el usuario?'
+        data: {mensaje: '¿Seguro que desea eliminar el usuario?', tipoMensaje: 'confirmacion'}
       });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if (result) {
         this.eliminar(cedula);
       }
-    })
+    });
   }
 
 }
