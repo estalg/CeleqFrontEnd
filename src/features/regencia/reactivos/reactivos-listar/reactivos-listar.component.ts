@@ -32,10 +32,14 @@ export class ReactivosListarComponent implements OnInit {
   }
 
   private consultarReactivos = () => {
-    this.reactivosService.consultar().subscribe(reactivos => {
+    this.reactivosService.consultar().subscribe(
+      reactivos => {
       this.dataSource.data = reactivos as ReactivoEntidad[];
       this.reactivos = this.dataSource.data;
-    });
+    },
+      error => {
+        this.abrirDialogoError('Error al cargar la lista');
+      });
   }
 
   applyFilter(filterValue: string) {
@@ -43,9 +47,14 @@ export class ReactivosListarComponent implements OnInit {
   }
 
   private eliminar(nombre: string, pureza: string) {
-    this.reactivosService.eliminar(nombre, pureza).subscribe(res => {
+    this.reactivosService.eliminar(nombre, pureza).subscribe(
+      res => {
       this.consultarReactivos();
-    });
+      this.abrirDialogoAfirmacion('Reactivo eliminado correctamente');
+    },
+      error => {
+        this.abrirDialogoError('Error al eliminar reactivo');
+      });
   }
 
   private abrirDialogoConfirmacion(nombre: string, pureza: string) {
@@ -62,4 +71,18 @@ export class ReactivosListarComponent implements OnInit {
     });
   }
 
+  private abrirDialogoError(mensaje: string) {
+    this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'error'}
+      });
+  }
+  private abrirDialogoAfirmacion(mensaje: string) {
+    const dialogRef = this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'afirmacion'}
+      });
+  }
 }

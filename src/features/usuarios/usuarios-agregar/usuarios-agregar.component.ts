@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UsuarioEntidad} from '../../../shared/entidades/usuarioEntidad';
 import {UsuariosService} from '../../../shared/servicios/usuarios/usuarios.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {DialogoConfirmacionComponent} from '../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-usuarios-agregar',
@@ -24,11 +26,12 @@ export class UsuariosAgregarComponent implements OnInit {
 
   constructor(private usuarioService: UsuariosService,
               private fb: FormBuilder,
-              private _routeService: Router,
-              private _route: ActivatedRoute) { }
+              private routeService: Router,
+              private route: ActivatedRoute,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.modoForm = this._route.snapshot.params.modo;
+    this.modoForm = this.route.snapshot.params.modo;
     this.usuario = new UsuarioEntidad();
 
     this.formUsuario = this.fb.group({
@@ -65,7 +68,7 @@ export class UsuariosAgregarComponent implements OnInit {
       this.titulo = 'Agregar Usuarios';
     } else {
 
-      this.usuarioService.consultarUsuario(this._route.snapshot.params.cedula).then(res =>{
+      this.usuarioService.consultarUsuario(this.route.snapshot.params.cedula).then(res => {
         this.usuario = res;
         this.formUsuario.controls.cedula.setValue(this.usuario.cedula);
         this.formUsuario.controls.correo.setValue(this.usuario.correo);
@@ -104,12 +107,12 @@ export class UsuariosAgregarComponent implements OnInit {
     return this.formUsuario.get('apellido2');
   }
 
-  private cancelar(){
-    this._routeService.navigate(['/usuarios']);
+  private cancelar() {
+    this.routeService.navigate(['/usuarios']);
   }
 
   async agregar() {
-    const usuarioNuevo = new UsuarioEntidad;
+    const usuarioNuevo = new UsuarioEntidad();
     usuarioNuevo.cedula = this.formUsuario.controls.cedula.value;
     usuarioNuevo.correo = this.formUsuario.controls.correo.value;
     usuarioNuevo.telefono = this.formUsuario.controls.telefono.value;
@@ -118,9 +121,14 @@ export class UsuariosAgregarComponent implements OnInit {
     usuarioNuevo.apellido2 = this.formUsuario.controls.apellido2.value;
     usuarioNuevo.contrasenna = '';
 
-    this.usuarioService.agregar(usuarioNuevo).subscribe(result => {
-      this._routeService.navigate(['/usuarios']);
-    })
+    this.usuarioService.agregar(usuarioNuevo).subscribe(
+      result => {
+      this.routeService.navigate(['/usuarios']);
+      this.abrirDialogoAfirmacion('Usuario agregado correctamente');
+    },
+      error => {
+        this.abrirDialogoError('Error al agregar usuario, inténtelo de nuevo');
+      });
   }
 
   async modificar() {
@@ -133,9 +141,29 @@ export class UsuariosAgregarComponent implements OnInit {
     usuarioModificado.apellido2 = this.formUsuario.controls.apellido2.value;
     usuarioModificado.contrasenna = this.usuario.contrasenna;
 
-    this.usuarioService.modificar(usuarioModificado).subscribe(result => {
-      this._routeService.navigate(['/usuarios']);
-    })
+    this.usuarioService.modificar(usuarioModificado).subscribe(
+      result => {
+      this.routeService.navigate(['/usuarios']);
+      this.abrirDialogoAfirmacion('Usuario modificado correctamente');
+    },
+      error => {
+        this.abrirDialogoError('Error al modificar usuario, inténtelo de nuevo');
+      });
   }
 
+  private abrirDialogoAfirmacion(mensaje: string) {
+    const dialogRef = this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'afirmacion'}
+      });
+  }
+
+  private abrirDialogoError(mensaje: string) {
+    this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'error'}
+      });
+  }
 }

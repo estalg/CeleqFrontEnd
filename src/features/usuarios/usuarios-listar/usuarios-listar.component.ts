@@ -32,7 +32,8 @@ export class UsuariosListarComponent implements OnInit {
   }
 
   private consultarUsuarios = () => {
-    this.usuariosService.consultar().subscribe(usuarios => {
+    this.usuariosService.consultar().subscribe(
+      usuarios => {
       this.dataSource.data = usuarios as UsuarioEntidad[];
       this.usuarios = this.dataSource.data;
     });
@@ -42,10 +43,15 @@ export class UsuariosListarComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  private eliminar(cedula: string){
-    this.usuariosService.eliminar(cedula).subscribe(res => {
+  private eliminar(cedula: string) {
+    this.usuariosService.eliminar(cedula).subscribe(
+      res => {
       this.consultarUsuarios();
-    });
+      this.abrirDialogoAfirmacion('Usuario eliminado correctamente');
+    },
+      error => {
+        this.abrirDialogoError('Error al eliminar usuario, inténtelo de nuevo');
+      });
   }
 
   private abrirDialogoConfirmacion(cedula: string) {
@@ -62,4 +68,18 @@ export class UsuariosListarComponent implements OnInit {
     });
   }
 
+  private abrirDialogoError(mensaje: string) {
+    this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'error'}
+      });
+  }
+  private abrirDialogoAfirmacion(mensaje: string) {
+    const dialogRef = this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'afirmacion'}
+      });
+  }
 }

@@ -3,7 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CristaleriaEntidad} from '../../../../shared/entidades/regencia/cristaleriaEntidad';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CristaleriaService} from '../../../../shared/servicios/regencia/cristaleria/cristaleria.service';
-import {UsuarioEntidad} from '../../../../shared/entidades/usuarioEntidad';
+import {DialogoConfirmacionComponent} from '../../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-cristaleria-agregar',
@@ -25,11 +26,12 @@ export class CristaleriaAgregarComponent implements OnInit {
 
   constructor(private cristaleriaService: CristaleriaService,
               private fb: FormBuilder,
-              private _routeService: Router,
-              private _route: ActivatedRoute) { }
+              private routeService: Router,
+              private route: ActivatedRoute,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.modoForm = this._route.snapshot.params.modo;
+    this.modoForm = this.route.snapshot.params.modo;
     this.cristaleria = new CristaleriaEntidad();
 
     this.formCristaleria = this.fb.group({
@@ -56,7 +58,7 @@ export class CristaleriaAgregarComponent implements OnInit {
     } else {
 
       // tslint:disable-next-line:max-line-length
-      this.cristaleriaService.consultarCristaleria(this._route.snapshot.params.nombre, this._route.snapshot.params.material, this._route.snapshot.params.capacidad).then(res => {
+      this.cristaleriaService.consultarCristaleria(this.route.snapshot.params.nombre, this.route.snapshot.params.material, this.route.snapshot.params.capacidad).then(res => {
         this.cristaleria = res;
         this.formCristaleria.controls.nombre.setValue(this.cristaleria.nombre);
         this.formCristaleria.controls.material.setValue(this.cristaleria.material);
@@ -93,8 +95,8 @@ export class CristaleriaAgregarComponent implements OnInit {
     return this.formCristaleria.get('caja');
   }
 
-  private cancelar(){
-    this._routeService.navigate(['/regencia/cristaleria']);
+  private cancelar() {
+    this.routeService.navigate(['/regencia/cristaleria']);
   }
 
   async agregar() {
@@ -106,8 +108,12 @@ export class CristaleriaAgregarComponent implements OnInit {
     cristaleriaNueva.caja = this.formCristaleria.controls.caja.value;
 
     this.cristaleriaService.agregar(cristaleriaNueva).subscribe(result => {
-      this._routeService.navigate(['/regencia/cristaleria']);
-    });
+      this.routeService.navigate(['/regencia/cristaleria']);
+      this.abrirDialogoAfirmacion('Cristalería agregada correctamente');
+    },
+      error => {
+        this.abrirDialogoError('Error al agregar cristalería, inténtelo de nuevo');
+      });
   }
 
   async modificar() {
@@ -119,7 +125,27 @@ export class CristaleriaAgregarComponent implements OnInit {
     cristaleriaModificada.caja = this.formCristaleria.controls.caja.value;
 
     this.cristaleriaService.modificar(cristaleriaModificada).subscribe(result => {
-      this._routeService.navigate(['/regencia/cristaleria']);
-    });
+      this.routeService.navigate(['/regencia/cristaleria']);
+      this.abrirDialogoAfirmacion('Cristalería modificada correctamente');
+    },
+      error => {
+        this.abrirDialogoError('Error al modificar cristalería, inténtelo de nuevo');
+      });
+  }
+
+  private abrirDialogoAfirmacion(mensaje: string) {
+    const dialogRef = this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'afirmacion'}
+      });
+  }
+
+  private abrirDialogoError(mensaje: string) {
+    this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'error'}
+      });
   }
 }
