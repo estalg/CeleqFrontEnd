@@ -4,6 +4,7 @@ import { MatDialogModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatIconModule } from '@angular/material';
 
 import { DialogoConfirmacionComponent } from './dialogo-confirmacion.component';
 
@@ -16,7 +17,8 @@ import { DialogoConfirmacionComponent } from './dialogo-confirmacion.component';
     BrowserAnimationsModule,
     BrowserModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   entryComponents: [
     DialogoConfirmacionComponent

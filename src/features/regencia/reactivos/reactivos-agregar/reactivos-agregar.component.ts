@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ReactivoEntidad} from '../../../../shared/entidades/regencia/reactivoEntidad';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ReactivosService} from '../../../../shared/servicios/regencia/reactivos/reactivos.service';
+import {DialogoConfirmacionComponent} from '../../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-reactivos-agregar',
@@ -25,7 +27,8 @@ export class ReactivosAgregarComponent implements OnInit {
   constructor(private reactivoService: ReactivosService,
               private fb: FormBuilder,
               private routeService: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     this.modoForm = this.route.snapshot.params.modo;
@@ -107,6 +110,7 @@ export class ReactivosAgregarComponent implements OnInit {
 
     this.reactivoService.agregar(reactivoNuevo).subscribe(result => {
       this.routeService.navigate(['/regencia/reactivos']);
+      this.abrirDialogoAfirmacion();
     });
   }
 
@@ -123,5 +127,12 @@ export class ReactivosAgregarComponent implements OnInit {
     });
   }
 
+  private abrirDialogoAfirmacion() {
+    const dialogRef = this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje: 'Reactivo agregado correctamente', tipoMensaje: 'afirmacion'}
+      });
+  }
 
 }

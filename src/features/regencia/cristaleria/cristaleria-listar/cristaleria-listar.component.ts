@@ -52,7 +52,7 @@ export class CristaleriaListarComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogoConfirmacionComponent,
       {
         width: '350px',
-        data: '¿Seguro que desea eliminar la cristaleria?'
+        data: {mensaje: '¿Seguro que desea eliminar la cristalería?', tipoMensaje: 'confirmacion'}
       });
 
     dialogRef.afterClosed().subscribe(result => {
