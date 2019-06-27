@@ -4,4 +4,5 @@ export class ReactivoEntidad {
   cantidad: number;
   estado: string;
   estante: string;
+  cantidadSolicitada: number;
 }

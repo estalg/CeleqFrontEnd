@@ -4,4 +4,5 @@ export class CristaleriaEntidad {
   capacidad: string;
   cantidad: number;
   caja: string;
+  cantidadSolicitada: number;
 }

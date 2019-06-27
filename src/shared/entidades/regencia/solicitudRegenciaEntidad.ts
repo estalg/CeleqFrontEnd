@@ -1,3 +1,6 @@
+import {ReactivoEntidad} from './reactivoEntidad';
+import {CristaleriaEntidad} from './cristaleriaEntidad';
+
 export class SolicitudRegenciaEntidad {
   id: number;
   anno: number;
@@ -9,4 +12,6 @@ export class SolicitudRegenciaEntidad {
   correoSolicitante: string;
   observacion: string;
   unidad: string;
+  reactivosSolicitados: ReactivoEntidad[];
+  cristaleriaSolicitada: CristaleriaEntidad[];
 }

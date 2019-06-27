@@ -48,3 +48,9 @@ th.mat-header-cell {
   background-color: #78909C;
   color: white;
 }
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
