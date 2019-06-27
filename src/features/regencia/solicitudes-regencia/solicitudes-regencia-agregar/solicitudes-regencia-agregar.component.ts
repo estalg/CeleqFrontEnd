@@ -10,6 +10,7 @@ import {MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogRef, MAT_
 import {ReactivoEntidad} from '../../../../shared/entidades/regencia/reactivoEntidad';
 import {CristaleriaEntidad} from '../../../../shared/entidades/regencia/cristaleriaEntidad';
 import {SelectionModel} from '@angular/cdk/collections';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-solicitudes-regencia-agregar',
@@ -75,7 +76,7 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
     });
 
     if (this.modoForm === 'agregar') {
-      this.titulo = 'Nueva solicitud P-05:PC-01:F-02';
+      this.titulo = 'Nueva solicitud de reactivos y cristalería P-05:PC-01:F-02';
     } else {
 
       // Llena datos de solicitud
@@ -106,16 +107,19 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
   openDialogReactivos(): void {
     const dialogRef = this.dialog.open(SolicitudesRegenciaReactivos, {
       width: '60rem',
-      data: this.dataSourceReactivos.data as ReactivoEntidad[]
+      data: this.dataSourceReactivos.data as ReactivoEntidad[],
+      disableClose: true
     });
     dialogRef.afterClosed().subscribe(result=> {
       this.dataSourceReactivos.data = result as ReactivoEntidad[];
+      this.dataSourceReactivos.data.forEach(function(reactivo) {
+        reactivo.cantidadSolicitada = 0;
+      })
     });
   }
 
-  onKey(event: any, reacCris: any) {
-    reacCris.cantidadSolicitada = event.target.value;
-    console.log(reacCris);
+  onKeyReactivo(event: any, reactivo: ReactivoEntidad) {
+    reactivo.cantidadSolicitada = event.target.value;
   }
 
   borrarReactivo(reactivo: ReactivoEntidad){
@@ -129,11 +133,19 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
   openDialogCristaleria(): void {
     const dialogRef = this.dialog.open(SolicitudesRegenciaCristaleria, {
       width: '60rem',
-      data: this.dataSourceCristaleria.data as CristaleriaEntidad[]
+      data: this.dataSourceCristaleria.data as CristaleriaEntidad[],
+      disableClose: true
     });
     dialogRef.afterClosed().subscribe(result=> {
       this.dataSourceCristaleria.data = result as CristaleriaEntidad[];
+      this.dataSourceCristaleria.data.forEach(function(cristaleria) {
+        cristaleria.cantidadSolicitada = 0;
+      })
     });
+  }
+
+  onKeyCristaleria(event: any, cristaleria: CristaleriaEntidad) {
+    cristaleria.cantidadSolicitada = event.target.value;
   }
 
   borrarCristaleria(cristaleria: CristaleriaEntidad){
@@ -142,6 +154,56 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
       this.dataSourceCristaleria.data.splice(index, 1);
       this.dataSourceCristaleria._updateChangeSubscription();
     }
+  }
+
+  cancelar(){
+    this._routeService.navigate(['/']);
+  }
+
+  agregar() {
+    let valido = true;
+    if(this.dataSourceReactivos.data.length > 0){
+      this.dataSourceReactivos.data.forEach(function(reactivo) {
+        if(reactivo.cantidadSolicitada < 1){
+          valido = false;
+        }
+      });
+    }
+
+    if(this.dataSourceCristaleria.data.length > 0){
+      this.dataSourceCristaleria.data.forEach(function(cristaleria) {
+        if(cristaleria.cantidadSolicitada < 1){
+          valido = false;
+        }
+      });
+    }
+
+    if(valido){
+      let solicitud = new SolicitudRegenciaEntidad();
+      solicitud.anno = (new Date()).getFullYear();
+      solicitud.fechaSolicitud = new Date();
+      solicitud.estado = "Pendiente";
+      solicitud.nombreSolicitante = this.formSolicitud.controls.nombreSolicitante.value;
+      solicitud.correoSolicitante = this.formSolicitud.controls.correoSolicitante.value;
+      solicitud.nombreEncargado = this.formSolicitud.controls.nombreEncargado.value;
+      solicitud.observacion = this.formSolicitud.controls.observaciones.value;
+      solicitud.reactivosSolicitados = new Array();
+      solicitud.cristaleriaSolicitada = new Array();
+
+      this.dataSourceReactivos.data.forEach(function(reactivo) {
+        solicitud.reactivosSolicitados.push(reactivo);
+      })
+
+      this.dataSourceCristaleria.data.forEach(function(cristaleria) {
+        solicitud.cristaleriaSolicitada.push(cristaleria);
+      })
+
+      console.log(solicitud);
+      this.solicitudesService.agregarSolicitud(solicitud).subscribe(result =>{
+        this._routeService.navigate(['/']);
+      })
+    }
+
   }
 }
 

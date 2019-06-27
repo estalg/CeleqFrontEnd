@@ -26,7 +26,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <textarea matInput placeholder="Observaciones"></textarea>
+        <textarea matInput placeholder="Observaciones" formControlName="observaciones"></textarea>
       </mat-form-field>
     </mat-card>
   </form>
@@ -49,7 +49,7 @@
     <ng-container matColumnDef="cantidad">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
       <td mat-cell *matCellDef="let reactivo">
-        <input matInput placeholder="Seleccione la cantidad" (keyup)="onKey($event, reactivo)" type="number">
+        <input matInput placeholder="Seleccione la cantidad" (keyup)="onKeyReactivo($event, reactivo)" type="number">
       </td>
     </ng-container>
 
@@ -88,7 +88,7 @@
     <ng-container matColumnDef="cantidad">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
       <td mat-cell *matCellDef="let cristaleria">
-        <input matInput placeholder="Seleccione la cantidad" (keyup)="onKey($event, cristaleria)" type="number">
+        <input matInput placeholder="Seleccione la cantidad" (keyup)="onKeyCristaleria($event, cristaleria)" type="number">
       </td>
     </ng-container>
 
@@ -102,4 +102,10 @@
     <tr mat-row *matRowDef="let row; columns: cristaleriaColumns;"></tr>
 
   </table>
+  <div class="position-absolute">
+    <button mat-button type="submit" (click)="agregar()" *ngIf="modoForm === 'agregar'"
+            [disabled]="formSolicitud.invalid || (dataSourceCristaleria.data.length === 0 && dataSourceReactivos.data.length === 0)">Aceptar</button>
+    <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+  </div>
+
 </div>
