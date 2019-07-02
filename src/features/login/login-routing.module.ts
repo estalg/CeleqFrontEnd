@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MenuComponent } from './menu.component';
-import {AuthGuard} from '../../shared/Seguridad/auth.guard';
+import { LoginComponent } from './login.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: MenuComponent,
-    canActivate: [AuthGuard]
+    path: 'login',
+    component: LoginComponent,
   }
 ];
 
@@ -15,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class MenuRoutingModule { }
+export class LoginRoutingModule { }
