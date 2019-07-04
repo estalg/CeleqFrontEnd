@@ -9,7 +9,7 @@ import {
   MatFormFieldModule,
   MatGridListModule,
   MatInputModule,
-  MatPaginatorModule,
+  MatPaginatorModule, MatSelectModule,
   MatSortModule,
   MatTableModule
 } from '@angular/material';
@@ -43,7 +43,8 @@ import {GruposAsignarRoutingModule} from './grupos-asignar/grupos-asignar-routin
     MatDialogModule,
     GruposAgregarRoutingModule,
     MatCheckboxModule,
-    GruposAsignarRoutingModule
+    GruposAsignarRoutingModule,
+    MatSelectModule
   ],
   exports: [
     GruposListarComponent,

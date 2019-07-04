@@ -3,11 +3,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GrupoEntidad} from '../../../shared/entidades/grupoEntidad';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GruposService} from '../../../shared/servicios/grupos/grupos.service';
-import {UsuarioEntidad} from '../../../shared/entidades/usuarioEntidad';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {PermisoEntidad} from '../../../shared/entidades/permisoEntidad';
 import {SelectionModel} from '@angular/cdk/collections';
-import {ReactivoEntidad} from '../../../shared/entidades/regencia/reactivoEntidad';
 
 @Component({
   selector: 'app-grupos-agregar',
@@ -21,7 +19,7 @@ export class GruposAgregarComponent implements OnInit {
   // Nombre de la página
   private titulo: string;
 
-  // Usuario a editar/visualizar
+  // Grupo a editar/visualizar
   private grupo: GrupoEntidad;
 
   // Modo del form

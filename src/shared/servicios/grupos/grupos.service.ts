@@ -39,4 +39,12 @@ export class GruposService {
   consultarPermisosGrupo(grupo: string): Observable<PermisoEntidad[]> {
     return this.http.get<PermisoEntidad[]>(`${this.urlEndPoint}/consultar-permisos-grupo?grupo=` + grupo);
   }
+
+  consultarUsuariosGrupo(grupo: string): Observable<UsuarioEntidad[]> {
+    return this.http.get<UsuarioEntidad[]>(`${this.urlEndPoint}/consultar-usuarios-grupo?grupo=` + grupo);
+  }
+
+  asignarUsuariosGrupo(grupo: GrupoEntidad) {
+    return this.http.put<GrupoEntidad>(`${this.urlEndPoint}/asignar-usuarios-grupo`, grupo, {headers: this.httpHeaders});
+  }
 }
