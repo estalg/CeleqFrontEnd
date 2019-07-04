@@ -1,0 +1,119 @@
+<div class="container">
+
+  <h2>Revisión de solicitud</h2>
+
+  <form [formGroup]="formSolicitud">
+    <mat-card class="formContainer">
+
+      <mat-form-field>
+        <input matInput placeholder="" formControlName="nombreSolicitante">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="" formControlName="correoSolicitante">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="" formControlName="nombreEncargado">
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea matInput placeholder="" formControlName="observaciones"></textarea>
+      </mat-form-field>
+    </mat-card>
+  </form>
+
+  <br>
+
+  <h3>Reactivos solicitados</h3>
+
+  <table mat-table [dataSource]="dataSourceReactivos" matSort *ngIf="dataSourceReactivos.data.length > 0">
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>Selección</th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selectionReactivo.toggle(row) : null"
+                      [checked]="selectionReactivo.isSelected(row)"
+                      [aria-label]="checkboxLabelReactivo(row)"
+                      color="primary">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+      <td mat-cell *matCellDef="let reactivo">{{reactivo.nombreReactivo}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="pureza">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Pureza</th>
+      <td mat-cell *matCellDef="let reactivo">{{reactivo.pureza}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="cantidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
+      <td mat-cell *matCellDef="let reactivo">{{reactivo.cantidad}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="justificacion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Justificacion</th>
+      <td mat-cell *matCellDef="let reactivo">
+        <input [disabled]="bloquearJustificacion(reactivo)" matInput placeholder="{{mostrarTexto(reactivo)}}" (keyup)="onKeyReactivo($event, reactivo)" type="string">
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="reactivosColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: reactivosColumns;"></tr>
+
+  </table>
+
+  <br>
+
+  <h3>Cristalería solicitada</h3>
+
+  <table mat-table [dataSource]="dataSourceCristaleria" matSort *ngIf="dataSourceCristaleria.data.length > 0">
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>Selección</th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selectionCristaleria.toggle(row) : null"
+                      [checked]="selectionCristaleria.isSelected(row)"
+                      [aria-label]="checkboxLabelCristaleria(row)"
+                      color="primary">
+
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+      <td mat-cell *matCellDef="let cristaleria">{{cristaleria.nombreCristaleria}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="material">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Material</th>
+      <td mat-cell *matCellDef="let cristaleria">{{cristaleria.material}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="capacidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Capacidad</th>
+      <td mat-cell *matCellDef="let cristaleria">{{cristaleria.capacidad}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="cantidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
+      <td mat-cell *matCellDef="let cristaleria">{{cristaleria.cantidad}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="cristaleriaColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: cristaleriaColumns;"></tr>
+
+  </table>
+  <div class="position-absolute">
+    <button mat-button type="submit" (click)="abrirDialogoConfirmacion()">Aceptar</button>
+    <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+  </div>
+
+</div>

@@ -12,19 +12,23 @@ import {UsuariosAgregarRoutingModule} from '../../usuarios/usuarios-agregar/usua
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SolicitudesRegenciaReactivos} from './solicitudes-regencia-agregar/solicitudes-regencia-agregar.component';
 import {SolicitudesRegenciaCristaleria} from './solicitudes-regencia-agregar/solicitudes-regencia-agregar.component';
+import {SolicitudesRegenciaRevisarComponent} from './solicitudes-regencia-revisar/solicitudes-regencia-revisar.component';
+import {SolicitudesRegenciaRevisarRoutingModule} from './solicitudes-regencia-revisar/solicitudes-regencia-revisar-routing.module';
 
 @NgModule({
   declarations: [
     SolicitudesRegenciaListarComponent,
     SolicitudesRegenciaAgregarComponent,
     SolicitudesRegenciaReactivos,
-    SolicitudesRegenciaCristaleria
+    SolicitudesRegenciaCristaleria,
+    SolicitudesRegenciaRevisarComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     SolicitudesRegenciaListarRoutingModule,
     SolicitudesRegenciaAgregarRoutingModule,
+    SolicitudesRegenciaRevisarRoutingModule,
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
@@ -42,7 +46,8 @@ import {SolicitudesRegenciaCristaleria} from './solicitudes-regencia-agregar/sol
   ],
   exports: [
     SolicitudesRegenciaListarComponent,
-    SolicitudesRegenciaAgregarComponent
+    SolicitudesRegenciaAgregarComponent,
+    SolicitudesRegenciaRevisarComponent
   ],
   entryComponents: [
     SolicitudesRegenciaReactivos,

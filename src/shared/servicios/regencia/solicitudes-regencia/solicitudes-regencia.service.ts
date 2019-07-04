@@ -18,11 +18,19 @@ export class SolicitudesRegenciaService {
     return this.http.get<SolicitudRegenciaEntidad[]>(this.urlEndPoint + '/consultar-solicitudes');
   }
 
+  async consultarSolicitud(idSolicitud: string, annoSolicitud: string): Promise<any>  {
+    return this.http.get<SolicitudRegenciaEntidad>(`${this.urlEndPoint}/consultar-solicitudes-id?idSolicitud=` + idSolicitud + `&annoSolicitud=` + annoSolicitud).toPromise();
+  }
+
   consultarPendientes(): Observable<SolicitudRegenciaEntidad[]> {
     return this.http.get<SolicitudRegenciaEntidad[]>(this.urlEndPoint + '/consultar-solicitudes-pendientes');
   }
 
   agregarSolicitud(solicitud: SolicitudRegenciaEntidad): Observable<SolicitudRegenciaEntidad> {
     return this.http.post<SolicitudRegenciaEntidad>(`${this.urlEndPoint}/agregar-solicitud`, solicitud, {headers: this.httpHeaders});
+  }
+
+  modificarSolicitud(solicitud: SolicitudRegenciaEntidad): Observable<SolicitudRegenciaEntidad> {
+    return this.http.post<SolicitudRegenciaEntidad>(`${this.urlEndPoint}/editar-solicitudes`, solicitud, {headers: this.httpHeaders});
   }
 }

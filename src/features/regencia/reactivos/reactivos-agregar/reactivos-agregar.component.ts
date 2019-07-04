@@ -18,7 +18,7 @@ export class ReactivosAgregarComponent implements OnInit {
   // Nombre de la página
   private titulo: string;
 
-  // Usuario a editar/visualizar
+  // Reactivo a editar/visualizar
   private reactivo: ReactivoEntidad;
 
   // Modo del form

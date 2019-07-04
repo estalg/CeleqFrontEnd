@@ -60,7 +60,7 @@ export class SolicitudesRegenciaListarComponent implements OnInit {
     this.SolicitudRegenciaService.consultarPendientes().subscribe(solicitudes => {
       this.dataSource.data = solicitudes as SolicitudRegenciaEntidad[];
       this.solicitudes = this.dataSource.data;
-      this.displayedColumns = ['consecutivo', 'fechaSolicitud', 'nombreSolicitante', 'nombreEncargado', 'correoSolicitante', 'unidad'];
+      this.displayedColumns = ['consecutivo', 'fechaSolicitud', 'nombreSolicitante', 'nombreEncargado', 'correoSolicitante', 'unidad', 'acciones'];
     });
   }
 

@@ -5,4 +5,6 @@ export class CristaleriaEntidad {
   cantidad: number;
   caja: string;
   cantidadSolicitada: number;
+  estadoEnSolicitud: string;
+  justificacionRechazo: string;
 }

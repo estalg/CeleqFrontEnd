@@ -11,6 +11,7 @@ import { MenuModule } from '../features/menu/menu.module';
 import { SolicitudesRegenciaModule } from '../features/regencia/solicitudes-regencia/solicitudes-regencia.module';
 import {ReactivosModule} from '../features/regencia/reactivos/reactivos.module';
 import { LocalizacionesModule } from '../features/vinculo externo/localizaciones/localizaciones.module';
+import {UnidadesModule} from '../features/unidades/unidades.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LocalizacionesModule } from '../features/vinculo externo/localizaciones
     DialogoConfirmacionModule,
     HeaderModule,
     MenuModule,
-    SolicitudesRegenciaModule
+    SolicitudesRegenciaModule,
+    UnidadesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
