@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UsuariosListarComponent} from './usuarios-listar.component';
 import {AuthGuard} from '../../../shared/seguridad/auth.guard';
+import { GruposListarComponent } from './grupos-listar.component';
 
 const routes: Routes = [
   {
-    path: 'usuarios',
-    component: UsuariosListarComponent,
+    path: 'grupos',
+    component: GruposListarComponent,
     canActivate: [AuthGuard]
   }
 ];
@@ -15,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class UsuariosListarRoutingModule { }
+export class GruposListarRoutingModule { }

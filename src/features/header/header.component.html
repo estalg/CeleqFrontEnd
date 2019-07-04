@@ -2,5 +2,9 @@
   <span>Sistema CELEQ</span>
   <button mat-button routerLink="/">Menú</button>
   <button mat-button routerLink="/usuarios">Usuarios</button>
-  <button mat-button routerLink="/grupos">Grupos</button>
+  <button mat-button [matMenuTriggerFor]="grupos">Grupos</button>
+  <mat-menu #grupos="matMenu">
+    <button mat-menu-item routerLink="/grupos">Ver grupos</button>
+    <button mat-menu-item routerLink="/grupos/asignar">Asignar usuarios</button>
+  </mat-menu>
 </mat-toolbar>

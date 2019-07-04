@@ -12,6 +12,7 @@ import { SolicitudesRegenciaModule } from '../features/regencia/solicitudes-rege
 import {ReactivosModule} from '../features/regencia/reactivos/reactivos.module';
 import { LocalizacionesModule } from '../features/vinculo externo/localizaciones/localizaciones.module';
 import {LoginModule} from '../features/login/login.module';
+import {GruposModule} from '../features/grupos/grupos.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {LoginModule} from '../features/login/login.module';
     HeaderModule,
     MenuModule,
     SolicitudesRegenciaModule,
-    LoginModule
+    LoginModule,
+    GruposModule
   ],
   providers: [],
   bootstrap: [AppComponent]
