@@ -86,6 +86,7 @@ export class SolicitudesRegenciaRevisarComponent implements OnInit {
         this.dataSourceReactivos.data[i].estadoEnSolicitud = 'Rechazado';
       } else {
         this.dataSourceReactivos.data[i].estadoEnSolicitud = 'Aceptado';
+        this.dataSourceReactivos.data[i].justificacionRechazo = '';
       }
     }
     // Aqui se hace para cristaleria
@@ -95,10 +96,12 @@ export class SolicitudesRegenciaRevisarComponent implements OnInit {
         this.dataSourceCristaleria.data[i].estadoEnSolicitud = 'Rechazado';
       } else {
         this.dataSourceCristaleria.data[i].estadoEnSolicitud = 'Aceptado';
+        this.dataSourceCristaleria.data[i].justificacionRechazo = '';
       }
     }
     this.solicitud.estado = 'Aceptado';
     this.solicitud.fechaAprobacion = new Date();
+    console.log(this.solicitud.fechaAprobacion);
     this.solicitudesRegenciaService.modificarSolicitud(this.solicitud).subscribe(
       res => {
         this.routeService.navigate(['/regencia/solicitudes', 'pendientes']);

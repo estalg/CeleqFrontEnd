@@ -30,7 +30,7 @@
   <table mat-table [dataSource]="dataSourceReactivos" matSort *ngIf="dataSourceReactivos.data.length > 0">
 
     <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef>Selección</th>
+      <th mat-header-cell *matHeaderCellDef>Aceptado</th>
       <td mat-cell *matCellDef="let row">
         <mat-checkbox (click)="$event.stopPropagation()"
                       (change)="$event ? selectionReactivo.toggle(row) : null"
@@ -75,7 +75,7 @@
   <table mat-table [dataSource]="dataSourceCristaleria" matSort *ngIf="dataSourceCristaleria.data.length > 0">
 
     <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef>Selección</th>
+      <th mat-header-cell *matHeaderCellDef>Aceptado</th>
       <td mat-cell *matCellDef="let row">
         <mat-checkbox (click)="$event.stopPropagation()"
                       (change)="$event ? selectionCristaleria.toggle(row) : null"

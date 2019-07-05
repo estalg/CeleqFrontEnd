@@ -33,7 +33,7 @@ import {UnidadesModule} from '../features/unidades/unidades.module';
     MenuModule,
     SolicitudesRegenciaModule,
     LoginModule,
-    GruposModule
+    GruposModule,
     UnidadesModule
   ],
   providers: [],
