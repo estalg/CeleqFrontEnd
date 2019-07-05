@@ -8,7 +8,10 @@ const routes: Routes = [
     path: 'grupos/asignar',
     component: GruposAsignarComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      permisos: ['14']
+    }
   }
 ];
 

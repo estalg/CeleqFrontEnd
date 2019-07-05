@@ -8,7 +8,10 @@ const routes: Routes = [
     path: 'regencia/solicitudes/:modo/:id/:anno',
     component: SolicitudesRegenciaAgregarComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      permisos: ['25']
+    }
   }
 ];
 

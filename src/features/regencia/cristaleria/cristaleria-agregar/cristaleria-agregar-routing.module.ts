@@ -8,7 +8,10 @@ const routes: Routes = [
     path: 'regencia/cristaleria/:modo/:nombre/:material/:capacidad',
     component: CristaleriaAgregarComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      permisos: ['20', '21']
+    }
   }
 ];
 

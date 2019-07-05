@@ -3,7 +3,7 @@
   <h2>Usuarios</h2>
 
   <div style="margin-top: -3rem">
-    <button mat-stroked-button class="botonAgregar" [routerLink]="['/usuarios', 'agregar', 'nuevo']">Agregar</button>
+    <button mat-stroked-button class="botonAgregar" [routerLink]="['/usuarios', 'agregar', 'nuevo']" *ngIf="revisarPermiso('3')">Agregar</button>
 
     <mat-form-field class="barraBusqueda">
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
@@ -44,9 +44,9 @@
         <ng-container matColumnDef="acciones">
           <th mat-header-cell *matHeaderCellDef>Acciones</th>
           <td mat-cell *matCellDef="let usuario">
-            <button mat-stroked-button class="botonesTabla" [routerLink]="['/usuarios', 'visualizar', usuario.cedula]">Detalles</button>
-            <button mat-stroked-button class="botonesTabla" [routerLink]="['/usuarios', 'editar', usuario.cedula]">Editar</button>
-            <button mat-stroked-button class="botonesTabla" (click)="abrirDialogoConfirmacion(usuario.cedula)">Eliminar</button>
+            <button mat-stroked-button class="botonesTabla" [routerLink]="['/usuarios', 'visualizar', usuario.cedula]" *ngIf="revisarPermiso('3') || revisarPermiso('4')">Detalles</button>
+            <button mat-stroked-button class="botonesTabla" [routerLink]="['/usuarios', 'editar', usuario.cedula]" *ngIf="revisarPermiso('4')">Editar</button>
+            <button mat-stroked-button class="botonesTabla" (click)="abrirDialogoConfirmacion(usuario.cedula)" *ngIf="revisarPermiso('5')">Eliminar</button>
           </td>
 
         </ng-container>

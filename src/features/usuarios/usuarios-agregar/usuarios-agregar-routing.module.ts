@@ -8,7 +8,10 @@ const routes: Routes = [
     path: 'usuarios/:modo/:cedula',
     component: UsuariosAgregarComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      permisos: ['3', '4']
+    }
   }
 ];
 

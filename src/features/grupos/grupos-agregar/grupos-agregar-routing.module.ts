@@ -8,7 +8,10 @@ const routes: Routes = [
     path: 'grupos/:modo/:descripcion',
     component: GruposAgregarComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      permisos: ['11', '12']
+    }
   }
 ];
 

@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       password: ['', [
         Validators.required
       ]]
-    })
+    });
   }
 
   get cedula() {
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     return this.formLogin.controls.password;
   }
 
-  login(){
+  login() {
     this.submitted = true;
     this.loading = true;
     this.authService.login(this.cedula.value, this.password.value)

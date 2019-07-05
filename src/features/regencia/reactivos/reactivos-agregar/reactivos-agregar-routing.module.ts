@@ -8,7 +8,10 @@ const routes: Routes = [
     path: 'regencia/reactivos/:modo/:nombre/:pureza',
     component: ReactivosAgregarComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      permisos: ['16', '17']
+    }
   }
 ];
 
