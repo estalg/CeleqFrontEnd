@@ -45,6 +45,8 @@ export class GruposAgregarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     this.modoForm = this._route.snapshot.params.modo;
     this.grupo = new GrupoEntidad();
     this.consultarPermisos();
