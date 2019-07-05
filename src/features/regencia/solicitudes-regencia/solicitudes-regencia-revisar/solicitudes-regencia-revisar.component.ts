@@ -11,6 +11,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReactivoEntidad} from '../../../../shared/entidades/regencia/reactivoEntidad';
 import {CristaleriaEntidad} from '../../../../shared/entidades/regencia/cristaleriaEntidad';
 import {SelectionModel} from '@angular/cdk/collections';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-solicitudes-regencia-revisar',
@@ -22,7 +23,7 @@ export class SolicitudesRegenciaRevisarComponent implements OnInit {
   private solicitud: SolicitudRegenciaEntidad;
   private formSolicitud: FormGroup;
   public reactivosColumns: string[] = ['select', 'nombre', 'pureza', 'cantidad', 'justificacion'];
-  public cristaleriaColumns: string[] = ['select', 'nombre', 'material', 'capacidad', 'cantidad'];
+  public cristaleriaColumns: string[] = ['select', 'nombre', 'material', 'capacidad', 'cantidad', 'justificacion'];
   public dataSourceReactivos = new MatTableDataSource<ReactivoEntidad>();
   public dataSourceCristaleria = new MatTableDataSource<CristaleriaEntidad>();
   selectionReactivo = new SelectionModel<ReactivoEntidad>(true, []);
@@ -166,7 +167,7 @@ export class SolicitudesRegenciaRevisarComponent implements OnInit {
     this.routeService.navigate(['/regencia/solicitudes', 'pendientes']);
   }
 
-  bloquearJustificacion(row?: ReactivoEntidad) {
+  bloquearJustificacionReact(row?: ReactivoEntidad) {
     if (this.selectionReactivo.isSelected(row)) {
       row.justificacionRechazo = '';
       return true;
@@ -175,8 +176,24 @@ export class SolicitudesRegenciaRevisarComponent implements OnInit {
     }
   }
 
-  mostrarTexto(row?: ReactivoEntidad) {
+  bloquearJustificacionCrist(row?: CristaleriaEntidad) {
+    if (this.selectionCristaleria.isSelected(row)) {
+      row.justificacionRechazo = '';
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  mostrarTextoReact(row?: ReactivoEntidad) {
     if (this.selectionReactivo.isSelected(row)) {
+      return '';
+    } else {
+      return 'Indique la justificación del rechazo';
+    }
+  }
+  mostrarTextoCrist(row?: CristaleriaEntidad) {
+    if (this.selectionCristaleria.isSelected(row)) {
       return '';
     } else {
       return 'Indique la justificación del rechazo';
@@ -185,6 +202,10 @@ export class SolicitudesRegenciaRevisarComponent implements OnInit {
 
   onKeyReactivo(event: any, reactivo: ReactivoEntidad) {
     reactivo.justificacionRechazo = event.target.value;
+  }
+
+  onKeyCristaleria(event: any, cristaleria: CristaleriaEntidad) {
+    cristaleria.justificacionRechazo = event.target.value;
   }
 }
 
