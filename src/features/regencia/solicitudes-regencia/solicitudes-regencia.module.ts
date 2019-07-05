@@ -5,26 +5,32 @@ import { SolicitudesRegenciaAgregarComponent } from './solicitudes-regencia-agre
 import { SolicitudesRegenciaListarRoutingModule } from './solicitudes-regencia-listar/solicitudes-regencia-listar-routing.module';
 import { SolicitudesRegenciaAgregarRoutingModule } from './solicitudes-regencia-agregar/solicitudes-regencia-agregar-routing.module';
 import {RouterModule} from '@angular/router';
-import {  MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatGridListModule, MatInputModule, MatPaginatorModule,
-  MatSortModule, MatTableModule, MatCheckboxModule } from '@angular/material';
+import {
+  MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatGridListModule, MatInputModule, MatPaginatorModule,
+  MatSortModule, MatTableModule, MatCheckboxModule, MatSelectModule
+} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UsuariosAgregarRoutingModule} from '../../usuarios/usuarios-agregar/usuarios-agregar-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SolicitudesRegenciaReactivos} from './solicitudes-regencia-agregar/solicitudes-regencia-agregar.component';
 import {SolicitudesRegenciaCristaleria} from './solicitudes-regencia-agregar/solicitudes-regencia-agregar.component';
+import {SolicitudesRegenciaRevisarComponent} from './solicitudes-regencia-revisar/solicitudes-regencia-revisar.component';
+import {SolicitudesRegenciaRevisarRoutingModule} from './solicitudes-regencia-revisar/solicitudes-regencia-revisar-routing.module';
 
 @NgModule({
   declarations: [
     SolicitudesRegenciaListarComponent,
     SolicitudesRegenciaAgregarComponent,
     SolicitudesRegenciaReactivos,
-    SolicitudesRegenciaCristaleria
+    SolicitudesRegenciaCristaleria,
+    SolicitudesRegenciaRevisarComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     SolicitudesRegenciaListarRoutingModule,
     SolicitudesRegenciaAgregarRoutingModule,
+    SolicitudesRegenciaRevisarRoutingModule,
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
@@ -38,11 +44,13 @@ import {SolicitudesRegenciaCristaleria} from './solicitudes-regencia-agregar/sol
     ReactiveFormsModule,
     MatCardModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule
   ],
   exports: [
     SolicitudesRegenciaListarComponent,
-    SolicitudesRegenciaAgregarComponent
+    SolicitudesRegenciaAgregarComponent,
+    SolicitudesRegenciaRevisarComponent
   ],
   entryComponents: [
     SolicitudesRegenciaReactivos,

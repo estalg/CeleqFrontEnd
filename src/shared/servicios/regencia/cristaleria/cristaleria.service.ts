@@ -3,7 +3,6 @@ import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CristaleriaEntidad } from '../../../entidades/regencia/cristaleriaEntidad';
-import {UsuarioEntidad} from '../../../entidades/usuarioEntidad';
 
 @Injectable({
   providedIn: 'root'

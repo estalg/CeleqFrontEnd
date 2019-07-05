@@ -18,7 +18,7 @@ export class ReactivosAgregarComponent implements OnInit {
   // Nombre de la página
   private titulo: string;
 
-  // Usuario a editar/visualizar
+  // Reactivo a editar/visualizar
   private reactivo: ReactivoEntidad;
 
   // Modo del form
@@ -108,10 +108,14 @@ export class ReactivosAgregarComponent implements OnInit {
     reactivoNuevo.estado = this.formReactivo.controls.estado.value;
     reactivoNuevo.estante = this.formReactivo.controls.estante.value;
 
-    this.reactivoService.agregar(reactivoNuevo).subscribe(result => {
+    this.reactivoService.agregar(reactivoNuevo).subscribe(
+      result => {
       this.routeService.navigate(['/regencia/reactivos']);
-      this.abrirDialogoAfirmacion();
-    });
+      this.abrirDialogoAfirmacion('Reactivo agregado correctamente');
+    },
+      error => {
+        this.abrirDialogoError('Error al agregar reactivo');
+      });
   }
 
   async modificar() {
@@ -122,17 +126,28 @@ export class ReactivosAgregarComponent implements OnInit {
     reactivoModificado.estado = this.formReactivo.controls.estado.value;
     reactivoModificado.estante = this.formReactivo.controls.estante.value;
 
-    this.reactivoService.modificar(reactivoModificado).subscribe(result => {
+    this.reactivoService.modificar(reactivoModificado).subscribe(
+      result => {
       this.routeService.navigate(['/regencia/reactivos']);
-    });
-  }
-
-  private abrirDialogoAfirmacion() {
-    const dialogRef = this.dialog.open(DialogoConfirmacionComponent,
-      {
-        width: '350px',
-        data: {mensaje: 'Reactivo agregado correctamente', tipoMensaje: 'afirmacion'}
+      this.abrirDialogoAfirmacion('Reactivo modificado correctamente');
+    },
+      error => {
+        this.abrirDialogoError('Error al modificar reactivo');
       });
   }
 
+  private abrirDialogoAfirmacion(mensaje: string) {
+    const dialogRef = this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'afirmacion'}
+      });
+  }
+  private abrirDialogoError(mensaje: string) {
+    this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'error'}
+      });
+  }
 }

@@ -32,20 +32,30 @@ export class CristaleriaListarComponent implements OnInit {
   }
 
   private consultarCristaleria = () => {
-    this.cristaleriaService.consultar().subscribe(cristaleria => {
+    this.cristaleriaService.consultar().subscribe(
+      cristaleria => {
       this.dataSource.data = cristaleria as CristaleriaEntidad[];
       this.cristalerias = this.dataSource.data;
-    });
+    },
+        error => {
+        this.abrirDialogoError('Error al cargar lista, recargue la página nuevamente');
+      }
+    );
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  private eliminar(nombre: string, material: string, capacidad: string){
-    this.cristaleriaService.eliminar(nombre, material, capacidad).subscribe(res => {
+  private eliminar(nombre: string, material: string, capacidad: string) {
+    this.cristaleriaService.eliminar(nombre, material, capacidad).subscribe(
+      res => {
       this.consultarCristaleria();
-    });
+      this.abrirDialogoAfirmacion('Cristalería eliminada correctamente');
+    },
+      error => {
+        this.abrirDialogoError('Error al eliminar cristalería, inténtelo de nuevo');
+      });
   }
 
   private abrirDialogoConfirmacion(nombre: string, material: string, capacidad: string) {
@@ -62,4 +72,18 @@ export class CristaleriaListarComponent implements OnInit {
     });
   }
 
+  private abrirDialogoError(mensaje: string) {
+    this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'error'}
+      });
+  }
+  private abrirDialogoAfirmacion(mensaje: string) {
+    const dialogRef = this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'afirmacion'}
+      });
+  }
 }

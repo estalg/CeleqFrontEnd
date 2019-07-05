@@ -1,0 +1,29 @@
+<div class="container">
+  <form [formGroup]="formUnidad">
+    <h2>{{titulo}}</h2>
+    <mat-card class="formContainer">
+
+      <mat-form-field>
+        <input matInput placeholder="Unidad" formControlName="nombre" required>
+        <mat-error *ngIf="nombre.errors?.required && nombre.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Encargado</mat-label>
+        <mat-select formControlName="encargado" [(value)]="selected">
+          <mat-option *ngFor="let usuario of usuarios" [value]="usuario.cedula">
+            {{usuario.nombre + " " + usuario.apellido1 + " " + usuario.apellido2}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </mat-card>
+
+    <button mat-button type="submit" (click)="modificar()" *ngIf="modoForm === 'editar'" [disabled]="formUnidad.invalid">Aceptar</button>
+    <button mat-button type="submit" (click)="agregar()" *ngIf="modoForm === 'agregar'" [disabled]="formUnidad.invalid">Aceptar</button>
+
+    <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+  </form>
+</div>

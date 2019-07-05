@@ -5,4 +5,6 @@ export class ReactivoEntidad {
   estado: string;
   estante: string;
   cantidadSolicitada: number;
+  estadoEnSolicitud: string;
+  justificacionRechazo: string;
 }

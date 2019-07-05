@@ -11,6 +11,8 @@ import {ReactivoEntidad} from '../../../../shared/entidades/regencia/reactivoEnt
 import {CristaleriaEntidad} from '../../../../shared/entidades/regencia/cristaleriaEntidad';
 import {SelectionModel} from '@angular/cdk/collections';
 import {formatDate} from '@angular/common';
+import {UnidadEntidad} from '../../../../shared/entidades/unidad/unidadEntidad';
+import {UnidadesService} from '../../../../shared/servicios/unidades/unidades.service';
 
 @Component({
   selector: 'app-solicitudes-regencia-agregar',
@@ -27,6 +29,8 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
 
   // Usuario a editar/visualizar
   private solicitud: SolicitudRegenciaEntidad;
+
+  private unidades: UnidadEntidad[];
 
   // Modo del form
   private modoForm: string;
@@ -52,7 +56,8 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
               private fb: FormBuilder,
               private _routeService: Router,
               private _route: ActivatedRoute,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private unidadesService: UnidadesService) { }
 
   ngOnInit() {
     this.modoForm = this._route.snapshot.params.modo;
@@ -72,7 +77,8 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
         Validators.email
       ]],
       nombreEncargado: [''],
-      observaciones: ['']
+      observaciones: [''],
+      unidad: ['']
     });
 
     if (this.modoForm === 'agregar') {
@@ -89,6 +95,11 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
         this.formSolicitud.disable();
       }
     }
+
+    this.unidadesService.consultar().subscribe(
+      unidades => {
+        this.unidades = unidades as UnidadEntidad[];
+      });
   }
 
   get nombreSolicitante(){
@@ -102,6 +113,9 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
   }
   get observaciones(){
     return this.formSolicitud.get('observaciones');
+  }
+  get unidad() {
+    return this.formSolicitud.get('unidad');
   }
 
   openDialogReactivos(): void {
