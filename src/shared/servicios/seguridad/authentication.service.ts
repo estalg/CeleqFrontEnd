@@ -58,4 +58,9 @@ export class AuthenticationService {
     const datosToken = jwt_decode(JSON.parse(localStorage.getItem('currentUser')).token);
     return datosToken.permisos;
   }
+
+  getNombreCompleto() {
+    const datosToken = jwt_decode(JSON.parse(localStorage.getItem('currentUser')).token);
+    return datosToken.nombre + ' ' + datosToken.apellido1 + ' ' + datosToken.apellido2;
+  }
 }
