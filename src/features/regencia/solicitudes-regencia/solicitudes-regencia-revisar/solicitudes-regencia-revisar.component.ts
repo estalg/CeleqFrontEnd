@@ -78,14 +78,53 @@ export class SolicitudesRegenciaRevisarComponent implements OnInit {
     });
   }
 
+  private abrirDialogoRechazo() {
+    const dialogRef = this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje: '¿Desea rechazar la solicitud?', tipoMensaje: 'confirmacion'}
+      });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.rechazar();
+      }
+    });
+  }
+
+  rechazar() {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.dataSourceReactivos.data.length; i++) {
+        this.dataSourceReactivos.data[i].estadoEnSolicitud = 'Rechazado';
+        this.dataSourceReactivos.data[i].justificacionRechazo = 'Solicitud Rechazada';
+    }
+    // Aqui se hace para cristaleria
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.dataSourceCristaleria.data.length; i++) {
+        this.dataSourceCristaleria.data[i].estadoEnSolicitud = 'Rechazado';
+        this.dataSourceCristaleria.data[i].justificacionRechazo = 'Solicitud Rechazada';
+    }
+    this.solicitud.estado = 'Denegado';
+    this.solicitud.fechaAprobacion = new Date();
+    console.log(this.solicitud.fechaAprobacion);
+    this.solicitudesRegenciaService.modificarSolicitud(this.solicitud).subscribe(
+      res => {
+        this.routeService.navigate(['/regencia/solicitudes', 'pendientes']);
+      },
+      error => {
+        this.abrirDialogoError('Error al procesar solicitud, inténtelo de nuevo');
+      });
+  }
+
   modificar() {
-    // Se rechazan y pine justificacion a reactivos rechazados
+    // Se rechazan y pone justificacion a reactivos rechazados
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.dataSourceReactivos.data.length; i++) {
       if (!this.selectionReactivo.isSelected(this.dataSourceReactivos.data[i])) {
         this.dataSourceReactivos.data[i].estadoEnSolicitud = 'Rechazado';
       } else {
         this.dataSourceReactivos.data[i].estadoEnSolicitud = 'Aceptado';
+        this.dataSourceReactivos.data[i].justificacionRechazo = '';
       }
     }
     // Aqui se hace para cristaleria
@@ -95,13 +134,24 @@ export class SolicitudesRegenciaRevisarComponent implements OnInit {
         this.dataSourceCristaleria.data[i].estadoEnSolicitud = 'Rechazado';
       } else {
         this.dataSourceCristaleria.data[i].estadoEnSolicitud = 'Aceptado';
+        this.dataSourceCristaleria.data[i].justificacionRechazo = '';
       }
     }
     this.solicitud.estado = 'Aceptado';
     this.solicitud.fechaAprobacion = new Date();
+    console.log(this.solicitud.fechaAprobacion);
     this.solicitudesRegenciaService.modificarSolicitud(this.solicitud).subscribe(
       res => {
         this.routeService.navigate(['/regencia/solicitudes', 'pendientes']);
+      },
+      (err) => {
+        console.log(err.status);
+        if (err.status === 422) {
+          this.abrirDialogoError('Error al procesar solicitud, inténtelo de nuevo');
+        }
+        if (err.status === 406) {
+          this.abrirDialogoError('No hay cantidad disponible');
+        }
       });
   }
 
@@ -139,6 +189,18 @@ export class SolicitudesRegenciaRevisarComponent implements OnInit {
     const numSelected = this.selectionReactivo.selected.length;
     const numRows = this.dataSourceReactivos.data.length;
     return numSelected === numRows;
+  }
+
+  deshabilitarBotonAceptar(): boolean {
+    if ( (this.selectionReactivo.selected.length === 0 && this.selectionCristaleria.selected.length === 0) ) {
+      return true;
+    }
+  }
+
+  deshabilitarBotonRechazar(): boolean {
+    if ( (this.selectionReactivo.selected.length > 0 && this.selectionCristaleria.selected.length > 0) ) {
+      return true;
+    }
   }
 
   /** The label for the checkbox on the passed row */
@@ -198,6 +260,14 @@ export class SolicitudesRegenciaRevisarComponent implements OnInit {
     } else {
       return 'Indique la justificación del rechazo';
     }
+  }
+
+  private abrirDialogoError(mensaje: string) {
+    this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'error'}
+      });
   }
 
   onKeyReactivo(event: any, reactivo: ReactivoEntidad) {

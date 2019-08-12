@@ -201,6 +201,7 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
       solicitud.correoSolicitante = this.formSolicitud.controls.correoSolicitante.value;
       solicitud.nombreEncargado = this.formSolicitud.controls.nombreEncargado.value;
       solicitud.observacion = this.formSolicitud.controls.observaciones.value;
+      solicitud.unidad = this.formSolicitud.controls.unidad.value;
       solicitud.reactivosSolicitados = new Array();
       solicitud.cristaleriaSolicitada = new Array();
 
