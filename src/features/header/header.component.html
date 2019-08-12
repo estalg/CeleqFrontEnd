@@ -9,5 +9,6 @@
     <button mat-menu-item routerLink="/grupos/asignar" *ngIf="revisarPermiso('14')">Asignar usuarios</button>
   </mat-menu>
   <span class="spacer"></span>
+  <mat-icon>person</mat-icon><span style="font-size: medium">{{authService.getNombreCompleto()}}</span>
   <button class="padd" mat-button (click)="logout()">Logout</button>
 </mat-toolbar>
