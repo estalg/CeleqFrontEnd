@@ -103,7 +103,7 @@
     </ng-container>
 
     <ng-container matColumnDef="cantidad">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad Solicitada</th>
       <td mat-cell *matCellDef="let cristaleria">{{cristaleria.cantidad}}</td>
     </ng-container>
 
@@ -119,7 +119,8 @@
 
   </table>
   <div class="position-absolute">
-    <button mat-button type="submit" (click)="abrirDialogoConfirmacion()">Aceptar</button>
+    <button [disabled]="deshabilitarBotonAceptar()" mat-button type="submit" (click)="abrirDialogoConfirmacion()">Aceptar</button>
+    <button [disabled]="deshabilitarBotonRechazar()" mat-button type="submit" (click)="abrirDialogoRechazo()">Rechazar</button>
     <button mat-button type="button" (click)="cancelar()">Cancelar</button>
   </div>
 

@@ -15,7 +15,7 @@ export class CristaleriaListarComponent implements OnInit {
 
   cristalerias: Array<CristaleriaEntidad>;
 
-  public displayedColumns: string[] = ['nombre', 'material', 'capacidad', 'caja', 'acciones'];
+  public displayedColumns: string[] = ['nombre', 'material', 'capacidad', 'caja', 'cantidad', 'acciones'];
 
   public dataSource = new MatTableDataSource<CristaleriaEntidad>();
 
