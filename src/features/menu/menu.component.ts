@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from '../../shared/servicios/seguridad/authentication.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthenticationService) { }
 
+  permisos: string[];
   ngOnInit() {
+    this.permisos = this.authService.getPermisos();
+  }
+
+  revisarPermiso(permiso: string) {
+    return this.permisos.includes(permiso);
   }
 
 }

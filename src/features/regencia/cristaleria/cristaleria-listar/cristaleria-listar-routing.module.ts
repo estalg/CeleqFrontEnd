@@ -7,7 +7,10 @@ const routes: Routes = [
   {
     path: 'regencia/cristaleria',
     component: CristaleriaListarComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      permisos: ['19']
+    }
   }
 ];
 

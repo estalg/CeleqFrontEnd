@@ -7,7 +7,10 @@ const routes: Routes = [
   {
     path: 'regencia/reactivos',
     component: ReactivosListarComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      permisos: ['15']
+    }
   }
 ];
 

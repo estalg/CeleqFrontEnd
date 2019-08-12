@@ -6,15 +6,14 @@
       </mat-expansion-panel-header>
 
       <div class="buttonContainer">
-        <button mat-stroked-button routerLink="/regencia/solicitudes/agregar/nueva/nueva">Realizar solicitud</button>
-        <button mat-stroked-button routerLink="/regencia/reactivos">Reactivos</button>
-        <button mat-stroked-button routerLink="/regencia/cristaleria">Cristalería</button>
-        <button mat-stroked-button [routerLink]="['/regencia/solicitudes', 'pendientes']">Solicitudes pendientes</button>
-        <button mat-stroked-button [routerLink]="['/regencia/solicitudes', 'historico']">Histórico solicitudes</button>
-        <a mat-stroked-button href="http://localhost:81/celeqBackEnd/api/regencia/reactivos/reporte-reactivos">Reporte Reactivos</a>
-        <a mat-stroked-button href="http://localhost:81/celeqBackEnd/api/regencia/cristaleria/reporte-cristaleria">Reporte Cristaleria</a>
-        <button mat-stroked-button routerLink="/unidades">Unidades</button>
-        <button mat-stroked-button>Mis solicitudes</button>
+        <button mat-stroked-button routerLink="/regencia/solicitudes/agregar/nueva/nueva" *ngIf="revisarPermiso('25')">Realizar solicitud</button>
+        <button mat-stroked-button routerLink="/regencia/reactivos" *ngIf="revisarPermiso('15')">Reactivos</button>
+        <button mat-stroked-button routerLink="/regencia/cristaleria" *ngIf="revisarPermiso('19')">Cristalería</button>
+        <button mat-stroked-button [routerLink]="['/regencia/solicitudes', 'pendientes']" *ngIf="revisarPermiso('26')">Solicitudes pendientes</button>
+        <button mat-stroked-button [routerLink]="['/regencia/solicitudes', 'historico']" *ngIf="revisarPermiso('27')">Histórico solicitudes</button>
+        <a mat-stroked-button href="http://localhost:81/celeqBackEnd/api/regencia/reactivos/reporte-reactivos" *ngIf="revisarPermiso('23')">Reporte Reactivos</a>
+        <a mat-stroked-button href="http://localhost:81/celeqBackEnd/api/regencia/cristaleria/reporte-cristaleria" *ngIf="revisarPermiso('24')">Reporte Cristaleria</a>
+        <button mat-stroked-button *ngIf="revisarPermiso('28')">Mis solicitudes</button>
       </div>
 
     </mat-expansion-panel>

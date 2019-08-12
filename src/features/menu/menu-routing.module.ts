@@ -7,7 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: MenuComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      permisos: ['1']
+    }
   }
 ];
 

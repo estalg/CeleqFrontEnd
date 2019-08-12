@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import * as jwt_decode from 'jwt-decode';
 
 import { UsuarioEntidad } from '../../entidades/usuarioEntidad';
+import {Router} from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -16,7 +17,8 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<UsuarioEntidad>;
   public currentUser: Observable<UsuarioEntidad>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private routeService: Router) {
     this.currentUserSubject = new BehaviorSubject<UsuarioEntidad>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -30,7 +32,6 @@ export class AuthenticationService {
       cedula: username,
       password: pass
     };
-    console.log(datos);
     return this.http.post<any>(`${this.urlEndPoint}/authenticate`, datos, {headers: this.httpHeaders})
       .pipe(map(user => {
         console.log(user);
@@ -45,10 +46,16 @@ export class AuthenticationService {
     // remove user from local storage and set current user to null
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+    this.routeService.navigate(['/login']);
   }
 
   getCedula() {
     const datosToken = jwt_decode(JSON.parse(localStorage.getItem('currentUser')).token);
     return datosToken.cedula;
+  }
+
+  getPermisos() {
+    const datosToken = jwt_decode(JSON.parse(localStorage.getItem('currentUser')).token);
+    return datosToken.permisos;
   }
 }

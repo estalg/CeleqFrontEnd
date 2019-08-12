@@ -1,10 +1,13 @@
 <mat-toolbar>
   <span>Sistema CELEQ</span>
   <button mat-button routerLink="/">Menú</button>
-  <button mat-button routerLink="/usuarios">Usuarios</button>
-  <button mat-button [matMenuTriggerFor]="grupos">Grupos</button>
+  <button mat-button routerLink="/usuarios" *ngIf="revisarPermiso('2')">Usuarios</button>
+  <button mat-button routerLink="/unidades" *ngIf="revisarPermiso('6')">Unidades</button>
+  <button mat-button [matMenuTriggerFor]="grupos" *ngIf="revisarPermiso('10') || revisarPermiso('14')">Grupos</button>
   <mat-menu #grupos="matMenu">
-    <button mat-menu-item routerLink="/grupos">Ver grupos</button>
-    <button mat-menu-item routerLink="/grupos/asignar">Asignar usuarios</button>
+    <button mat-menu-item routerLink="/grupos" *ngIf="revisarPermiso('10')">Ver grupos</button>
+    <button mat-menu-item routerLink="/grupos/asignar" *ngIf="revisarPermiso('14')">Asignar usuarios</button>
   </mat-menu>
+  <span class="spacer"></span>
+  <button class="padd" mat-button (click)="logout()">Logout</button>
 </mat-toolbar>

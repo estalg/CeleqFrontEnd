@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from '../../shared/servicios/seguridad/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthenticationService) { }
 
+  permisos: string[];
   ngOnInit() {
+    this.permisos = this.authService.getPermisos();
   }
 
+  logout() {
+    this.authService.logout();
+  }
+
+  revisarPermiso(permiso: string) {
+    return this.permisos.includes(permiso);
+  }
 }

@@ -7,7 +7,10 @@ const routes: Routes = [
   {
     path: 'usuarios',
     component: UsuariosListarComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      permisos: ['2']
+    }
   }
 ];
 

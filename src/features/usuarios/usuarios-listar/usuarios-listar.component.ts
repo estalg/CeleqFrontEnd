@@ -4,6 +4,7 @@ import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/mat
 import {UsuariosService} from '../../../shared/servicios/usuarios/usuarios.service';
 
 import {DialogoConfirmacionComponent} from '../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
+import {AuthenticationService} from '../../../shared/servicios/seguridad/authentication.service';
 
 @Component({
   selector: 'app-usuarios-listar',
@@ -22,10 +23,14 @@ export class UsuariosListarComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
+  permisos: string[];
+
   constructor(private usuariosService: UsuariosService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private authServeice: AuthenticationService) { }
 
   ngOnInit() {
+    this.permisos = this.authServeice.getPermisos();
     this.consultarUsuarios();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -81,5 +86,9 @@ export class UsuariosListarComponent implements OnInit {
         width: '350px',
         data: {mensaje, tipoMensaje: 'afirmacion'}
       });
+  }
+
+  revisarPermiso(permiso: string) {
+    return this.permisos.includes(permiso);
   }
 }

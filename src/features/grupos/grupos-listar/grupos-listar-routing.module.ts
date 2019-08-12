@@ -7,7 +7,10 @@ const routes: Routes = [
   {
     path: 'grupos',
     component: GruposListarComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      permisos: ['10']
+    }
   }
 ];
 
