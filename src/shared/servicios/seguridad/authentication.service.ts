@@ -34,7 +34,6 @@ export class AuthenticationService {
     };
     return this.http.post<any>(`${this.urlEndPoint}/authenticate`, datos, {headers: this.httpHeaders})
       .pipe(map(user => {
-        console.log(user);
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);

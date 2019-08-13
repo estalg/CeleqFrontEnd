@@ -14,6 +14,7 @@ import { LocalizacionesModule } from '../features/vinculo externo/localizaciones
 import {LoginModule} from '../features/login/login.module';
 import {GruposModule} from '../features/grupos/grupos.module';
 import {UnidadesModule} from '../features/unidades/unidades.module';
+import {BnNgIdleService} from 'bn-ng-idle';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,9 @@ import {UnidadesModule} from '../features/unidades/unidades.module';
     GruposModule,
     UnidadesModule
   ],
-  providers: [],
+  providers: [
+    BnNgIdleService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
