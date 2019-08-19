@@ -5,6 +5,7 @@ import {DialogoConfirmacionComponent} from '../../../../shared/componentes/dialo
 import {SolicitudesRegenciaService} from '../../../../shared/servicios/regencia/solicitudes-regencia/solicitudes-regencia.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder} from "@angular/forms";
+import {AuthenticationService} from '../../../../shared/servicios/seguridad/authentication.service';
 
 @Component({
   selector: 'app-solicitudes-regencia-listar',
@@ -34,7 +35,8 @@ export class SolicitudesRegenciaListarComponent implements OnInit {
   constructor(private SolicitudRegenciaService: SolicitudesRegenciaService,
               public dialog: MatDialog,
               private _routeService: Router,
-              private _route: ActivatedRoute) { }
+              private _route: ActivatedRoute,
+              private authServeice: AuthenticationService) { }
 
   ngOnInit() {
     this.modoForm = this._route.snapshot.params.modo;
@@ -46,6 +48,9 @@ export class SolicitudesRegenciaListarComponent implements OnInit {
     } else if (this.modoForm === 'pendientes') {
       this.titulo = 'Solicitudes Pendientes';
       this.consultarSolicitudesRegenciaPendientes();
+    } else if(this.modoForm === 'usuario') {
+      this.titulo = 'Solicitudes Usuario';
+      this.consultarSolicitudesRegenciaUsuario();
     }
   }
 
@@ -62,6 +67,13 @@ export class SolicitudesRegenciaListarComponent implements OnInit {
       this.solicitudes = this.dataSource.data;
       this.displayedColumns = ['consecutivo', 'fechaSolicitud', 'nombreSolicitante', 'nombreEncargado', 'correoSolicitante', 'unidad', 'acciones'];
     });
+  }
+
+  private consultarSolicitudesRegenciaUsuario = () => {
+    this.SolicitudRegenciaService.consultarSolicitudesUsuario(this.authServeice.getCedula()).subscribe(solicitudes => {
+      this.dataSource.data = solicitudes as SolicitudRegenciaEntidad[];
+      this.solicitudes = this.dataSource.data;
+    })
   }
 
   applyFilter(filterValue: string) {

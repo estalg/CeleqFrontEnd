@@ -13,7 +13,7 @@
         <button mat-stroked-button [routerLink]="['/regencia/solicitudes', 'historico']" *ngIf="revisarPermiso('27')">Histórico solicitudes</button>
         <a mat-stroked-button href="http://localhost:81/celeqBackEnd/api/regencia/reactivos/reporte-reactivos" *ngIf="revisarPermiso('23')">Reporte Reactivos</a>
         <a mat-stroked-button href="http://localhost:81/celeqBackEnd/api/regencia/cristaleria/reporte-cristaleria" *ngIf="revisarPermiso('24')">Reporte Cristaleria</a>
-        <button mat-stroked-button *ngIf="revisarPermiso('28')">Mis solicitudes</button>
+        <button mat-stroked-button [routerLink]="['/regencia/solicitudes', 'usuario']" *ngIf="revisarPermiso('28')">Mis solicitudes</button>
       </div>
 
     </mat-expansion-panel>

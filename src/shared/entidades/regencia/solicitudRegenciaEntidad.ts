@@ -12,6 +12,7 @@ export class SolicitudRegenciaEntidad {
   correoSolicitante: string;
   observacion: string;
   unidad: string;
+  cedulaUsuario: string;
   reactivosSolicitados: ReactivoEntidad[];
   cristaleriaSolicitada: CristaleriaEntidad[];
 }
