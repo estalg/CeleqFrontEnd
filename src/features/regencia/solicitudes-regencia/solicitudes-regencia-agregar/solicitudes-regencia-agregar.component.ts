@@ -13,6 +13,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {formatDate} from '@angular/common';
 import {UnidadEntidad} from '../../../../shared/entidades/unidad/unidadEntidad';
 import {UnidadesService} from '../../../../shared/servicios/unidades/unidades.service';
+import {DialogoConfirmacionComponent} from '../../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
 
 @Component({
   selector: 'app-solicitudes-regencia-agregar',
@@ -174,6 +175,14 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
     this._routeService.navigate(['/']);
   }
 
+  private abrirDialogoError(mensaje: string) {
+    this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'error'}
+      });
+  }
+
   agregar() {
     let valido = true;
     if(this.dataSourceReactivos.data.length > 0){
@@ -213,10 +222,13 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
         solicitud.cristaleriaSolicitada.push(cristaleria);
       })
 
-      console.log(solicitud);
       this.solicitudesService.agregarSolicitud(solicitud).subscribe(result =>{
         this._routeService.navigate(['/']);
+      }, error => {
+        this.abrirDialogoError('Error al conectarse con la base de datos. Intente de nuevo más tarde.')
       })
+    } else {
+      this.abrirDialogoError('El número de reactivos o cristalería solicitados debe ser mayor a 0.')
     }
 
   }

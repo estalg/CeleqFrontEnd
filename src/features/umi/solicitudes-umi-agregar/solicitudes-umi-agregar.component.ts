@@ -63,4 +63,12 @@ export class SolicitudesUmiAgregarComponent implements OnInit {
   get descripcion() {
     return this.formSolicitud.get('descripcion');
   }
+
+  cancelar() {
+    this._routeService.navigate(['/']);
+  }
+
+  agregar() {
+
+  }
 }
