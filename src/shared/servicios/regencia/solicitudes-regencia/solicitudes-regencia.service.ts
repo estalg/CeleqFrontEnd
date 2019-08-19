@@ -3,6 +3,7 @@ import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {SolicitudRegenciaEntidad} from '../../../entidades/regencia/solicitudRegenciaEntidad';
+import {CristaleriaEntidad} from '../../../entidades/regencia/cristaleriaEntidad';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class SolicitudesRegenciaService {
 
   consultarPendientes(): Observable<SolicitudRegenciaEntidad[]> {
     return this.http.get<SolicitudRegenciaEntidad[]>(this.urlEndPoint + '/consultar-solicitudes-pendientes');
+  }
+
+  consultarSolicitudesUsuario(cedulaUsuario: string): Observable<SolicitudRegenciaEntidad[]> {
+    return this.http.get<SolicitudRegenciaEntidad[]>(`${this.urlEndPoint}/consultar-solicitudes-usuario?cedula=` + cedulaUsuario, {headers: this.httpHeaders});
   }
 
   agregarSolicitud(solicitud: SolicitudRegenciaEntidad): Observable<SolicitudRegenciaEntidad> {

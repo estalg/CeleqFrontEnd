@@ -104,7 +104,7 @@ export class SolicitudesRegenciaRevisarComponent implements OnInit {
         this.dataSourceCristaleria.data[i].estadoEnSolicitud = 'Rechazado';
         this.dataSourceCristaleria.data[i].justificacionRechazo = 'Solicitud Rechazada';
     }
-    this.solicitud.estado = 'Denegado';
+    this.solicitud.estado = 'Rechazado';
     this.solicitud.fechaAprobacion = new Date();
     console.log(this.solicitud.fechaAprobacion);
     this.solicitudesRegenciaService.modificarSolicitud(this.solicitud).subscribe(
