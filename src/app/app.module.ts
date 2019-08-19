@@ -15,6 +15,7 @@ import {LoginModule} from '../features/login/login.module';
 import {GruposModule} from '../features/grupos/grupos.module';
 import {UnidadesModule} from '../features/unidades/unidades.module';
 import {BnNgIdleService} from 'bn-ng-idle';
+import {UmiModule} from '../features/umi/umi.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {BnNgIdleService} from 'bn-ng-idle';
     SolicitudesRegenciaModule,
     LoginModule,
     GruposModule,
-    UnidadesModule
+    UnidadesModule,
+    UmiModule
   ],
   providers: [
     BnNgIdleService
