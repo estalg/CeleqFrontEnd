@@ -17,6 +17,20 @@
       </div>
 
     </mat-expansion-panel>
+
+    <mat-expansion-panel class="pannel" *ngIf="revisarAlgunPermiso(['29', '30', '31', '32', '33'])">
+      <mat-expansion-panel-header>
+        <mat-panel-title>UMI</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="buttonContainer">
+        <button mat-stroked-button *ngIf="revisarPermiso('29')">Realizar solicitud</button>
+        <button mat-stroked-button *ngIf="revisarPermiso('30')">Aprobar solicitud</button>
+        <button mat-stroked-button *ngIf="revisarPermiso('31')">Analizar solicitud</button>
+        <button mat-stroked-button *ngIf="revisarPermiso('32')">Finalizar solicitud</button>
+        <button mat-stroked-button *ngIf="revisarPermiso('33')">Histórico solicitud</button>
+      </div>
+    </mat-expansion-panel>
   </mat-accordion>
 
 </div>
