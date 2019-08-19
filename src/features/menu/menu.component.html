@@ -24,7 +24,7 @@
       </mat-expansion-panel-header>
 
       <div class="buttonContainer">
-        <button mat-stroked-button *ngIf="revisarPermiso('29')">Realizar solicitud</button>
+        <button mat-stroked-button routerLink="/umi/nueva-solicitud" *ngIf="revisarPermiso('29')">Realizar solicitud</button>
         <button mat-stroked-button *ngIf="revisarPermiso('30')">Aprobar solicitud</button>
         <button mat-stroked-button *ngIf="revisarPermiso('31')">Analizar solicitud</button>
         <button mat-stroked-button *ngIf="revisarPermiso('32')">Finalizar solicitud</button>
