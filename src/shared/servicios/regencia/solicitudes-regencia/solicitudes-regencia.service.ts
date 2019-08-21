@@ -20,7 +20,8 @@ export class SolicitudesRegenciaService {
   }
 
   async consultarSolicitud(idSolicitud: string, annoSolicitud: string): Promise<any>  {
-    return this.http.get<SolicitudRegenciaEntidad>(`${this.urlEndPoint}/consultar-solicitudes-id?idSolicitud=` + idSolicitud + `&annoSolicitud=` + annoSolicitud).toPromise();
+    return this.http.get<SolicitudRegenciaEntidad>(`${this.urlEndPoint}/consultar-solicitudes-id?idSolicitud=` + idSolicitud +
+      `&annoSolicitud=` + annoSolicitud).toPromise();
   }
 
   consultarPendientes(): Observable<SolicitudRegenciaEntidad[]> {
@@ -28,7 +29,8 @@ export class SolicitudesRegenciaService {
   }
 
   consultarSolicitudesUsuario(cedulaUsuario: string): Observable<SolicitudRegenciaEntidad[]> {
-    return this.http.get<SolicitudRegenciaEntidad[]>(`${this.urlEndPoint}/consultar-solicitudes-usuario?cedula=` + cedulaUsuario, {headers: this.httpHeaders});
+    return this.http.get<SolicitudRegenciaEntidad[]>(`${this.urlEndPoint}/consultar-solicitudes-usuario?cedula=` + cedulaUsuario,
+      {headers: this.httpHeaders});
   }
 
   agregarSolicitud(solicitud: SolicitudRegenciaEntidad): Observable<SolicitudRegenciaEntidad> {

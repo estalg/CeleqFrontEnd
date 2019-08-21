@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../../shared/servicios/seguridad/authentication.service';
 import {first} from 'rxjs/operators';
+import {MatDialog} from '@angular/material';
+import {DialogoConfirmacionComponent} from '../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +23,8 @@ export class LoginComponent implements OnInit {
               private fb: FormBuilder,
               private _routeService: Router,
               private _route: ActivatedRoute,
-              private authService: AuthenticationService) {
+              private authService: AuthenticationService,
+              public dialog: MatDialog) {
     // redirect to home if already logged in
     if (this.authService.currentUserValue) {
       this._routeService.navigate(['/']);
@@ -56,9 +59,17 @@ export class LoginComponent implements OnInit {
           this._routeService.navigate(['/']);
         },
         error => {
-          console.log('error');
+          this.abrirDialogoError('Usuario y contraseña no coinciden');
           this.loading = false;
         }
       );
+  }
+
+  private abrirDialogoError(mensaje: string) {
+    this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'error'}
+      });
   }
 }

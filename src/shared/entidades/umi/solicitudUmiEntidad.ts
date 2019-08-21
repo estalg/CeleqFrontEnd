@@ -1,5 +1,3 @@
-import {UsuarioEntidad} from '../usuarioEntidad';
-
 export class SolicitudUmiEntidad {
   id: number;
   anno: number;
@@ -10,5 +8,6 @@ export class SolicitudUmiEntidad {
   areaTrabajo: string;
   lugarTrabajo: string;
   descripcionTrabajo: string;
-  usuario: UsuarioEntidad;
+  estado: string;
+  usuario: string;
 }
