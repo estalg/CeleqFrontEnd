@@ -13,31 +13,83 @@
 
       <mat-form-field>
         <input matInput placeholder="Teléfono o extensión" formControlName="telefono" required>
-        <mat-error *ngIf="correoSolicitante.errors?.required && correoSolicitante.touched">
+        <mat-error *ngIf="telefono.errors?.required && telefono.touched">
           Este campo es obligatorio
         </mat-error>
-        <mat-error *ngIf="correoSolicitante.errors?.email && correoSolicitante.touched">
-          El correo no cumple con un formto válido
+        <mat-error *ngIf="telefono.errors?.pattern && telefono.touched">
+          El teléfono no cumple con un formto válido
         </mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Nombre encargado" formControlName="nombreEncargado">
+        <input matInput placeholder="Contacto adicional" formControlName="contacto">
       </mat-form-field>
 
       <mat-form-field>
-        <textarea matInput placeholder="Observaciones" formControlName="observaciones"></textarea>
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Unidad</mat-label>
-        <mat-select formControlName="unidad">
-          <mat-option *ngFor="let unidad of unidades" [value]="unidad.nombre">
-            {{unidad.nombre}}
+        <mat-label>Urgencia</mat-label>
+        <mat-select required formControlName="urgencia">
+          <mat-option [value]="'Poco urgente'">
+            Poco urgente
+          </mat-option>
+          <mat-option [value]="'Urgente'">
+            Urgente
+          </mat-option>
+          <mat-option [value]="'Muy urgente'">
+            Muy urgente
+          </mat-option>
+          <mat-option [value]="'Emergencia'">
+            Emergencia
           </mat-option>
         </mat-select>
+
+        <mat-error *ngIf="urgencia.errors?.required && urgencia.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Área de trabajo</mat-label>
+        <mat-select required formControlName="areaTrabajo">
+          <mat-option [value]="'TI'">
+            TI
+          </mat-option>
+          <mat-option [value]="'Equipos varios'">
+            Equipos varios
+          </mat-option>
+          <mat-option [value]="'Equipos laboratorio'">
+            Equipos laboratorio
+          </mat-option>
+          <mat-option [value]="'Infraestructura'">
+            Infraestructura
+          </mat-option>
+        </mat-select>
+
+        <mat-error *ngIf="areaTrabajo.errors?.required && areaTrabajo.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Lugar donde se realiza el trabajo" formControlName="lugarTrabajo" required>
+        <mat-error *ngIf="lugarTrabajo.errors?.required && lugarTrabajo.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Descripción del trabajo" formControlName="descripcion" required>
+        <mat-error *ngIf="descripcion.errors?.required && descripcion.touched">
+          Este campo es obligatorio
+        </mat-error>
       </mat-form-field>
 
     </mat-card>
 
   </form>
+
+  <div class="position-absolute">
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="agregar()">Aceptar</button>
+    <button mat-button class="botonesAceptarCancelar" type="button" (click)="cancelar()">Cancelar</button>
+  </div>
+
+</div>
