@@ -6,7 +6,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {
   MatButtonModule,
-  MatCardModule, MatDialogModule,
+  MatCardModule, MatCheckboxModule, MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
   MatPaginatorModule, MatSelectModule,
@@ -14,10 +14,13 @@ import {
   MatTableModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { SolicitudesUmiAprobarComponent } from './solicitudes-umi-aprobar/solicitudes-umi-aprobar.component';
+import {SolicitudesUmiAprobarRoutingModule} from './solicitudes-umi-aprobar/solicitudes-umi-aprobar-routing.module';
 
 @NgModule({
   declarations: [
-    SolicitudesUmiAgregarComponent
+    SolicitudesUmiAgregarComponent,
+    SolicitudesUmiAprobarComponent
   ],
   imports: [
     CommonModule,
@@ -34,10 +37,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatFormFieldModule,
     MatCardModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule,
+    SolicitudesUmiAprobarRoutingModule
   ],
   exports: [
-    SolicitudesUmiAgregarComponent
+    SolicitudesUmiAgregarComponent,
+    SolicitudesUmiAprobarComponent
   ]
 })
 export class UmiModule { }
