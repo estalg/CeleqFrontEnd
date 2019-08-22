@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SolicitudesRegenciaService} from '../../../shared/servicios/regencia/solicitudes-regencia/solicitudes-regencia.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
@@ -11,11 +11,7 @@ import {MatDialog} from '@angular/material';
 })
 export class SolicitudesUmiAprobarComponent implements OnInit {
 
-  private shown: boolean;
-  private formSolicitudMantenimiento: FormGroup;
-  markedAceptar = false;
-  markedRechazar = false;
-  theCheckbox  = false;
+  private formSolicitud: FormGroup;
 
   constructor(private solicitudesRegenciaService: SolicitudesRegenciaService,
               private fb: FormBuilder,
@@ -24,37 +20,50 @@ export class SolicitudesUmiAprobarComponent implements OnInit {
               public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.formSolicitudMantenimiento = this.fb.group({
-      check1: [''],
-      rechazar: ['']
+    this.formSolicitud = this.fb.group({
+      nombreSolicitante: ['', [
+        Validators.required
+      ]],
+      telefono: ['', [
+        Validators.required,
+        Validators.pattern('[0-9]*')
+      ]],
+      contacto: [''],
+      urgencia: ['', [
+        Validators.required
+      ]],
+      areaTrabajo: ['', [
+        Validators.required
+      ]],
+      lugarTrabajo: ['', [
+        Validators.required
+      ]],
+      descripcion: ['', [
+        Validators.required
+      ]]
     });
   }
 
-  AccionAceptar() {
-    if (this.markedAceptar === true) {
-      this.markedAceptar = false;
-    } else {
-      this.markedAceptar = true;
-    }
+  get nombreSolicitante() {
+    return this.formSolicitud.get('nombreSolicitante');
+  }
+  get telefono() {
+    return this.formSolicitud.get('telefono');
+  }
+  get contacto() {
+    return this.formSolicitud.get('contacto');
+  }
+  get urgencia() {
+    return this.formSolicitud.get('urgencia');
+  }
+  get areaTrabajo() {
+    return this.formSolicitud.get('areaTrabajo');
+  }
+  get lugarTrabajo() {
+    return this.formSolicitud.get('lugarTrabajo');
+  }
+  get descripcion() {
+    return this.formSolicitud.get('descripcion');
   }
 
-  AccionRechazar() {
-    if (this.markedRechazar === true) {
-      this.markedRechazar = false;
-    } else {
-      this.markedRechazar = true;
-    }
-  }
-
-  habilitadoAceptar() {
-    return this.markedAceptar;
-  }
-
-  habilitadoRechazar() {
-    return this.markedRechazar;
-  }
-
-  toggleVisibility(e) {
-    this.markedAceptar = e.target.checked;
-  }
 }

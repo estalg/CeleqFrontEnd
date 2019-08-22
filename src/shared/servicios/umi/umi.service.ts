@@ -18,4 +18,8 @@ export class UmiService {
     console.log(solicitud);
     return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}/agregar-solicitud`, solicitud, {headers: this.httpHeaders});
   }
+
+  async consultarSolicitudesPendientes(id: number, anno: number): Promise<any> {
+
+  }
 }

@@ -47,7 +47,6 @@ export class SolicitudesRegenciaRevisarComponent implements OnInit {
     });
 
     this.solicitudesRegenciaService.consultarSolicitud(this.route.snapshot.params.id, this.route.snapshot.params.anno).then(res => {
-      console.log(res);
       this.solicitud = res;
       this.formSolicitud.controls.nombreSolicitante.setValue(this.solicitud.nombreSolicitante);
       this.formSolicitud.controls.correoSolicitante.setValue(this.solicitud.correoSolicitante);
