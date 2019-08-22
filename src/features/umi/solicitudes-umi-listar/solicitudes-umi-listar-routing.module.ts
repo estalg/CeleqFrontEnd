@@ -9,7 +9,7 @@ const routes: Routes = [
     component: SolicitudesUmiListarComponent,
     canActivate: [AuthGuard],
     data: {
-      permisos: ['27', '28'] // Ver
+      permisos: ['30', '31', '32', '33'] // Ver
     }
   }
 ];

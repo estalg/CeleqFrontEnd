@@ -12,6 +12,7 @@ import {MatDialog} from '@angular/material';
 export class SolicitudesUmiAprobarComponent implements OnInit {
 
   private formSolicitud: FormGroup;
+  private estadoSolicitud: string;
 
   constructor(private solicitudesRegenciaService: SolicitudesRegenciaService,
               private fb: FormBuilder,
@@ -21,27 +22,22 @@ export class SolicitudesUmiAprobarComponent implements OnInit {
 
   ngOnInit() {
     this.formSolicitud = this.fb.group({
-      nombreSolicitante: ['', [
-        Validators.required
-      ]],
-      telefono: ['', [
-        Validators.required,
-        Validators.pattern('[0-9]*')
-      ]],
+      consecutivo: [''],
+      nombreSolicitante: [''],
+      telefono: [''],
       contacto: [''],
-      urgencia: ['', [
-        Validators.required
-      ]],
-      areaTrabajo: ['', [
-        Validators.required
-      ]],
-      lugarTrabajo: ['', [
-        Validators.required
-      ]],
-      descripcion: ['', [
-        Validators.required
-      ]]
+      urgencia: [''],
+      areaTrabajo: [''],
+      lugarTrabajo: [''],
+      descripcion: [''],
+      personaAsignada: [''],
+      observaciones: [''],
+      motivoRechazo: ['']
     });
+  }
+
+  get consecutivo() {
+    return this.formSolicitud.get('consecutivo');
   }
 
   get nombreSolicitante() {
@@ -64,6 +60,15 @@ export class SolicitudesUmiAprobarComponent implements OnInit {
   }
   get descripcion() {
     return this.formSolicitud.get('descripcion');
+  }
+  get personaAsignada() {
+    return this.formSolicitud.get('personaAsignada');
+  }
+  get observaciones() {
+    return this.formSolicitud.get('observaciones');
+  }
+  get motivoRechazo() {
+    return this.formSolicitud.get('motivoRechazo');
   }
 
 }

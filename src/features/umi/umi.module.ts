@@ -9,7 +9,7 @@ import {
   MatCardModule, MatCheckboxModule, MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
-  MatPaginatorModule, MatSelectModule,
+  MatPaginatorModule, MatRadioModule, MatSelectModule,
   MatSortModule,
   MatTableModule
 } from '@angular/material';
@@ -43,7 +43,8 @@ import {SolicitudesUmiListarRoutingModule} from './solicitudes-umi-listar/solici
     MatDialogModule,
     MatSelectModule,
     MatCheckboxModule,
-    SolicitudesUmiAprobarRoutingModule
+    SolicitudesUmiAprobarRoutingModule,
+    MatRadioModule
   ],
   exports: [
     SolicitudesUmiAgregarComponent,

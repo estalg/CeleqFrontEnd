@@ -5,11 +5,11 @@ import {AuthGuard} from '../../../shared/seguridad/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'umi/solicitudes-aprobar/:id/:anno',
+    path: 'umi/aprobar-solicitud/:id/:anno',
     component: SolicitudesUmiAprobarComponent,
     canActivate: [AuthGuard],
     data: {
-      permisos: ['26']
+      permisos: ['30']
     }
   }
 ];

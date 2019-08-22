@@ -2,41 +2,48 @@
 
   <h2>Revisión solicitud de mantenimiento</h2>
 
-  <form [formGroup]="formSolicitudMantenimiento">
+  <form [formGroup]="formSolicitud">
     <mat-card class="formContainer">
 
       <mat-form-field>
-        <input matInput placeholder="Consecutivo" formControlName="consecutivo">
+        <input matInput placeholder="Consecutivo" formControlName="consecutivo" readonly>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Nombre del solicitante" formControlName="nombreSolicitante">
+        <input matInput placeholder="Nombre del solicitante" formControlName="nombreSolicitante" readonly>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Teléfono o extensión" formControlName="telefono">
+        <input matInput placeholder="Teléfono o extensión" formControlName="telefono" readonly>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Contacto adicional" formControlName="contacto">
+        <input matInput placeholder="Contacto adicional" formControlName="contacto" readonly>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Urgencia de la solicitud" formControlName="urgencia">
+        <input matInput placeholder="Urgencia de la solicitud" formControlName="urgencia" readonly>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Área de trabajo a solicitar" formControlName="areaTrabajo">
+        <input matInput placeholder="Área de trabajo a solicitar" formControlName="areaTrabajo" readonly>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Lugar donde realiza el trabajo" formControlName="lugarTrabajo">
+        <input matInput placeholder="Lugar donde realiza el trabajo" formControlName="lugarTrabajo" readonly>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Descripción del trabajo" formControlName="descripcion">
+        <input matInput placeholder="Descripción del trabajo" formControlName="descripcion" readonly>
       </mat-form-field>
 
+
+      <label id="aprobar-solicitud-label" style="margin-top: 32px">Estado de la solicitud</label>
+      <mat-radio-group aria-labelledby="aprobar-solicitud-label" [(ngModel)]="estadoSolicitud"
+                       [ngModelOptions]="{standalone: true}" color="primary">
+        <mat-radio-button value="aprobada">Aprobada</mat-radio-button>
+        <mat-radio-button value="rechazada">Rechazada</mat-radio-button>
+      </mat-radio-group>
 
     </mat-card>
   </form>

@@ -15,7 +15,6 @@ export class UmiService {
   constructor(private http: HttpClient) { }
 
   agregarSolicitud(solicitud: SolicitudUmiEntidad): Observable<SolicitudUmiEntidad> {
-    console.log(solicitud);
     return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}/agregar-solicitud`, solicitud, {headers: this.httpHeaders});
   }
 

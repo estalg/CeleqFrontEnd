@@ -34,3 +34,7 @@ th.mat-header-cell {
   flex-direction: column;
   padding: 2rem;
 }
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
