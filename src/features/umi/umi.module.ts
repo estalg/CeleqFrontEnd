@@ -16,15 +16,19 @@ import {
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SolicitudesUmiAprobarComponent } from './solicitudes-umi-aprobar/solicitudes-umi-aprobar.component';
 import {SolicitudesUmiAprobarRoutingModule} from './solicitudes-umi-aprobar/solicitudes-umi-aprobar-routing.module';
+import {SolicitudesUmiListarComponent} from './solicitudes-umi-listar/solicitudes-umi-listar.component';
+import {SolicitudesUmiListarRoutingModule} from './solicitudes-umi-listar/solicitudes-umi-listar-routing.module';
 
 @NgModule({
   declarations: [
     SolicitudesUmiAgregarComponent,
-    SolicitudesUmiAprobarComponent
+    SolicitudesUmiAprobarComponent,
+    SolicitudesUmiListarComponent
   ],
   imports: [
     CommonModule,
     SolicitudesUmiAgregarRoutingModule,
+    SolicitudesUmiListarRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
@@ -43,7 +47,8 @@ import {SolicitudesUmiAprobarRoutingModule} from './solicitudes-umi-aprobar/soli
   ],
   exports: [
     SolicitudesUmiAgregarComponent,
-    SolicitudesUmiAprobarComponent
+    SolicitudesUmiAprobarComponent,
+    SolicitudesUmiListarComponent
   ]
 })
 export class UmiModule { }

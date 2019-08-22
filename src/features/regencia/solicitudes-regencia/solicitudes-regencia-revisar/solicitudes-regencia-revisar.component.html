@@ -119,9 +119,9 @@
 
   </table>
   <div class="position-absolute">
-    <button [disabled]="deshabilitarBotonAceptar()" mat-button type="submit" (click)="abrirDialogoConfirmacion()">Aceptar</button>
-    <button [disabled]="deshabilitarBotonRechazar()" mat-button type="submit" (click)="abrirDialogoRechazo()">Rechazar</button>
-    <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+    <button class="botonesAceptarCancelar" [disabled]="deshabilitarBotonAceptar()" mat-button type="submit" (click)="abrirDialogoConfirmacion()">Aceptar</button>
+    <button class="botonesAceptarCancelar" [disabled]="deshabilitarBotonRechazar()" mat-button type="submit" (click)="abrirDialogoRechazo()">Rechazar</button>
+    <button class="botonesAceptarCancelar" mat-button type="button" (click)="cancelar()">Cancelar</button>
   </div>
 
 </div>

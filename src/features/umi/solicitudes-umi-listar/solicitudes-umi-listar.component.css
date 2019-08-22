@@ -1,0 +1,80 @@
+table {
+  text-align: center !important;
+  width: 100%;
+}
+
+tr.mat-header-row {
+  background-color: #78909C !important;
+}
+
+th.mat-header-cell {
+  color: white !important;
+}
+
+.mat-row:nth-child(even){
+  background-color:white;
+  font-size: medium;
+}
+
+.mat-row:nth-child(odd){
+  background-color: #ECEFF1;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-header-cell {
+  text-align: center;
+}
+
+.barraBusqueda {
+  display: flex;
+  justify-content: flex-end;
+  right: 10px;
+}
+
+.botonesTabla {
+  margin-right: 5px;
+  background-color: #78909C;
+  color: white;
+}
+
+.mat-column-consecutivo{
+  width: auto;
+}
+
+.mat-column-nombresolicitante{
+  width: auto;
+}
+
+.mat-column-telefono{
+  width: auto;
+}
+
+.mat-column-contactoAdicional{
+  width: auto;
+}
+
+.mat-column-urgencia{
+  width: auto;
+}
+
+.mat-column-areaTrabajo{
+  width: auto;
+}
+
+.mat-column-lugarTrabajo{
+  width: auto;
+}
+
+.mat-column-descripcionTrabajo{
+  width: auto;
+}
+
+mat-column-acciones{
+  width: 0%;
+  display: flex;
+  align-items: center;
+}

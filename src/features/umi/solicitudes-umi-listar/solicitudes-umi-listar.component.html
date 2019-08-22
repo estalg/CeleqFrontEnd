@@ -1,0 +1,69 @@
+<div class="container">
+
+  <h2>{{titulo}}</h2>
+
+  <div style="margin-top: -3rem">
+
+    <mat-form-field class="barraBusqueda">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+    </mat-form-field>
+
+    <div class="mat-elevation-z2">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="consecutivo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Consecutivo</th>
+          <td mat-cell *matCellDef="let solicitud">UMI-{{solicitud.anno}}-{{solicitud.id}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombreSolicitante">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre de solicitante</th>
+          <td mat-cell *matCellDef="let solicitud">{{solicitud.nombreSolicitante}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="telefono">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefono</th>
+          <td mat-cell *matCellDef="let solicitud">{{solicitud.telefono}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="contactoAdicional">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Contacto adicional</th>
+          <td mat-cell *matCellDef="let solicitud">{{solicitud.contactoAdicional}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="urgencia">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Urgencia</th>
+          <td mat-cell *matCellDef="let solicitud">{{solicitud.urgencia}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="areaTrabajo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>área de trabajo</th>
+          <td mat-cell *matCellDef="let solicitud">{{solicitud.areaTrabajo}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="lugarTrabajo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Lugar de trabajo</th>
+          <td mat-cell *matCellDef="let solicitud">{{solicitud.lugarTrabajo}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="descripcionTrabajo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción del trabajo</th>
+          <td mat-cell *matCellDef="let solicitud">{{solicitud.descripcionTrabajo}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let solicitud">
+            <button mat-button class="botonesTabla" [routerLink]="['../../solicitudes-revisar', solicitud.id, solicitud.anno]">Revisar</button>
+          </td>
+
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+
+</div>

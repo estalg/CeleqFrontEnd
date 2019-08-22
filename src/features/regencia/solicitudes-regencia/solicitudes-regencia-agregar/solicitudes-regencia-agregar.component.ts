@@ -14,6 +14,7 @@ import {formatDate} from '@angular/common';
 import {UnidadEntidad} from '../../../../shared/entidades/unidad/unidadEntidad';
 import {UnidadesService} from '../../../../shared/servicios/unidades/unidades.service';
 import {DialogoConfirmacionComponent} from '../../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
+import {AuthenticationService} from '../../../../shared/servicios/seguridad/authentication.service';
 
 @Component({
   selector: 'app-solicitudes-regencia-agregar',
@@ -58,7 +59,8 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
               private _routeService: Router,
               private _route: ActivatedRoute,
               public dialog: MatDialog,
-              private unidadesService: UnidadesService) { }
+              private unidadesService: UnidadesService,
+              private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.modoForm = this._route.snapshot.params.modo;
@@ -213,6 +215,7 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
       solicitud.unidad = this.formSolicitud.controls.unidad.value;
       solicitud.reactivosSolicitados = new Array();
       solicitud.cristaleriaSolicitada = new Array();
+      solicitud.cedulaUsuario = this.authService.getCedula();
 
       this.dataSourceReactivos.data.forEach(function(reactivo) {
         solicitud.reactivosSolicitados.push(reactivo);
@@ -221,7 +224,7 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
       this.dataSourceCristaleria.data.forEach(function(cristaleria) {
         solicitud.cristaleriaSolicitada.push(cristaleria);
       })
-
+      console.log(solicitud);
       this.solicitudesService.agregarSolicitud(solicitud).subscribe(result =>{
         this._routeService.navigate(['/']);
       }, error => {

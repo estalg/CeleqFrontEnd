@@ -114,9 +114,9 @@
 
   </table>
   <div class="position-absolute">
-    <button mat-button type="submit" (click)="agregar()" *ngIf="modoForm === 'agregar'"
+    <button class="botonesAceptarCancelar" mat-button type="submit" (click)="agregar()" *ngIf="modoForm === 'agregar'"
             [disabled]="formSolicitud.invalid || (dataSourceCristaleria.data.length === 0 && dataSourceReactivos.data.length === 0)">Aceptar</button>
-    <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+    <button class="botonesAceptarCancelar" mat-button type="button" (click)="cancelar()">Cancelar</button>
   </div>
 
 </div>

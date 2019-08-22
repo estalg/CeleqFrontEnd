@@ -18,4 +18,12 @@ export class UmiService {
     console.log(solicitud);
     return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}/agregar-solicitud`, solicitud, {headers: this.httpHeaders});
   }
+
+  consultar(): Observable<SolicitudUmiEntidad[]> {
+    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/consultar-solicitudes');
+  }
+
+  consultarPendientes(): Observable<SolicitudUmiEntidad[]> {
+    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/consultar-pendientes');
+  }
 }
