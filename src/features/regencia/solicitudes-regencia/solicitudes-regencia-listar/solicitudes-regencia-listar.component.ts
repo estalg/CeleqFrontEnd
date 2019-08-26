@@ -65,7 +65,8 @@ export class SolicitudesRegenciaListarComponent implements OnInit {
     this.SolicitudRegenciaService.consultarPendientes().subscribe(solicitudes => {
       this.dataSource.data = solicitudes as SolicitudRegenciaEntidad[];
       this.solicitudes = this.dataSource.data;
-      this.displayedColumns = ['consecutivo', 'fechaSolicitud', 'nombreSolicitante', 'nombreEncargado', 'correoSolicitante', 'unidad', 'acciones'];
+      this.displayedColumns = ['consecutivo', 'fechaSolicitud', 'nombreSolicitante', 'nombreEncargado', 'correoSolicitante', 'unidad',
+        'acciones'];
     });
   }
 
@@ -73,7 +74,7 @@ export class SolicitudesRegenciaListarComponent implements OnInit {
     this.SolicitudRegenciaService.consultarSolicitudesUsuario(this.authServeice.getCedula()).subscribe(solicitudes => {
       this.dataSource.data = solicitudes as SolicitudRegenciaEntidad[];
       this.solicitudes = this.dataSource.data;
-    })
+    });
   }
 
   applyFilter(filterValue: string) {
