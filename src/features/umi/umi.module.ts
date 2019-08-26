@@ -18,17 +18,21 @@ import { SolicitudesUmiAprobarComponent } from './solicitudes-umi-aprobar/solici
 import {SolicitudesUmiAprobarRoutingModule} from './solicitudes-umi-aprobar/solicitudes-umi-aprobar-routing.module';
 import {SolicitudesUmiListarComponent} from './solicitudes-umi-listar/solicitudes-umi-listar.component';
 import {SolicitudesUmiListarRoutingModule} from './solicitudes-umi-listar/solicitudes-umi-listar-routing.module';
+import {SolicitudesUmiFinalizarComponent} from './solicitudes-umi-finalizar/solicitudes-umi-finalizar.component';
+import {SolicitudesUmiFinalizarRoutingModule} from './solicitudes-umi-finalizar/solicitudes-umi-finalizar-routing.module';
 
 @NgModule({
   declarations: [
     SolicitudesUmiAgregarComponent,
     SolicitudesUmiAprobarComponent,
-    SolicitudesUmiListarComponent
+    SolicitudesUmiListarComponent,
+    SolicitudesUmiFinalizarComponent
   ],
   imports: [
     CommonModule,
     SolicitudesUmiAgregarRoutingModule,
     SolicitudesUmiListarRoutingModule,
+    SolicitudesUmiFinalizarRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
@@ -49,7 +53,8 @@ import {SolicitudesUmiListarRoutingModule} from './solicitudes-umi-listar/solici
   exports: [
     SolicitudesUmiAgregarComponent,
     SolicitudesUmiAprobarComponent,
-    SolicitudesUmiListarComponent
+    SolicitudesUmiListarComponent,
+    SolicitudesUmiFinalizarComponent
   ]
 })
 export class UmiModule { }

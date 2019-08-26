@@ -26,8 +26,8 @@ export class SolicitudesUmiListarComponent implements OnInit {
   private titulo: string;
 
   // tslint:disable-next-line:max-line-length
-  public displayedColumns: string[] = ['consecutivo', 'nombreSolicitante', 'telefono', 'contactoAdicional', 'urgencia', 'areaTrabajo',
-    'lugarTrabajo', 'descripcionTrabajo', 'acciones'];
+  public displayedColumns: string[] = ['consecutivo', 'nombreSolicitante', 'urgencia', 'areaTrabajo',
+    'lugarTrabajo', 'descripcionTrabajo', 'estado', 'acciones'];
 
   public dataSource = new MatTableDataSource<SolicitudUmiEntidad>();
 
@@ -50,6 +50,9 @@ export class SolicitudesUmiListarComponent implements OnInit {
     } else if (this.modoForm === 'pendientes') {
       this.titulo = 'Solicitudes Pendientes';
       this.consultarSolicitudesMantenimientoPendientes();
+    } else if (this.modoForm === 'analizadas') {
+      this.titulo = 'Solicitudes Analizadas';
+      this.consultarSolicitudesMantenimientoAnalizadas();
     }
   }
 
@@ -57,7 +60,10 @@ export class SolicitudesUmiListarComponent implements OnInit {
     this.SolicitudRegenciaService.consultar().subscribe(solicitudes => {
       this.dataSource.data = solicitudes as SolicitudUmiEntidad[];
       this.solicitudes = this.dataSource.data;
-    });
+    },
+      error => {
+        this.abrirDialogoError('Error al cargar lista');
+      });
   }
 
   private consultarSolicitudesMantenimientoPendientes = () => {
@@ -65,13 +71,37 @@ export class SolicitudesUmiListarComponent implements OnInit {
       this.dataSource.data = solicitudes as SolicitudUmiEntidad[];
       this.solicitudes = this.dataSource.data;
       // tslint:disable-next-line:max-line-length
-      this.displayedColumns = ['consecutivo', 'nombreSolicitante', 'telefono', 'contactoAdicional', 'urgencia', 'areaTrabajo',
+      this.displayedColumns = ['consecutivo', 'nombreSolicitante', 'urgencia', 'areaTrabajo',
       'lugarTrabajo', 'descripcionTrabajo', 'acciones'];
-    });
+    },
+      error => {
+        this.abrirDialogoError('Error al cargar lista');
+      });
+  }
+
+  private consultarSolicitudesMantenimientoAnalizadas = () => {
+    this.SolicitudRegenciaService.consultarAnalizadas().subscribe(solicitudes => {
+        this.dataSource.data = solicitudes as SolicitudUmiEntidad[];
+        this.solicitudes = this.dataSource.data;
+        // tslint:disable-next-line:max-line-length
+        this.displayedColumns = ['consecutivo', 'nombreSolicitante', 'urgencia', 'areaTrabajo',
+          'lugarTrabajo', 'descripcionTrabajo', 'acciones'];
+      },
+      error => {
+        this.abrirDialogoError('Error al cargar lista');
+      });
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  private abrirDialogoError(mensaje: string) {
+    this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'error'}
+      });
   }
 
 }

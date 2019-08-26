@@ -38,7 +38,7 @@ export class CristaleriaListarComponent implements OnInit {
       this.cristalerias = this.dataSource.data;
     },
         error => {
-        this.abrirDialogoError('Error al cargar lista, recargue la página nuevamente');
+        this.abrirDialogoError('Error al cargar lista');
       }
     );
   }
