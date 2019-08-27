@@ -23,6 +23,10 @@ export class UsuariosService {
     return this.http.get<UsuarioEntidad>(`${this.urlEndPoint}/consultar-usuario-id?cedula=` + cedula).toPromise();
   }
 
+  consultarPorGrupo(grupo: string): Observable<UsuarioEntidad[]> {
+    return this.http.get<UsuarioEntidad[]>(`${this.urlEndPoint}/consultar-usuarios-grupo?grupo=` + grupo);
+  }
+
   agregar(usuario: UsuarioEntidad): Observable<UsuarioEntidad> {
     return this.http.post<UsuarioEntidad>(`${this.urlEndPoint}/agregar-usuarios`, usuario, {headers: this.httpHeaders});
   }

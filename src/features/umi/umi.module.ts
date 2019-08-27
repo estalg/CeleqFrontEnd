@@ -20,13 +20,17 @@ import {SolicitudesUmiListarComponent} from './solicitudes-umi-listar/solicitude
 import {SolicitudesUmiListarRoutingModule} from './solicitudes-umi-listar/solicitudes-umi-listar-routing.module';
 import {SolicitudesUmiFinalizarComponent} from './solicitudes-umi-finalizar/solicitudes-umi-finalizar.component';
 import {SolicitudesUmiFinalizarRoutingModule} from './solicitudes-umi-finalizar/solicitudes-umi-finalizar-routing.module';
+import {SolicitudesUmiAnalizarComponent} from './solicitudes-umi-analizar/solicitudes-umi-analizar.component';
+import {SolicitudesUmiAnalizarRoutingModule} from './solicitudes-umi-analizar/solicitudes-umi-analizar-routing.module';
 
 @NgModule({
   declarations: [
     SolicitudesUmiAgregarComponent,
     SolicitudesUmiAprobarComponent,
     SolicitudesUmiListarComponent,
-    SolicitudesUmiFinalizarComponent
+    SolicitudesUmiFinalizarComponent,
+    SolicitudesUmiListarComponent,
+    SolicitudesUmiAnalizarComponent
   ],
   imports: [
     CommonModule,
@@ -48,13 +52,16 @@ import {SolicitudesUmiFinalizarRoutingModule} from './solicitudes-umi-finalizar/
     MatSelectModule,
     MatCheckboxModule,
     SolicitudesUmiAprobarRoutingModule,
-    MatRadioModule
+    MatRadioModule,
+    SolicitudesUmiAnalizarRoutingModule
   ],
   exports: [
     SolicitudesUmiAgregarComponent,
     SolicitudesUmiAprobarComponent,
     SolicitudesUmiListarComponent,
-    SolicitudesUmiFinalizarComponent
+    SolicitudesUmiFinalizarComponent,
+    SolicitudesUmiListarComponent,
+    SolicitudesUmiAnalizarComponent
   ]
 })
 export class UmiModule { }

@@ -37,4 +37,13 @@ export class UmiService {
   finalizarSolicitud(solicitud: SolicitudUmiEntidad): Observable<SolicitudUmiEntidad> {
     return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}/finalizar-solicitud`, solicitud, {headers: this.httpHeaders});
   }
+
+  async consultarSolicitud(idSolicitud: string, annoSolicitud: string): Promise<any>  {
+    return this.http.get<SolicitudUmiEntidad>(`${this.urlEndPoint}/consultar-solicitud-id?id=` + idSolicitud +
+      `&anno=` + annoSolicitud).toPromise();
+  }
+
+  aprobarSolicitud(solicitud: SolicitudUmiEntidad): Observable<SolicitudUmiEntidad> {
+    return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}/aprobar-solicitudes`, solicitud, {headers: this.httpHeaders});
+  }
 }

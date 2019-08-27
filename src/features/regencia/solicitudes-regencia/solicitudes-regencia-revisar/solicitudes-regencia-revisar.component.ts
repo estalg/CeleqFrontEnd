@@ -138,13 +138,12 @@ export class SolicitudesRegenciaRevisarComponent implements OnInit {
     }
     this.solicitud.estado = 'Aceptado';
     this.solicitud.fechaAprobacion = new Date();
-    console.log(this.solicitud.fechaAprobacion);
+
     this.solicitudesRegenciaService.modificarSolicitud(this.solicitud).subscribe(
       res => {
         this.routeService.navigate(['/regencia/solicitudes', 'pendientes']);
       },
       (err) => {
-        console.log(err.status);
         if (err.status === 422) {
           this.abrirDialogoError('Error al procesar solicitud, inténtelo de nuevo');
         }

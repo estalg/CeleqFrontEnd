@@ -10,7 +10,7 @@ export class SolicitudUmiEntidad {
   descripcionTrabajo: string;
   estado: string;
   usuario: string;
-  fechaAprobacion: string;
+  fechaAprobacion: Date;
   personaAsignada: string;
   observacionesAprob: string;
   recibido: string;
