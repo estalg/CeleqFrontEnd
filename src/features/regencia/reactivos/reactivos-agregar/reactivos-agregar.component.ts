@@ -37,22 +37,26 @@ export class ReactivosAgregarComponent implements OnInit {
     this.formReactivo = this.fb.group({
       nombre: ['', [
         Validators.required,
-        Validators.pattern('[A-Za-z0-9áéíóúÁÉÍÓÚ[ \-\-\(\)\.\%\+\:\,]*')
+        Validators.pattern('[A-Za-z0-9áéíóúÁÉÍÓÚ[ \-\-\(\)\.\%\+\:\,]*'),
+        Validators.maxLength(255)
       ]],
       pureza: ['', [
         Validators.required,
-        Validators.pattern('[A-Za-z0-9áéíóúÁÉÍÓÚ[ \.\%]*')
+        Validators.pattern('[A-Za-z0-9áéíóúÁÉÍÓÚ[ \.\%]*'),
+        Validators.maxLength(100)
       ]],
       cantidad: ['', [
         Validators.pattern('[0-9]*')
       ]],
       estado: ['', [
         Validators.required,
-        Validators.pattern('[A-Za-záéíóúÁÉÍÓÚ[\.\/]*')
+        Validators.pattern('[A-Za-záéíóúÁÉÍÓÚ[\.\/]*'),
+        Validators.maxLength(10)
       ]],
       estante: ['', [
         Validators.required,
-        Validators.pattern('[[A-Za-z]*[0-9]*]*')
+        Validators.pattern('[[A-Za-z]*[0-9]*]*'),
+        Validators.maxLength(10)
       ]],
     });
 

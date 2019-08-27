@@ -9,6 +9,9 @@
         <mat-error *ngIf="nombreSolicitante.errors?.required && nombreSolicitante.touched">
           Este campo es obligatorio
         </mat-error>
+        <mat-error *ngIf="nombreSolicitante.errors?.maxlength && nombreSolicitante.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -19,10 +22,16 @@
         <mat-error *ngIf="telefono.errors?.pattern && telefono.touched">
           El teléfono no cumple con un formto válido
         </mat-error>
+        <mat-error *ngIf="telefono.errors?.maxlength && telefono.touched">
+          El máximo de caracteres es de 11
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput placeholder="Contacto adicional" formControlName="contacto">
+        <mat-error *ngIf="contacto.errors?.maxlength && contacto.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -74,12 +83,18 @@
         <mat-error *ngIf="lugarTrabajo.errors?.required && lugarTrabajo.touched">
           Este campo es obligatorio
         </mat-error>
+        <mat-error *ngIf="lugarTrabajo.errors?.maxlength && lugarTrabajo.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput placeholder="Descripción del trabajo" formControlName="descripcion" required>
         <mat-error *ngIf="descripcion.errors?.required && descripcion.touched">
           Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="descripcion.errors?.maxlength && descripcion.touched">
+          El máximo de caracteres es de 500
         </mat-error>
       </mat-form-field>
 

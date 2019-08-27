@@ -8,12 +8,18 @@
             <mat-error *ngIf="nombre.errors?.required && nombre.touched">
               Este campo es obligatorio
             </mat-error>
+            <mat-error *ngIf="nombre.errors?.maxlength && nombre.touched">
+              El máximo de caracteres es de 255
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field>
             <input matInput placeholder="Pureza" formControlName="pureza" required>
             <mat-error *ngIf="pureza.errors?.required && pureza.touched">
               Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="pureza.errors?.maxlength && pureza.touched">
+              El máximo de caracteres es de 100
             </mat-error>
           </mat-form-field>
 
@@ -29,12 +35,18 @@
             <mat-error *ngIf="estado.errors?.pattern && estado.touched">
               El fromato no es correcto
             </mat-error>
+            <mat-error *ngIf="estado.errors?.maxlength && estado.touched">
+              El máximo de caracteres es de 10
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field>
             <input matInput placeholder="Estante" formControlName="estante" required>
             <mat-error *ngIf="estante.errors?.pattern && estante.touched">
               El formato no es correcto
+            </mat-error>
+            <mat-error *ngIf="estante.errors?.maxlength && estante.touched">
+              El máximo de caracteres es de 10
             </mat-error>
           </mat-form-field>
 

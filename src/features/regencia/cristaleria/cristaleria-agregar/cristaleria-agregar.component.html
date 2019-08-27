@@ -8,6 +8,9 @@
         <mat-error *ngIf="nombre.errors?.required && nombre.touched">
           Este campo es obligatorio
         </mat-error>
+        <mat-error *ngIf="nombre.errors?.maxlength && nombre.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -15,12 +18,18 @@
         <mat-error *ngIf="material.errors?.required && material.touched">
           Este campo es obligatorio
         </mat-error>
+        <mat-error *ngIf="material.errors?.maxlength && material.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput placeholder="Capacidad" formControlName="capacidad" required>
         <mat-error *ngIf="capacidad.errors?.required && capacidad.touched">
           Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="capacidad.errors?.maxlength && capacidad.touched">
+          El máximo de caracteres es de 255
         </mat-error>
       </mat-form-field>
 
@@ -35,6 +44,9 @@
         <input matInput placeholder="Caja" formControlName="caja" required>
         <mat-error *ngIf="caja.errors?.required && caja.touched">
           Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="caja.errors?.maxlength && caja.touched">
+          El máximo de caracteres es de 5
         </mat-error>
       </mat-form-field>
 

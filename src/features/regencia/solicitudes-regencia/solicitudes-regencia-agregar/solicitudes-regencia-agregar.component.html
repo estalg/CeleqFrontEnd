@@ -9,6 +9,9 @@
         <mat-error *ngIf="nombreSolicitante.errors?.required && nombreSolicitante.touched">
           Este campo es obligatorio
         </mat-error>
+        <mat-error *ngIf="nombreSolicitante.errors?.maxlength && nombreSolicitante.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -19,14 +22,23 @@
         <mat-error *ngIf="correoSolicitante.errors?.email && correoSolicitante.touched">
           El correo no cumple con un formto válido
         </mat-error>
+        <mat-error *ngIf="correoSolicitante.errors?.maxlength && correoSolicitante.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput placeholder="Nombre encargado" formControlName="nombreEncargado">
+        <mat-error *ngIf="nombreEncargado.errors?.maxlength && nombreEncargado.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <textarea matInput placeholder="Observaciones" formControlName="observaciones"></textarea>
+        <mat-error *ngIf="observaciones.errors?.maxlength && observaciones.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>

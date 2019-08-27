@@ -26,11 +26,13 @@ export class SolicitudesUmiAgregarComponent implements OnInit {
   ngOnInit() {
     this.formSolicitud = this.fb.group({
       nombreSolicitante: ['', [
-        Validators.required
+        Validators.required,
+        Validators.maxLength(255)
       ]],
       telefono: ['', [
         Validators.required,
-        Validators.pattern('[0-9]*')
+        Validators.pattern('[0-9]*'),
+        Validators.maxLength(11)
       ]],
       contacto: [''],
       urgencia: ['', [
@@ -40,10 +42,12 @@ export class SolicitudesUmiAgregarComponent implements OnInit {
         Validators.required
       ]],
       lugarTrabajo: ['', [
-        Validators.required
+        Validators.required,
+        Validators.maxLength(255)
       ]],
       descripcion: ['', [
-        Validators.required
+        Validators.required,
+        Validators.maxLength(500)
       ]]
     });
   }
