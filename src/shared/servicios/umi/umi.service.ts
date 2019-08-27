@@ -26,12 +26,12 @@ export class UmiService {
     return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/consultar-pendientes');
   }
 
-  consultarAnalizadas(): Observable<SolicitudUmiEntidad[]> {
-    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/consultar-solicitudes-analizadas');
+  consultarAnalizadas(cedula: string): Observable<SolicitudUmiEntidad[]> {
+    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/consultar-solicitudes-analizadas?cedula=' + cedula);
   }
 
-  consultarAprobadas(): Observable<SolicitudUmiEntidad[]> {
-    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/consultar-solicitudes-analizadas');
+  consultarAprobadas(cedula: string): Observable<SolicitudUmiEntidad[]> {
+    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/consultar-solicitudes-aprobadas?cedula=' + cedula);
   }
 
   finalizarSolicitud(solicitud: SolicitudUmiEntidad): Observable<SolicitudUmiEntidad> {

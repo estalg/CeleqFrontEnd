@@ -21,4 +21,5 @@ export class SolicitudUmiEntidad {
   periodoEjecucion: string;
   observacionesFinales: string;
   motivoRechazo: string;
+  nombrePersonaAsignada: string;
 }

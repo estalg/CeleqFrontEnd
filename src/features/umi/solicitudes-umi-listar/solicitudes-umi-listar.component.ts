@@ -38,7 +38,7 @@ export class SolicitudesUmiListarComponent implements OnInit {
               public dialog: MatDialog,
               private _routeService: Router,
               private _route: ActivatedRoute,
-              private authServeice: AuthenticationService) { }
+              private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.modoForm = this._route.snapshot.params.modo;
@@ -51,7 +51,7 @@ export class SolicitudesUmiListarComponent implements OnInit {
       this.titulo = 'Solicitudes Pendientes';
       this.consultarSolicitudesMantenimientoPendientes();
     } else if (this.modoForm === 'aprobadas') {
-      this.titulo = 'Solicitudes Analizadas';
+      this.titulo = 'Solicitudes Aprobadas';
       this.consultarSolicitudesMantenimientoAprobadas();
     } else if (this.modoForm === 'analizadas') {
       this.titulo = 'Solicitudes Analizadas';
@@ -83,29 +83,31 @@ export class SolicitudesUmiListarComponent implements OnInit {
   }
 
   private consultarSolicitudesMantenimientoAnalizadas = () => {
-    this.SolicitudRegenciaService.consultarAnalizadas().subscribe(solicitudes => {
-        this.dataSource.data = solicitudes as SolicitudUmiEntidad[];
-        this.solicitudes = this.dataSource.data;
+    this.SolicitudRegenciaService.consultarAnalizadas(this.authService.getCedula()).subscribe(solicitudes => {
+      console.log(solicitudes);
+      this.dataSource.data = solicitudes as SolicitudUmiEntidad[];
+      this.solicitudes = this.dataSource.data;
         // tslint:disable-next-line:max-line-length
-        this.displayedColumns = ['consecutivo', 'nombreSolicitante', 'urgencia', 'areaTrabajo',
-          'lugarTrabajo', 'descripcionTrabajo', 'personaAsignada', 'acciones'];
-      },
-      error => {
-        this.abrirDialogoError('Error al cargar lista');
-      });
+      this.displayedColumns = ['consecutivo', 'nombreSolicitante', 'urgencia', 'areaTrabajo',
+          'lugarTrabajo', 'descripcionTrabajo', 'nombrePersonaAsignada', 'acciones'];
+    },
+    error => {
+      this.abrirDialogoError('Error al cargar lista');
+    });
   }
 
   private consultarSolicitudesMantenimientoAprobadas = () => {
-    this.SolicitudRegenciaService.consultarAprobadas().subscribe(solicitudes => {
-        this.dataSource.data = solicitudes as SolicitudUmiEntidad[];
-        this.solicitudes = this.dataSource.data;
-        // tslint:disable-next-line:max-line-length
-        this.displayedColumns = ['consecutivo', 'nombreSolicitante', 'urgencia', 'areaTrabajo',
-          'lugarTrabajo', 'descripcionTrabajo', 'personaAsignada', 'acciones'];
-      },
-      error => {
-        this.abrirDialogoError('Error al cargar lista');
-      });
+    this.SolicitudRegenciaService.consultarAprobadas(this.authService.getCedula()).subscribe(solicitudes => {
+      console.log(solicitudes);
+      this.dataSource.data = solicitudes as SolicitudUmiEntidad[];
+      this.solicitudes = this.dataSource.data;
+      // tslint:disable-next-line:max-line-length
+      this.displayedColumns = ['consecutivo', 'nombreSolicitante', 'urgencia', 'areaTrabajo',
+        'lugarTrabajo', 'descripcionTrabajo', 'nombrePersonaAsignada', 'acciones'];
+    },
+    error => {
+      this.abrirDialogoError('Error al cargar lista');
+    });
   }
 
   applyFilter(filterValue: string) {
