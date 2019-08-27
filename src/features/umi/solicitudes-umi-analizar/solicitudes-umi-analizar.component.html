@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h2>Revisión solicitud de mantenimiento</h2>
+  <h2>Análisis de solicitud de mantenimiento</h2>
 
   <form [formGroup]="formSolicitud">
     <mat-card class="formContainer">
@@ -37,38 +37,49 @@
         <input matInput placeholder="Descripción del trabajo" formControlName="descripcion" readonly>
       </mat-form-field>
 
-
-      <label id="aprobar-solicitud-label" style="margin-top: 32px">Estado de la solicitud</label>
-      <mat-radio-group aria-labelledby="aprobar-solicitud-label" [(ngModel)]="estadoSolicitud"
-                       [ngModelOptions]="{standalone: true}" color="primary">
-        <mat-radio-button value="aprobada">Aprobada</mat-radio-button>
-        <mat-radio-button value="rechazada">Rechazada</mat-radio-button>
-      </mat-radio-group>
-
-      <mat-form-field *ngIf="estadoSolicitud === 'aprobada'">
-        <mat-label>Persona asignada</mat-label>
-        <mat-select formControlName="personaAsignada" required>
-          <mat-option *ngFor="let usuario of usuariosUmi" [value]="usuario.cedula">
-            {{usuario.nombre + ' ' + usuario.apellido1 + ' ' + usuario.apellido2}}
-          </mat-option>
-        </mat-select>
+      <mat-form-field>
+        <input matInput placeholder="Observaciones de aprobación" formControlName="observacionesAprobacion" readonly>
       </mat-form-field>
-
-      <mat-form-field *ngIf="estadoSolicitud === 'aprobada'">
-        <textarea matInput placeholder="Observaciones" formControlName="observaciones"></textarea>
-        <mat-error *ngIf="observaciones.errors?.maxlength && observaciones.touched">
-          El máximo de caracteres es de 500
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field *ngIf="estadoSolicitud === 'rechazada'">
-        <textarea matInput placeholder="Motivo del rechazo" formControlName="motivoRechazo" required></textarea>
-        <mat-error *ngIf="motivoRechazo.errors?.maxlength && motivoRechazo.touched">
-          El máximo de caracteres es de 500
-        </mat-error>
-      </mat-form-field>
-
     </mat-card>
+
+    <mat-card class="formContainer">
+      <mat-form-field>
+        <textarea matInput placeholder="Insumos necesarios para el trabajo" formControlName="insumos" required></textarea>
+        <mat-error *ngIf="insumos.errors?.required && insumos.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="insumos.errors?.maxlength && insumos.touched">
+          El máximo de caracteres es de 500
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Costo aproximado" formControlName="costo" required>
+        <mat-error *ngIf="costo.errors?.required && costo.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="costo.errors?.maxlength && costo.touched">
+          El máximo de caracteres es de 100
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea matInput placeholder="Observaciones" formControlName="observacionesAnalisis"></textarea>
+        <mat-error *ngIf="observacionesAnalisis.errors?.maxlength && observacionesAnalisis.touched">
+          El máximo de caracteres es de 500
+        </mat-error>
+      </mat-form-field>
+
+      <div class="input-group">
+        <div class="custom-file">
+          <form action="/api/upload" method="post" enctype="multipart/form-data">
+            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+          </form>
+          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        </div>
+      </div>
+    </mat-card>
+
   </form>
 
   <div class="position-absolute">

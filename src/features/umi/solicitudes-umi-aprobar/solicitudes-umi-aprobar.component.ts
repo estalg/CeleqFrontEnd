@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {SolicitudesRegenciaService} from '../../../shared/servicios/regencia/solicitudes-regencia/solicitudes-regencia.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {UsuariosService} from '../../../shared/servicios/usuarios/usuarios.service';
@@ -21,8 +20,7 @@ export class SolicitudesUmiAprobarComponent implements OnInit {
   private usuariosUmi: UsuarioEntidad[];
   private solicitud: SolicitudUmiEntidad;
 
-  constructor(private solicitudesRegenciaService: SolicitudesRegenciaService,
-              private fb: FormBuilder,
+  constructor(private fb: FormBuilder,
               private routeService: Router,
               private route: ActivatedRoute,
               public dialog: MatDialog,
