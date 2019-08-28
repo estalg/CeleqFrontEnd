@@ -50,6 +50,16 @@ export class SolicitudesUmiFinalizarComponent implements OnInit {
       this.formSolicitud.controls.lugarTrabajo.setValue(this.solicitud.lugarTrabajo);
       this.formSolicitud.controls.descripcionTrabajo.setValue(this.solicitud.descripcionTrabajo);
       this.formSolicitud.controls.estado.setValue(this.solicitud.estado);
+
+      this.formSolicitud.controls.consecutivo.disable();
+      this.formSolicitud.controls.nombreSolicitante.disable();
+      this.formSolicitud.controls.telefono.disable();
+      this.formSolicitud.controls.contactoAdicional.disable();
+      this.formSolicitud.controls.urgencia.disable();
+      this.formSolicitud.controls.areaTrabajo.disable();
+      this.formSolicitud.controls.lugarTrabajo.disable();
+      this.formSolicitud.controls.descripcionTrabajo.disable();
+      this.formSolicitud.controls.estado.disable();
     });
 
   }

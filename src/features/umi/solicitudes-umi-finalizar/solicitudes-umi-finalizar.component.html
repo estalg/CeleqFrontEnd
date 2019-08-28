@@ -1,9 +1,7 @@
 <div class="container">
   <form [formGroup]="formSolicitud">
     <h2>Finalizar solicitud de mantenimimento</h2>
-    <mat-card class="formContainer">
-
-      <mat-form-field>
+    <mat-card class="container">
 
         <mat-form-field>
           <input matInput placeholder="Consecutivo" formControlName="consecutivo">
@@ -41,6 +39,7 @@
           <input matInput placeholder="Estado" formControlName="estado">
         </mat-form-field>
 
+      <mat-form-field>
         <mat-label>Período de ejecución</mat-label>
         <mat-select required formControlName="periodo">
           <mat-option [value]="'Inmediato'">
