@@ -4,6 +4,8 @@ import {SolicitudUmiEntidad} from '../../../shared/entidades/umi/solicitudUmiEnt
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {UmiService} from '../../../shared/servicios/umi/umi.service';
+import {UploadService} from '../../../shared/servicios/upload/upload.service';
+import {DialogoConfirmacionComponent} from '../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
 
 @Component({
   selector: 'app-solicitudes-umi-analizar',
@@ -14,12 +16,14 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
 
   private formSolicitud: FormGroup;
   private solicitud: SolicitudUmiEntidad;
+  uploadResponse;
 
   constructor(private fb: FormBuilder,
               private routeService: Router,
               private route: ActivatedRoute,
               public dialog: MatDialog,
-              private umiService: UmiService) { }
+              private umiService: UmiService,
+              private uploadService: UploadService) { }
 
   ngOnInit() {
     this.formSolicitud = this.fb.group({
@@ -100,11 +104,60 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
     return this.formSolicitud.get('archivo');
   }
 
-  aceptar() {
-
+  private abrirDialogoError(mensaje: string) {
+    this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'error'}
+      });
   }
+
+  aceptar() {
+    if (this.formSolicitud.get('archivo').value !== '') {
+      const formData = new FormData();
+      formData.append('archivo', this.formSolicitud.get('archivo').value);
+
+      this.uploadService.subirArchivo(formData).subscribe(
+        (res) => {
+          this.uploadResponse = res.url;
+          this.uploadResponse = this.uploadResponse.substring(this.uploadResponse.indexOf('/uploads/'));
+          console.log(this.uploadResponse);
+          this.analizarSolicitud();
+        },
+        (err) => {
+          this.uploadResponse = 'error';
+          this.abrirDialogoError('Ha ocurrido un error subiendo el archivo');
+        }
+      );
+    } else {
+     this.analizarSolicitud();
+    }
+  }
+
+  analizarSolicitud() {
+    let solicitudActualizada: SolicitudUmiEntidad;
+    solicitudActualizada = this.solicitud;
+    solicitudActualizada.estado = 'Analizada';
+    solicitudActualizada.insumos = this.formSolicitud.controls.insumos.value;
+    solicitudActualizada.costoEstimado = this.formSolicitud.controls.costo.value;
+    solicitudActualizada.observacionesAnalisis = this.formSolicitud.controls.observacionesAnalisis.value;
+    solicitudActualizada.ubicacionArchivo = this.uploadResponse;
+    console.log(solicitudActualizada);
+    this.umiService.analizarSolicitud(solicitudActualizada).subscribe(res => {
+      this.routeService.navigate(['/umi/solicitudes', 'pendientes']);
+    }, error => {
+      this.abrirDialogoError('Error al comunicarse con la base de datos');
+    });
+}
 
   cancelar() {
 
+  }
+
+  onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.formSolicitud.controls.archivo.setValue(file);
+    }
   }
 }
