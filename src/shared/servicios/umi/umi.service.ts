@@ -3,7 +3,6 @@ import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {SolicitudUmiEntidad} from '../../entidades/umi/solicitudUmiEntidad';
-import {SolicitudRegenciaEntidad} from '../../entidades/regencia/solicitudRegenciaEntidad';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +24,18 @@ export class UmiService {
 
   consultarPendientes(): Observable<SolicitudUmiEntidad[]> {
     return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/consultar-pendientes');
+  }
+
+  consultarAnalizadas(cedula: string): Observable<SolicitudUmiEntidad[]> {
+    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/consultar-solicitudes-analizadas?cedula=' + cedula);
+  }
+
+  consultarAprobadas(cedula: string): Observable<SolicitudUmiEntidad[]> {
+    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/consultar-solicitudes-aprobadas?cedula=' + cedula);
+  }
+
+  finalizarSolicitud(solicitud: SolicitudUmiEntidad): Observable<SolicitudUmiEntidad> {
+    return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}/finalizar-solicitud`, solicitud, {headers: this.httpHeaders});
   }
 
   async consultarSolicitud(idSolicitud: string, annoSolicitud: string): Promise<any>  {

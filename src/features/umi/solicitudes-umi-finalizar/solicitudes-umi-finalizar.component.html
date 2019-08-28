@@ -1,0 +1,47 @@
+<div class="container">
+  <form [formGroup]="formSolicitud">
+    <h2>Finalizar solicitud de mantenimimento</h2>
+    <mat-card class="formContainer">
+
+      <mat-form-field>
+        <mat-label>Período de ejecución</mat-label>
+        <mat-select required formControlName="periodo">
+          <mat-option [value]="'Inmediato'">
+            Inmediato
+          </mat-option>
+          <mat-option [value]="'1-2 semanas'">
+            1-2 semanas
+          </mat-option>
+          <mat-option [value]="'2-3 semanas'">
+            2-3 semanas
+          </mat-option>
+          <mat-option [value]="'1-2 meses'">
+            1-2 meses
+          </mat-option>
+          <mat-option [value]="'2-4 meses'">
+            2-4 meses
+          </mat-option>
+          <mat-option [value]="'Más de 4 meses'">
+            Más de 4 meses
+          </mat-option>
+        </mat-select>
+
+        <mat-error *ngIf="periodo.errors?.required && periodo.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Observaciones asignadas" formControlName="observaciones" required>
+        <mat-error *ngIf="observaciones.errors?.required && observaciones.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+    </mat-card>
+
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="finalizar()" [disabled]="formSolicitud.invalid">Aceptar</button>
+
+    <button mat-button class="botonesAceptarCancelar" type="button" (click)="cancelar()">Cancelar</button>
+  </form>
+</div>

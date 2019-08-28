@@ -18,6 +18,8 @@ import { SolicitudesUmiAprobarComponent } from './solicitudes-umi-aprobar/solici
 import {SolicitudesUmiAprobarRoutingModule} from './solicitudes-umi-aprobar/solicitudes-umi-aprobar-routing.module';
 import {SolicitudesUmiListarComponent} from './solicitudes-umi-listar/solicitudes-umi-listar.component';
 import {SolicitudesUmiListarRoutingModule} from './solicitudes-umi-listar/solicitudes-umi-listar-routing.module';
+import {SolicitudesUmiFinalizarComponent} from './solicitudes-umi-finalizar/solicitudes-umi-finalizar.component';
+import {SolicitudesUmiFinalizarRoutingModule} from './solicitudes-umi-finalizar/solicitudes-umi-finalizar-routing.module';
 import {SolicitudesUmiAnalizarComponent} from './solicitudes-umi-analizar/solicitudes-umi-analizar.component';
 import {SolicitudesUmiAnalizarRoutingModule} from './solicitudes-umi-analizar/solicitudes-umi-analizar-routing.module';
 
@@ -26,12 +28,15 @@ import {SolicitudesUmiAnalizarRoutingModule} from './solicitudes-umi-analizar/so
     SolicitudesUmiAgregarComponent,
     SolicitudesUmiAprobarComponent,
     SolicitudesUmiListarComponent,
+    SolicitudesUmiFinalizarComponent,
+    SolicitudesUmiListarComponent,
     SolicitudesUmiAnalizarComponent
   ],
   imports: [
     CommonModule,
     SolicitudesUmiAgregarRoutingModule,
     SolicitudesUmiListarRoutingModule,
+    SolicitudesUmiFinalizarRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
@@ -53,6 +58,8 @@ import {SolicitudesUmiAnalizarRoutingModule} from './solicitudes-umi-analizar/so
   exports: [
     SolicitudesUmiAgregarComponent,
     SolicitudesUmiAprobarComponent,
+    SolicitudesUmiListarComponent,
+    SolicitudesUmiFinalizarComponent,
     SolicitudesUmiListarComponent,
     SolicitudesUmiAnalizarComponent
   ]

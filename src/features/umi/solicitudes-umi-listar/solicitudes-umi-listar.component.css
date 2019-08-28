@@ -1,6 +1,7 @@
 table {
   text-align: center !important;
   width: 100%;
+  overflow-wrap: break-word;
 }
 
 tr.mat-header-row {
@@ -42,35 +43,35 @@ th.mat-header-cell {
 }
 
 .mat-column-consecutivo{
-  width: auto;
+  width: 10%;
 }
 
 .mat-column-nombresolicitante{
-  width: auto;
+  width: 20%;
 }
 
 .mat-column-telefono{
-  width: auto;
+  width: 10%;
 }
 
 .mat-column-contactoAdicional{
-  width: auto;
+  width: 10%;
 }
 
 .mat-column-urgencia{
-  width: auto;
+  width: 10%;
 }
 
 .mat-column-areaTrabajo{
-  width: auto;
+  width: 10%;
 }
 
 .mat-column-lugarTrabajo{
-  width: auto;
+  width: 15%;
 }
 
 .mat-column-descripcionTrabajo{
-  width: auto;
+  width: 15%;
 }
 
 mat-column-acciones{

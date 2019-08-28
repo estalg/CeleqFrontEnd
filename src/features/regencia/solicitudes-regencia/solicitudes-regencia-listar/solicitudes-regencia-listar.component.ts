@@ -58,26 +58,42 @@ export class SolicitudesRegenciaListarComponent implements OnInit {
     this.SolicitudRegenciaService.consultar().subscribe(solicitudes => {
       this.dataSource.data = solicitudes as SolicitudRegenciaEntidad[];
       this.solicitudes = this.dataSource.data;
-    });
+    },
+      error => {
+        this.abrirDialogoError('Error al cargar lista');
+      });
   }
 
   private consultarSolicitudesRegenciaPendientes = () => {
     this.SolicitudRegenciaService.consultarPendientes().subscribe(solicitudes => {
       this.dataSource.data = solicitudes as SolicitudRegenciaEntidad[];
       this.solicitudes = this.dataSource.data;
-      this.displayedColumns = ['consecutivo', 'fechaSolicitud', 'nombreSolicitante', 'nombreEncargado', 'correoSolicitante', 'unidad',
-        'acciones'];
-    });
+      this.displayedColumns = ['consecutivo', 'fechaSolicitud', 'nombreSolicitante', 'nombreEncargado', 'correoSolicitante', 'unidad', 'acciones'];
+    },
+      error => {
+        this.abrirDialogoError('Error al cargar lista');
+      });
   }
 
   private consultarSolicitudesRegenciaUsuario = () => {
     this.SolicitudRegenciaService.consultarSolicitudesUsuario(this.authServeice.getCedula()).subscribe(solicitudes => {
       this.dataSource.data = solicitudes as SolicitudRegenciaEntidad[];
       this.solicitudes = this.dataSource.data;
-    });
+    },
+      error => {
+        this.abrirDialogoError('Error al cargar lista');
+      });
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  private abrirDialogoError(mensaje: string) {
+    this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'error'}
+      });
   }
 }

@@ -36,20 +36,24 @@ export class CristaleriaAgregarComponent implements OnInit {
 
     this.formCristaleria = this.fb.group({
       nombre: ['', [
-        Validators.required
+        Validators.required,
+        Validators.maxLength(255)
       ]],
       material: ['', [
-        Validators.required
+        Validators.required,
+        Validators.maxLength(255)
       ]],
       capacidad: ['', [
-        Validators.required
+        Validators.required,
+        Validators.maxLength(255)
       ]],
       cantidad: ['', [
         Validators.required,
         Validators.pattern('[1-9]*')
       ]],
       caja: ['', [
-        Validators.required
+        Validators.required,
+        Validators.maxLength(5)
       ]]
     });
 

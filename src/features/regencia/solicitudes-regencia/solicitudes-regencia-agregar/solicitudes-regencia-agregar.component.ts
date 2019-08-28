@@ -73,14 +73,20 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
 
     this.formSolicitud = this.fb.group({
       nombreSolicitante: ['', [
-        Validators.required
+        Validators.required,
+        Validators.maxLength(255)
       ]],
       correoSolicitante: ['', [
         Validators.required,
-        Validators.email
+        Validators.email,
+        Validators.maxLength(255)
       ]],
-      nombreEncargado: [''],
-      observaciones: [''],
+      nombreEncargado: ['', [
+        Validators.maxLength(255)
+      ]],
+      observaciones: ['', [
+        Validators.maxLength(255)
+      ]],
       unidad: ['']
     });
 
