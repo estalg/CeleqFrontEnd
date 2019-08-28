@@ -4,6 +4,43 @@
     <mat-card class="formContainer">
 
       <mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Consecutivo" formControlName="consecutivo">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Nombre del solicitante" formControlName="nombreSolicitante">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Teléfono" formControlName="telefono">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Contacto Adicional" formControlName="contactoAdicional">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Urgencia" formControlName="urgencia">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Área de trabajo" formControlName="areaTrabajo">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Lugar de trabajo" formControlName="lugarTrabajo">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Descripción del trabajo" formControlName="descripcionTrabajo">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Estado" formControlName="estado">
+        </mat-form-field>
+
         <mat-label>Período de ejecución</mat-label>
         <mat-select required formControlName="periodo">
           <mat-option [value]="'Inmediato'">

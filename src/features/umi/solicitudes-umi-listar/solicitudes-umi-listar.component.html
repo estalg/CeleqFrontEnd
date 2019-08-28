@@ -57,7 +57,7 @@
             <button mat-button class="botonesTabla" [routerLink]="['../../aprobar-solicitud', solicitud.id, solicitud.anno]" *ngIf="modoForm === 'pendientes'">Revisar</button>
             <button mat-button class="botonesTabla" [routerLink]="['../../analizar-solicitud', solicitud.id, solicitud.anno]" *ngIf="modoForm === 'aprobadas'">Revisar</button>
             <button mat-button class="botonesTabla" [routerLink]="['../../finalizar-solicitud', solicitud.id, solicitud.anno]" *ngIf="modoForm === 'analizadas'">Revisar</button>
-            <button mat-button class="botonesTabla" *ngIf="modoForm === 'historico'">Detalles</button>
+            <button mat-button class="botonesTabla" [routerLink]="['../../solicitud', solicitud.id, solicitud.anno]" *ngIf="modoForm === 'historico'">Detalles</button>
           </td>
 
         </ng-container>

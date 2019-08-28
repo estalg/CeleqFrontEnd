@@ -26,9 +26,32 @@ export class SolicitudesUmiFinalizarComponent implements OnInit {
     this.solicitud = new SolicitudUmiEntidad();
 
     this.formSolicitud = this.fb.group({
+      consecutivo: [''],
+      nombreSolicitante: [''],
+      telefono: [''],
+      contactoAdicional: [''],
+      urgencia: [''],
+      areaTrabajo: [''],
+      lugarTrabajo: [''],
+      descripcionTrabajo: [''],
+      estado: [''],
       periodo: [''],
       observaciones: ['']
     });
+
+    this.solicitudUmiService.consultarSolicitud(this.route.snapshot.params.id, this.route.snapshot.params.anno).then(res => {
+      this.solicitud = res;
+      this.formSolicitud.controls.consecutivo.setValue('UMI-' + this.solicitud.id + '-' + this.solicitud.anno);
+      this.formSolicitud.controls.nombreSolicitante.setValue(this.solicitud.nombreSolicitante);
+      this.formSolicitud.controls.telefono.setValue(this.solicitud.telefono);
+      this.formSolicitud.controls.contactoAdicional.setValue(this.solicitud.contactoAdicional);
+      this.formSolicitud.controls.urgencia.setValue(this.solicitud.urgencia);
+      this.formSolicitud.controls.areaTrabajo.setValue(this.solicitud.areaTrabajo);
+      this.formSolicitud.controls.lugarTrabajo.setValue(this.solicitud.lugarTrabajo);
+      this.formSolicitud.controls.descripcionTrabajo.setValue(this.solicitud.descripcionTrabajo);
+      this.formSolicitud.controls.estado.setValue(this.solicitud.estado);
+    });
+
   }
 
   get periodo() {
