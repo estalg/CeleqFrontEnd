@@ -46,4 +46,8 @@ export class UmiService {
   aprobarSolicitud(solicitud: SolicitudUmiEntidad): Observable<SolicitudUmiEntidad> {
     return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}/aprobar-solicitudes`, solicitud, {headers: this.httpHeaders});
   }
+
+  analizarSolicitud(solicitud: SolicitudUmiEntidad): Observable<SolicitudUmiEntidad> {
+    return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}/analizar-solicitudes`, solicitud, {headers: this.httpHeaders});
+  }
 }

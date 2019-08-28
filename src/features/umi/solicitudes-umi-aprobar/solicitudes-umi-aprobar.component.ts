@@ -137,6 +137,12 @@ export class SolicitudesUmiAprobarComponent implements OnInit {
       } else {
         this.solicitud.estado = 'Rechazada';
         this.solicitud.motivoRechazo = this.formSolicitud.controls.motivoRechazo.value;
+        console.log(this.solicitud);
+        this.umiService.aprobarSolicitud(this.solicitud).subscribe(res => {
+          this.routeService.navigate(['/umi/solicitudes', 'pendientes']);
+        }, error => {
+          this.abrirDialogoError('Error al comunicarse con la base de datos');
+        });
       }
     }
   }
