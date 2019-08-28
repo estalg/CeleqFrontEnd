@@ -121,7 +121,6 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
         (res) => {
           this.uploadResponse = res.url;
           this.uploadResponse = this.uploadResponse.substring(this.uploadResponse.indexOf('/uploads/'));
-          console.log(this.uploadResponse);
           this.analizarSolicitud();
         },
         (err) => {
@@ -130,7 +129,8 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
         }
       );
     } else {
-     this.analizarSolicitud();
+      this.uploadResponse = '';
+      this.analizarSolicitud();
     }
   }
 
@@ -144,14 +144,14 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
     solicitudActualizada.ubicacionArchivo = this.uploadResponse;
     console.log(solicitudActualizada);
     this.umiService.analizarSolicitud(solicitudActualizada).subscribe(res => {
-      this.routeService.navigate(['/umi/solicitudes', 'pendientes']);
+      this.routeService.navigate(['/umi/solicitudes', 'aprobadas']);
     }, error => {
       this.abrirDialogoError('Error al comunicarse con la base de datos');
     });
 }
 
   cancelar() {
-
+    this.routeService.navigate(['/']);
   }
 
   onFileSelect(event) {
