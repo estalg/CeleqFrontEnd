@@ -36,6 +36,9 @@ export class SolicitudesUmiFinalizarComponent implements OnInit {
       areaTrabajo: [''],
       lugarTrabajo: [''],
       descripcionTrabajo: [''],
+      insumos: [''],
+      costoAproximado: [''],
+      observacionesAnalisis: [''],
       estado: [''],
       periodo: [''],
       observaciones: ['']
@@ -51,7 +54,9 @@ export class SolicitudesUmiFinalizarComponent implements OnInit {
       this.formSolicitud.controls.areaTrabajo.setValue(this.solicitud.areaTrabajo);
       this.formSolicitud.controls.lugarTrabajo.setValue(this.solicitud.lugarTrabajo);
       this.formSolicitud.controls.descripcionTrabajo.setValue(this.solicitud.descripcionTrabajo);
-      this.formSolicitud.controls.estado.setValue(this.solicitud.estado);
+      this.formSolicitud.controls.insumos.setValue(this.solicitud.insumos);
+      this.formSolicitud.controls.costoAproximado.setValue(this.solicitud.costoEstimado);
+      this.formSolicitud.controls.observacionesAnalisis.setValue(this.solicitud.observacionesAnalisis);
 
       this.formSolicitud.controls.consecutivo.disable();
       this.formSolicitud.controls.nombreSolicitante.disable();
@@ -61,7 +66,9 @@ export class SolicitudesUmiFinalizarComponent implements OnInit {
       this.formSolicitud.controls.areaTrabajo.disable();
       this.formSolicitud.controls.lugarTrabajo.disable();
       this.formSolicitud.controls.descripcionTrabajo.disable();
-      this.formSolicitud.controls.estado.disable();
+      this.formSolicitud.controls.insumos.disable();
+      this.formSolicitud.controls.costoAproximado.disable();
+      this.formSolicitud.controls.observacionesAnalisis.disable();
     });
 
   }

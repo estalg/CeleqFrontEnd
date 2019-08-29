@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material';
 import {UmiService} from '../../../shared/servicios/umi/umi.service';
 import {UploadService} from '../../../shared/servicios/upload/upload.service';
 import {DialogoConfirmacionComponent} from '../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
+import {print} from 'util';
 
 @Component({
   selector: 'app-solicitudes-umi-analizar',
@@ -36,6 +37,7 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
       lugarTrabajo: [''],
       descripcion: [''],
       observacionesAprobacion: [''],
+      nombrePersonaAsignada: [''],
       insumos: ['', [
         Validators.required,
         Validators.maxLength(500)
@@ -50,8 +52,10 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
       archivo: ['']
     });
 
+    // tslint:disable-next-line:max-line-length
     this.umiService.consultarSolicitud(this.route.snapshot.params.id, this.route.snapshot.params.anno).then(res => {
       this.solicitud = res;
+      console.log(res);
       this.formSolicitud.controls.consecutivo.setValue(this.solicitud.id + '-' + this.solicitud.anno);
       this.formSolicitud.controls.nombreSolicitante.setValue(this.solicitud.nombreSolicitante);
       this.formSolicitud.controls.telefono.setValue(this.solicitud.telefono);
@@ -60,6 +64,7 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
       this.formSolicitud.controls.areaTrabajo.setValue(this.solicitud.areaTrabajo);
       this.formSolicitud.controls.lugarTrabajo.setValue(this.solicitud.lugarTrabajo);
       this.formSolicitud.controls.descripcion.setValue(this.solicitud.descripcionTrabajo);
+      this.formSolicitud.controls.nombrePersonaAsignada.setValue(this.solicitud.nombrePersonaAsignada);
       this.formSolicitud.controls.observacionesAprobacion.setValue(this.solicitud.observacionesAprob);
     });
   }
@@ -102,6 +107,9 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
   }
   get archivo() {
     return this.formSolicitud.get('archivo');
+  }
+  get nombrePersonaAsignada() {
+    return this.formSolicitud.get('nombrePersonaAsignada');
   }
 
   private abrirDialogoError(mensaje: string) {
