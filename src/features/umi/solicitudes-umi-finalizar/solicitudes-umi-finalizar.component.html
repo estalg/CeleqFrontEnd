@@ -47,6 +47,16 @@
         <input matInput placeholder="Observaciones de análisis" formControlName="observacionesAnalisis" readonly>
       </mat-form-field>
 
+      <button mat-stroked-button color="primary" (click)="descargar('Hola')">Descargar</button>
+      <div>
+      <a href="http://127.0.0.1:81/celeqBackEnd/api/archivos/uploads/5d66f765a4791-horario-i-2019.pdf" download>
+        <button mat-stroked-button>Decargar</button>
+      </a>
+      </div>
+
+    </mat-card>
+
+    <mat-card class="container">
       <mat-form-field>
         <mat-label>Período de ejecución</mat-label>
         <mat-select required formControlName="periodo">
