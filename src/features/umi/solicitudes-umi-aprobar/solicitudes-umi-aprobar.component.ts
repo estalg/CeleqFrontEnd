@@ -47,6 +47,7 @@ export class SolicitudesUmiAprobarComponent implements OnInit {
       ]]
     });
 
+    // tslint:disable-next-line:max-line-length
     this.umiService.consultarSolicitud(this.route.snapshot.params.id, this.route.snapshot.params.anno).then(res => {
       this.solicitud = res;
       this.formSolicitud.controls.consecutivo.setValue(this.solicitud.id + '-' + this.solicitud.anno);

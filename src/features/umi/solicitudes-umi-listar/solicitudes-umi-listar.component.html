@@ -11,42 +11,42 @@
     <div class="mat-elevation-z2">
       <table mat-table [dataSource]="dataSource" matSort>
 
-        <ng-container matColumnDef="consecutivo">
+        <ng-container matColumnDef="consecutivo" readonly>
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Consecutivo</th>
           <td mat-cell *matCellDef="let solicitud">UMI-{{solicitud.anno}}-{{solicitud.id}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="nombreSolicitante">
+        <ng-container matColumnDef="nombreSolicitante" readonly>
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre de solicitante</th>
           <td mat-cell *matCellDef="let solicitud">{{solicitud.nombreSolicitante}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="nombrePersonaAsignada">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+        <ng-container matColumnDef="nombrePersonaAsignada" readonly>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Persona Asignada</th>
           <td mat-cell *matCellDef="let solicitud">{{solicitud.nombrePersonaAsignada}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="urgencia">
+        <ng-container matColumnDef="urgencia" readonly>
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Urgencia</th>
           <td mat-cell *matCellDef="let solicitud">{{solicitud.urgencia}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="areaTrabajo">
+        <ng-container matColumnDef="areaTrabajo" readonly>
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Área de trabajo</th>
           <td mat-cell *matCellDef="let solicitud">{{solicitud.areaTrabajo}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="lugarTrabajo">
+        <ng-container matColumnDef="lugarTrabajo" readonly>
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Lugar de trabajo</th>
           <td mat-cell *matCellDef="let solicitud">{{solicitud.lugarTrabajo}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="descripcionTrabajo">
+        <ng-container matColumnDef="descripcionTrabajo" readonly>
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción del trabajo</th>
           <td mat-cell *matCellDef="let solicitud">{{solicitud.descripcionTrabajo}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="estado">
+        <ng-container matColumnDef="estado" readonly>
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
           <td mat-cell *matCellDef="let solicitud">{{solicitud.estado}}</td>
         </ng-container>

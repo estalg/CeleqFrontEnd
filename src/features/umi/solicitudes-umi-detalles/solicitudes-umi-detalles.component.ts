@@ -4,6 +4,7 @@ import {SolicitudUmiEntidad} from '../../../shared/entidades/umi/solicitudUmiEnt
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {UmiService} from '../../../shared/servicios/umi/umi.service';
+import {print} from 'util';
 
 @Component({
   selector: 'app-solicitudes-umi-detalles',
@@ -13,6 +14,8 @@ import {UmiService} from '../../../shared/servicios/umi/umi.service';
 export class SolicitudesUmiDetallesComponent implements OnInit {
 
   private formDetalles: FormGroup;
+
+  private estado: string;
 
   // Reactivo a editar/visualizar
   private solicitud: SolicitudUmiEntidad;
@@ -35,7 +38,15 @@ export class SolicitudesUmiDetallesComponent implements OnInit {
       areaTrabajo: [''],
       lugarTrabajo: [''],
       descripcionTrabajo: [''],
-      estado: ['']
+      estado: [''],
+      personaAsignada: [''],
+      observacionesAprob: [''],
+      insumos: [''],
+      costoEstimado: [''],
+      observacionesAnalisis: [''],
+      periodoEjecucion: [''],
+      observacionesFinales: [''],
+      motivoRechazo: [''],
     });
 
     this.formDetalles.disable();
@@ -51,6 +62,16 @@ export class SolicitudesUmiDetallesComponent implements OnInit {
       this.formDetalles.controls.lugarTrabajo.setValue(this.solicitud.lugarTrabajo);
       this.formDetalles.controls.descripcionTrabajo.setValue(this.solicitud.descripcionTrabajo);
       this.formDetalles.controls.estado.setValue(this.solicitud.estado);
+      this.formDetalles.controls.personaAsignada.setValue(this.solicitud.nombrePersonaAsignada);
+      this.formDetalles.controls.observacionesAprob.setValue(this.solicitud.observacionesAprob);
+      this.formDetalles.controls.insumos.setValue(this.solicitud.insumos);
+      this.formDetalles.controls.costoEstimado.setValue(this.solicitud.costoEstimado);
+      this.formDetalles.controls.observacionesAnalisis.setValue(this.solicitud.observacionesAnalisis);
+      this.formDetalles.controls.periodoEjecucion.setValue(this.solicitud.periodoEjecucion);
+      this.formDetalles.controls.observacionesFinales.setValue(this.solicitud.observacionesFinales);
+      this.formDetalles.controls.motivoRechazo.setValue(this.solicitud.motivoRechazo);
+
+      this.estado = this.solicitud.estado;
     });
   }
 
