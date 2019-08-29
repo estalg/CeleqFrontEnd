@@ -119,6 +119,7 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
 
       this.uploadService.subirArchivo(formData).subscribe(
         (res) => {
+          console.log(res);
           this.uploadResponse = res.url;
           this.uploadResponse = this.uploadResponse.substring(this.uploadResponse.indexOf('/uploads/'));
           this.analizarSolicitud();

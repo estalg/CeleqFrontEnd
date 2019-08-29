@@ -5,6 +5,7 @@ import {UmiService} from '../../../shared/servicios/umi/umi.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {DialogoConfirmacionComponent} from '../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
+import {FileService} from '../../../shared/servicios/archivos/file.service';
 
 @Component({
   selector: 'app-solicitudes-umi-finalizar',
@@ -20,7 +21,8 @@ export class SolicitudesUmiFinalizarComponent implements OnInit {
               private fb: FormBuilder,
               private routeService: Router,
               private route: ActivatedRoute,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private fileService: FileService) { }
 
   ngOnInit() {
     this.solicitud = new SolicitudUmiEntidad();
@@ -96,6 +98,21 @@ export class SolicitudesUmiFinalizarComponent implements OnInit {
         width: '350px',
         data: {mensaje, tipoMensaje: 'error'}
       });
+  }
+
+  private descargar(filename: string = null) {
+    this.fileService.downloadFile('/uploads/5d66f765a4791-horario-i-2019.pdf').subscribe(res => {
+      const dataType = res.type;
+      const binaryData = [];
+      binaryData.push(res);
+      const downloadLink = document.createElement('a');
+      downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+      if (filename) {
+        downloadLink.setAttribute('download', filename);
+      }
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+    });
   }
 
 }
