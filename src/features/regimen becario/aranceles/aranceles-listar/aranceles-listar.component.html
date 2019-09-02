@@ -1,0 +1,25 @@
+<div class="container">
+  <form [formGroup]="formAranceles">
+    <h2>Monto por hora</h2>
+
+    <div class="mat-elevation-z2">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <mat-form-field>
+          <input matInput placeholder="Tipo" formControlName="tipo" readonly>
+        </mat-form-field>
+
+        <ng-container matColumnDef="monto">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Monto</th>
+          <td mat-cell *matCellDef="let arancel">
+            <input matInput type="number">
+          </td>
+          <mat-error *ngIf="monto.errors?.pattern && monto.touched">
+            Sólo se permiten números
+          </mat-error>
+        </ng-container>
+
+      </table>
+    </div>
+  </form>
+</div>
