@@ -16,6 +16,7 @@ export class SolicitudesUmiFinalizarComponent implements OnInit {
 
   private solicitud: SolicitudUmiEntidad;
   private formSolicitud: FormGroup;
+  private nombreArchivo: string;
 
   constructor(private solicitudUmiService: UmiService,
               private fb: FormBuilder,
@@ -58,17 +59,9 @@ export class SolicitudesUmiFinalizarComponent implements OnInit {
       this.formSolicitud.controls.costoAproximado.setValue(this.solicitud.costoEstimado);
       this.formSolicitud.controls.observacionesAnalisis.setValue(this.solicitud.observacionesAnalisis);
 
-      this.formSolicitud.controls.consecutivo.disable();
-      this.formSolicitud.controls.nombreSolicitante.disable();
-      this.formSolicitud.controls.telefono.disable();
-      this.formSolicitud.controls.contactoAdicional.disable();
-      this.formSolicitud.controls.urgencia.disable();
-      this.formSolicitud.controls.areaTrabajo.disable();
-      this.formSolicitud.controls.lugarTrabajo.disable();
-      this.formSolicitud.controls.descripcionTrabajo.disable();
-      this.formSolicitud.controls.insumos.disable();
-      this.formSolicitud.controls.costoAproximado.disable();
-      this.formSolicitud.controls.observacionesAnalisis.disable();
+      if (this.solicitud.ubicacionArchivo !== '') {
+        this.nombreArchivo = this.solicitud.ubicacionArchivo.substring(this.solicitud.ubicacionArchivo.indexOf('-') + 1);
+      }
     });
 
   }
@@ -107,18 +100,20 @@ export class SolicitudesUmiFinalizarComponent implements OnInit {
       });
   }
 
-  private descargar(filename: string = null) {
-    this.fileService.downloadFile('/uploads/5d66f765a4791-horario-i-2019.pdf').subscribe(res => {
+  private descargar() {
+    console.log(this.solicitud.ubicacionArchivo);
+    this.fileService.downloadFile(this.solicitud.ubicacionArchivo).subscribe(res => {
       const dataType = res.type;
       const binaryData = [];
       binaryData.push(res);
       const downloadLink = document.createElement('a');
       downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
-      if (filename) {
-        downloadLink.setAttribute('download', filename);
-      }
+      const filename = this.nombreArchivo;
+      downloadLink.setAttribute('download', filename);
       document.body.appendChild(downloadLink);
       downloadLink.click();
+    }, error => {
+      this.abrirDialogoError('Ha ocurrido un error descargando el archivo.');
     });
   }
 
