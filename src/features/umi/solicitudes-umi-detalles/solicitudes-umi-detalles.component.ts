@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {SolicitudUmiEntidad} from '../../../shared/entidades/umi/solicitudUmiEntidad';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {UmiService} from '../../../shared/servicios/umi/umi.service';
-import {print} from 'util';
+import {DialogoConfirmacionComponent} from '../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
+import {FileService} from '../../../shared/servicios/archivos/file.service';
 
 @Component({
   selector: 'app-solicitudes-umi-detalles',
@@ -17,10 +18,13 @@ export class SolicitudesUmiDetallesComponent implements OnInit {
 
   private estado: string;
 
+  private nombreArchivo: string;
+
   // Reactivo a editar/visualizar
   private solicitud: SolicitudUmiEntidad;
 
   constructor(private umiService: UmiService,
+              private fileService: FileService,
               private fb: FormBuilder,
               private routeService: Router,
               private route: ActivatedRoute,
@@ -49,8 +53,6 @@ export class SolicitudesUmiDetallesComponent implements OnInit {
       motivoRechazo: [''],
     });
 
-    this.formDetalles.disable();
-
     this.umiService.consultarSolicitud(this.route.snapshot.params.id, this.route.snapshot.params.anno).then(res => {
       this.solicitud = res;
       this.formDetalles.controls.consecutivo.setValue('UMI-' + this.solicitud.id + '-' + this.solicitud.anno);
@@ -72,6 +74,35 @@ export class SolicitudesUmiDetallesComponent implements OnInit {
       this.formDetalles.controls.motivoRechazo.setValue(this.solicitud.motivoRechazo);
 
       this.estado = this.solicitud.estado;
+
+      if (this.solicitud.ubicacionArchivo !== '') {
+        this.nombreArchivo = this.solicitud.ubicacionArchivo.substring(this.solicitud.ubicacionArchivo.indexOf('-') + 1);
+      }
+    });
+  }
+
+  private abrirDialogoError(mensaje: string) {
+    this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'error'}
+      });
+  }
+
+  private descargar() {
+    console.log(this.solicitud.ubicacionArchivo);
+    this.fileService.downloadFile(this.solicitud.ubicacionArchivo).subscribe(res => {
+      const dataType = res.type;
+      const binaryData = [];
+      binaryData.push(res);
+      const downloadLink = document.createElement('a');
+      downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+      const filename = this.nombreArchivo;
+      downloadLink.setAttribute('download', filename);
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+    }, error => {
+      this.abrirDialogoError('Ha ocurrido un error descargando el archivo.');
     });
   }
 

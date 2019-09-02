@@ -24,13 +24,28 @@
       </mat-expansion-panel-header>
 
       <div class="buttonContainer">
-        <button mat-stroked-button routerLink="/umi/nueva-solicitud" *ngIf="revisarPermiso('29')">Realizar solicitud</button>
+        <button mat-stroked-button [routerLink]="['umi/nueva-solicitud']" *ngIf="revisarPermiso('29')">Realizar solicitud</button>
         <button mat-stroked-button [routerLink]="['/umi/solicitudes', 'pendientes']" *ngIf="revisarPermiso('30')">Aprobar solicitud</button>
         <button mat-stroked-button [routerLink]="['/umi/solicitudes', 'aprobadas']" *ngIf="revisarPermiso('31')">Analizar solicitud</button>
         <button mat-stroked-button [routerLink]="['/umi/solicitudes', 'analizadas']" *ngIf="revisarPermiso('32')">Finalizar solicitud</button>
         <button mat-stroked-button [routerLink]="['/umi/solicitudes', 'historico']" *ngIf="revisarPermiso('33')">Histórico solicitud</button>
       </div>
     </mat-expansion-panel>
+
+    <mat-expansion-panel class="pannel" *ngIf="revisarAlgunPermiso(['34', '35', '37', '41', '43'])">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Régimen Becario</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="buttonContainer">
+        <button mat-stroked-button *ngIf="revisarPermiso('34')">Realizar designación</button>
+        <button mat-stroked-button *ngIf="revisarPermiso('35')">Lista designaciones</button>
+        <button mat-stroked-button *ngIf="revisarPermiso('37')">Presupuesto</button>
+        <button mat-stroked-button *ngIf="revisarPermiso('41')">Aranceles</button>
+        <button mat-stroked-button *ngIf="revisarPermiso('43')">Generar repotes</button>
+      </div>
+    </mat-expansion-panel>
+
   </mat-accordion>
 
 </div>
