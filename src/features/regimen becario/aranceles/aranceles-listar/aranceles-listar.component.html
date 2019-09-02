@@ -7,13 +7,12 @@
 
         <mat-form-field>
           <input matInput placeholder="Tipo" formControlName="tipo" readonly>
+          <td mat-cell *matCellDef="let arancel">{{arancel.tipo}}</td>
         </mat-form-field>
 
         <ng-container matColumnDef="monto">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Monto</th>
-          <td mat-cell *matCellDef="let arancel">
-            <input matInput type="number">
-          </td>
+          <input matInput placeholder="Monto" formControlName="monto" readonly type="number">
+          <td mat-cell *matCellDef="let arancel">{{arancel.monto}}</td>
           <mat-error *ngIf="monto.errors?.pattern && monto.touched">
             Sólo se permiten números
           </mat-error>

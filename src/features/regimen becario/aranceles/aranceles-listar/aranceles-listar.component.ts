@@ -3,7 +3,8 @@ import {ArancelEntidad} from '../../../../shared/entidades/regimen becario/aranc
 import {ArancelesService} from '../../../../shared/servicios/regimen becario/aranceles/aranceles.service';
 import {MatDialog, MatTableDataSource} from '@angular/material';
 import {DialogoConfirmacionComponent} from '../../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
-import {FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-aranceles-listar',
@@ -19,10 +20,24 @@ export class ArancelesListarComponent implements OnInit {
   private formAranceles: FormGroup;
 
   constructor(private arancelesService: ArancelesService,
+              private fb: FormBuilder,
+              private routeService: Router,
+              private route: ActivatedRoute,
               public dialog: MatDialog) { }
 
   ngOnInit() {
     this.consultarAranceles();
+
+    this.formAranceles = this.fb.group({
+      monto: ['', [
+        Validators.required,
+        Validators.pattern('[0-9]*')
+      ]],
+    });
+  }
+
+  get monto() {
+    return this.formAranceles.get('monto');
   }
 
   private consultarAranceles = () => {
