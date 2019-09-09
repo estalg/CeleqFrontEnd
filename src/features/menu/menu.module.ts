@@ -4,6 +4,7 @@ import { MenuComponent } from './menu.component';
 import { MenuRoutingModule } from './menu-routing.module';
 import { MatExpansionModule, MatTreeModule, MatButtonModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
+import {FiltrarReporteComponent} from '../regimen-becario/reportes/filtrar-reporte/filtrar-reporte.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,9 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [
     MenuComponent
+  ],
+  entryComponents: [
+    FiltrarReporteComponent
   ]
 })
 export class MenuModule { }

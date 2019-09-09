@@ -1,0 +1,33 @@
+<div class="container">
+  <form [formGroup]="formPresupuesto">
+    <h2>{{titulo}}</h2>
+    <mat-card class="formContainer">
+
+      <mat-form-field>
+        <input matInput placeholder="Código" formControlName="codigo" required>
+        <mat-error *ngIf="nombre.errors?.required && nombre.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="nombre.errors?.maxlength && nombre.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Descripción" formControlName="nombre" required>
+        <mat-error *ngIf="nombre.errors?.required && nombre.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="nombre.errors?.maxlength && nombre.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
+      </mat-form-field>
+
+    </mat-card>
+
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="modificar()" *ngIf="modoForm === 'editar'" [disabled]="formPresupuesto.invalid">Aceptar</button>
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="agregar()" *ngIf="modoForm === 'agregar'" [disabled]="formPresupuesto.invalid">Aceptar</button>
+
+    <button mat-button class="botonesAceptarCancelar" type="button" (click)="cancelar()">Cancelar</button>
+  </form>
+</div>

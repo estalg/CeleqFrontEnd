@@ -1,0 +1,16 @@
+<div class="contenedor">
+  <form [formGroup]="fromAranceles">
+    <h4>Modificar monto</h4>
+    <br>
+    <mat-card class="formContainer">
+      <div mat-dialog-content class="text-center">
+          <input matInput formControlName="monto" required>
+      </div>
+    </mat-card>
+    <br>
+    <button class="botonesAceptarCancelar" mat-button type="submit" (click)="modificar()">Aceptar</button>
+    <button class="botonesAceptarCancelar" mat-button (click)="cerrar()">Cancelar</button>
+
+  </form>
+</div>
+

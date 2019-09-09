@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ArancelEntidad} from '../../../../shared/entidades/regimen becario/arancelEntidad';
 import {ArancelesService} from '../../../../shared/servicios/regimen becario/aranceles/aranceles.service';
-import {MatDialog, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {DialogoConfirmacionComponent} from '../../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
-import {FormGroup} from '@angular/forms';
+import {ArancelesEditarComponent} from '../aranceles-editar/aranceles-editar.component';
+import {ReactivoEntidad} from '../../../../shared/entidades/regencia/reactivoEntidad';
 
 @Component({
   selector: 'app-aranceles-listar',
@@ -16,24 +17,30 @@ export class ArancelesListarComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<ArancelEntidad>();
 
-  private formAranceles: FormGroup;
+  public displayedColumns: string[] = ['tipo', 'monto', 'acciones'];
+
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private arancelesService: ArancelesService,
               public dialog: MatDialog) { }
 
   ngOnInit() {
     this.consultarAranceles();
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   private consultarAranceles = () => {
     this.arancelesService.consultar().subscribe(
-      aranceles => {
-        this.dataSource.data = aranceles as ArancelEntidad[];
+      arancel => {
+        this.dataSource.data = arancel as ArancelEntidad[];
         this.aranceles = this.dataSource.data;
       },
       error => {
-        this.abrirDialogoError('Error al cargar la lista');
-      });
+        this.abrirDialogoError('Error al cargar lista');
+      }
+    );
   }
 
   private abrirDialogoError(mensaje: string) {
@@ -42,6 +49,17 @@ export class ArancelesListarComponent implements OnInit {
         width: '350px',
         data: {mensaje, tipoMensaje: 'error'}
       });
+  }
+
+  private abrirDialogoEditar(tipo: string, monto: number) {
+    const dialogRef = this.dialog.open(ArancelesEditarComponent,
+      {
+        width: '350px',
+        data: {tipo, monto}
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      this.consultarAranceles();
+    });
   }
 
 }
