@@ -38,7 +38,7 @@
       </mat-expansion-panel-header>
 
       <div class="buttonContainer">
-        <button mat-stroked-button *ngIf="revisarPermiso('34')">Realizar designación</button>
+        <button mat-stroked-button [routerLink]="['/regimen-becario/designaciones/agregar/nueva/nueva']" *ngIf="revisarPermiso('34')">Realizar designación</button>
         <button mat-stroked-button *ngIf="revisarPermiso('35')">Lista designaciones</button>
         <button mat-stroked-button *ngIf="revisarPermiso('37')">Presupuesto</button>
         <button mat-stroked-button *ngIf="revisarPermiso('41')">Aranceles</button>
