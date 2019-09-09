@@ -16,6 +16,9 @@ import {GruposModule} from '../features/grupos/grupos.module';
 import {UnidadesModule} from '../features/unidades/unidades.module';
 import {BnNgIdleService} from 'bn-ng-idle';
 import {UmiModule} from '../features/umi/umi.module';
+import {ArancelesModule} from '../features/regimen-becario/aranceles/aranceles.module';
+import {PresupuestosModule} from '../features/regimen-becario/presupuestos/presupuestos.module';
+import {ReportesModule} from '../features/regimen-becario/reportes/reportes.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import {UmiModule} from '../features/umi/umi.module';
     LoginModule,
     GruposModule,
     UnidadesModule,
-    UmiModule
+    UmiModule,
+    ArancelesModule,
+    PresupuestosModule,
+    ReportesModule
   ],
   providers: [
     BnNgIdleService

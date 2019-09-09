@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ArancelesListarComponent} from './aranceles-listar.component';
 import {AuthGuard} from '../../../../shared/seguridad/auth.guard';
+import {ArancelesListarComponent} from './aranceles-listar.component';
 
 const routes: Routes = [
   {
-    path: 'regencia/reactivos',
+    path: 'regimen-becario/aranceles',
     component: ArancelesListarComponent,
     canActivate: [AuthGuard],
     data: {
-      permisos: ['41,42']
+      permisos: ['41', '42']
     }
   }
 ];

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../../shared/servicios/seguridad/authentication.service';
 import {element} from 'protractor';
+import {FiltrarReporteComponent} from '../regimen-becario/reportes/filtrar-reporte/filtrar-reporte.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-menu',
@@ -9,7 +11,8 @@ import {element} from 'protractor';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService,
+              public dialog: MatDialog) { }
 
   permisos: string[];
   ngOnInit() {
@@ -23,6 +26,7 @@ export class MenuComponent implements OnInit {
 
   // Retorna verdadero si cumple al menos un permiso
   revisarAlgunPermiso(permisos: string[]) {
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < permisos.length; ++i) {
       if (this.permisos.includes(permisos[i])) {
         return true;
@@ -30,4 +34,12 @@ export class MenuComponent implements OnInit {
     }
     return false;
   }
+
+  private abrirDialogoFiltroReporteDesignaciones() {
+      const dialogRef = this.dialog.open(FiltrarReporteComponent,
+      {
+        width: '600px'
+      });
+  }
+
 }

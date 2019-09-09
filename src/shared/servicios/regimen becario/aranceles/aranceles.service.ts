@@ -8,7 +8,7 @@ import {ArancelEntidad} from '../../../entidades/regimen becario/arancelEntidad'
   providedIn: 'root'
 })
 export class ArancelesService {
-  private urlEndPoint = environment.backendUrl + '/regimen becario/aranceles';
+  private urlEndPoint = environment.backendUrl + '/regimen-becario/aranceles';
   private httpHeaders = new HttpHeaders({'Content-type': 'application/json'});
 
   constructor(private http: HttpClient) { }

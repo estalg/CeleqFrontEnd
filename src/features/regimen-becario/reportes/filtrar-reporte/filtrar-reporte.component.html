@@ -1,0 +1,45 @@
+<div class="contenedor">
+  <form [formGroup]="formFiltro">
+    <h4>Reporte Designaciones</h4>
+
+    <mat-card class="formContainer">
+
+      <mat-card>
+        <div mat-dialog-content class="text-center">
+          <input style="width: 90px" atInput placeholder="Año" formControlName="monto" required type="number">
+        </div>
+      </mat-card>
+
+      <label id="ciclo-label" style="margin-top: 32px">Ciclo: </label>
+      <mat-radio-group style="width: 20%" aria-labelledby="ciclo-label" [(ngModel)]="ciclo"
+                       [ngModelOptions]="{standalone: true}" color="primary">
+        <mat-radio-button value="I"> I </mat-radio-button>
+        <mat-radio-button value="I I.C"> I I.C </mat-radio-button>
+        <mat-radio-button value="II"> II </mat-radio-button>
+        <mat-radio-button value="II I.C"> II I.C </mat-radio-button>
+        <mat-radio-button value="III"> III </mat-radio-button>
+      </mat-radio-group>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Filtrar por</mat-label>
+        <mat-select required formControlName="filtro">
+          <mat-option [value]="'presupuesto'">
+            Presupuesto
+          </mat-option>
+          <mat-option [value]="'responsable'">
+            Responsable
+          </mat-option>
+          <mat-option [value]="'estudiante'">
+            Estudiante
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </mat-card>
+    <br>
+    <button class="botonesAceptarCancelar" mat-button type="submit" (click)="generarReporte()">Generar Reporte</button>
+
+  </form>
+</div>
