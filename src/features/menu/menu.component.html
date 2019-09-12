@@ -42,7 +42,7 @@
         <button mat-stroked-button *ngIf="revisarPermiso('35')">Lista designaciones</button>
         <button mat-stroked-button [routerLink]="['/regimen-becario/presupuestos']" *ngIf="revisarPermiso('37')">Presupuesto</button>
         <button mat-stroked-button [routerLink]="['/regimen-becario/aranceles']" *ngIf="revisarPermiso('41')">Aranceles</button>
-        <button mat-stroked-button (click)="abrirDialogoFiltroReporteDesignaciones()" *ngIf="revisarPermiso('43')">Generar repotes</button>
+        <button mat-stroked-button (click)="abrirDialogoFiltroReporteDesignaciones()" *ngIf="revisarPermiso('43')">Generar reporte</button>
       </div>
     </mat-expansion-panel>
 

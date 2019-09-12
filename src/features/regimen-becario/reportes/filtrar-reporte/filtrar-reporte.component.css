@@ -5,3 +5,11 @@
   align-content: center;
   text-align: center;
 }
+
+.opciones{
+  margin-left: 5px;
+}
+
+.mat-radio-button{
+  margin-left: 15px;
+}
