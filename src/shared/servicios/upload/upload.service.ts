@@ -13,7 +13,7 @@ export class UploadService {
 
   constructor(private httpClient: HttpClient) { }
 
-  subirArchivo(datos): Observable<any> {
-    return this.httpClient.post<any>(`${this.urlEndPoint}/upload`, datos);
+  subirArchivo(datos, folder: string): Observable<any> {
+    return this.httpClient.post<any>(`${this.urlEndPoint}/upload?folder=` + folder, datos);
   }
 }

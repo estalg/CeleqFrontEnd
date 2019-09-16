@@ -1,0 +1,18 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  margin-bottom: 1rem;
+}
+
+.gridCell{
+  width: 100%;
+}
+
+.botonAgregar {
+  position: relative;
+  margin-bottom: 10px;
+  z-index: 2;
+  background-color: #78909C;
+  color: white;
+}

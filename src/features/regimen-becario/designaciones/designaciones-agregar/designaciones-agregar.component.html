@@ -1,0 +1,362 @@
+<div class="container">
+  <h2>{{titulo}}</h2>
+  <form [formGroup]="formEstudiante">
+    <mat-card class="formContainer">
+      <mat-card-header>Datos del estudiante</mat-card-header>
+      <mat-form-field>
+        <mat-label>Tipo de identificación</mat-label>
+        <mat-select required formControlName="tipoId" (selectionChange)="llenarDatosEstudiante($event)">
+          <mat-option [value]="'Cédula nacional'">
+            Cédula nacional
+          </mat-option>
+          <mat-option [value]="'Cédula residencia'">
+            Cédula residencia
+          </mat-option>
+          <mat-option [value]="'Pasaporte'">
+            Pasaporte
+          </mat-option>
+          <mat-option [value]="'Pemiso residencia'">
+            Pemiso residencia
+          </mat-option>
+        </mat-select>
+
+        <mat-error *ngIf="estudiante.tipoId.errors?.required && estudiante.tipoId.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Identificación" formControlName="id" (keyup)="llenarDatosEstudiante($event)" required>
+        <mat-error *ngIf="estudiante.id.errors?.required && estudiante.id.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="estudiante.id.errors?.maxlength && estudiante.id.touched">
+          El máximo de caracteres es de 30
+        </mat-error>
+        <mat-error *ngIf="estudiante.id.errors?.minlength && estudiante.id.touched">
+          El mínimo de caracteres es de 9
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Nombre" formControlName="nombre" required>
+        <mat-error *ngIf="estudiante.nombre.errors?.required && estudiante.nombre.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="estudiante.nombre.errors?.maxlength && estudiante.nombre.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
+        <mat-error *ngIf="estudiante.nombre.errors?.pattern && estudiante.nombre.touched">
+          Solo se permiten letras
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Primer apellido" formControlName="apellido1" required>
+        <mat-error *ngIf="estudiante.apellido1.errors?.required && estudiante.apellido1.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="estudiante.apellido1.errors?.maxlength && estudiante.apellido1.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
+        <mat-error *ngIf="estudiante.apellido1.errors?.pattern && estudiante.apellido1.touched">
+          Solo se permiten letras
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Segundo apellido" formControlName="apellido2" required>
+        <mat-error *ngIf="estudiante.apellido2.errors?.required && estudiante.apellido2.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="estudiante.apellido2.errors?.maxlength && estudiante.apellido2.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
+        <mat-error *ngIf="estudiante.apellido2.errors?.pattern && estudiante.apellido2.touched">
+          Solo se permiten letras
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Carrera" formControlName="carrera" required>
+        <mat-error *ngIf="estudiante.carrera.errors?.required && estudiante.carrera.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="estudiante.carrera.errors?.maxlength && estudiante.carrera.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Correo electrónico" formControlName="correo" required>
+        <mat-error *ngIf="estudiante.correo.errors?.required && estudiante.correo.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="estudiante.correo.errors?.maxlength && estudiante.correo.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
+        <mat-error *ngIf="estudiante.correo.errors?.email && estudiante.correo.touched">
+          El formato del correo no es correcto
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Teléfono fijo" formControlName="telefonoFijo">
+        <mat-error *ngIf="estudiante.telefonoFijo.errors?.pattern && estudiante.telefonoFijo.touched">
+          Solo se permiten números
+        </mat-error>
+        <mat-error *ngIf="estudiante.telefonoFijo.errors?.maxlength && estudiante.telefonoFijo.touched">
+          El máximo de dígitos es de 8
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Teléfono celular" formControlName="celular">
+        <mat-error *ngIf="estudiante.celular.errors?.pattern && estudiante.celular.touched">
+          Solo se permiten números
+        </mat-error>
+        <mat-error *ngIf="estudiante.celular.errors?.maxlength && estudiante.celular.touched">
+          El máximo de dígitos es de 8
+        </mat-error>
+      </mat-form-field>
+
+    </mat-card>
+
+  </form>
+
+  <form [formGroup]="formDesignacion">
+    <mat-card class="formContainer">
+      <mat-card-header>Datos de la designacion</mat-card-header>
+
+      <mat-grid-list cols="3" rowHeight="65px">
+
+        <mat-grid-tile colspan="3">
+          <mat-form-field class="gridCell">
+            <mat-label>Responsable</mat-label>
+            <mat-select required formControlName="responsable">
+              <mat-option *ngFor="let responsable of listaUsuarios" [value]="responsable.cedula">
+                {{responsable.nombre + ' ' + responsable.apellido1 + ' ' + responsable.apellido2}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="fDesignacion.responsable.errors?.required && fDesignacion.responsable.touched">
+              Este campo es obligatorio
+            </mat-error>
+
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="3">
+          <mat-form-field class="gridCell">
+            <mat-label>Unidad</mat-label>
+            <mat-select required formControlName="unidad">
+              <mat-option *ngFor="let unidad of listaUnidades" [value]="unidad.nombre">
+                {{unidad.nombre}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="fDesignacion.unidad.errors?.required && fDesignacion.unidad.touched">
+              Este campo es obligatorio
+            </mat-error>
+
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2">
+          <mat-form-field style="width: 95%; right: 2.5%">
+            <mat-label>Ciclo</mat-label>
+            <mat-select required formControlName="ciclo">
+              <mat-option value="I">
+                I
+              </mat-option>
+              <mat-option value="I I.C">
+                I I.C
+              </mat-option>
+              <mat-option value="II">
+                II
+              </mat-option>
+              <mat-option value="II I.C">
+                II I.C
+              </mat-option>
+              <mat-option value="III">
+                III
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="fDesignacion.ciclo.errors?.required && fDesignacion.ciclo.touched">
+              Este campo es obligatorio
+            </mat-error>
+
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <mat-form-field class="gridCell">
+            <input matInput required formControlName="anno" placeholder="Año">
+
+            <mat-error *ngIf="fDesignacion.anno.errors?.required && fDesignacion.anno.touched">
+              Este campo es obligatorio
+            </mat-error>
+
+            <mat-error *ngIf="fDesignacion.anno.errors?.pattern && fDesignacion.anno.touched">
+              Solo se permiten números
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <mat-form-field class="gridCell" style="width: 90%; right: 5%">
+            <input matInput required formControlName="horas" placeholder="Horas">
+
+            <mat-error *ngIf="fDesignacion.horas.errors?.required && fDesignacion.horas.touched">
+              Este campo es obligatorio
+            </mat-error>
+
+            <mat-error *ngIf="fDesignacion.horas.errors?.pattern && fDesignacion.horas.touched">
+              Solo se permiten números
+            </mat-error>
+            <mat-error *ngIf="fDesignacion.horas.errors?.max && fDesignacion.horas.touched">
+              El número máximo de horas es 20
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <mat-form-field class="gridCell" style="width: 90%; right: 5%">
+            <mat-label>Modalidad</mat-label>
+            <mat-select required formControlName="modalidad" >
+              <mat-option value="HE">
+                Horas estudiante
+              </mat-option>
+              <mat-option value="HA">
+                Horas asistente
+              </mat-option>
+              <mat-option value="HP">
+                Horas de postgrado
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="fDesignacion.modalidad.errors?.required && fDesignacion.modalidad.touched">
+              Este campo es obligatorio
+            </mat-error>
+
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <mat-checkbox formControlName="adHonorem" color="primary" style="margin-right: 60%">Ad honorem</mat-checkbox>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2">
+          <mat-form-field class="gridCell" style="width: 95%; right: 2.5%">
+            <mat-label>Presupuesto</mat-label>
+            <mat-select required formControlName="presupuesto">
+              <mat-option *ngFor="let presupuesto of listaPresupuesto" [value]="presupuesto.codigo">
+                {{presupuesto.codigo + ' - ' + presupuesto.nombre}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="fDesignacion.presupuesto.errors?.required && fDesignacion.presupuesto.touched">
+              Este campo es obligatorio
+            </mat-error>
+
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <button mat-button class="botonAgregar" style="right: 35%">Agregar</button>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="3">
+          <mat-form-field class="gridCell">
+            <input matInput required formControlName="convocatoria" placeholder="Convocatoria">
+
+            <mat-error *ngIf="fDesignacion.convocatoria.errors?.required && fDesignacion.convocatoria.touched">
+              Este campo es obligatorio
+            </mat-error>
+
+            <mat-error *ngIf="fDesignacion.anno.errors?.maxlength && fDesignacion.anno.touched">
+              El máximo número de caracteres es 10
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <mat-checkbox formControlName="inopia" color="primary" style="margin-right: 70%" (change)="limpiarMotivoInopia()">Inopia</mat-checkbox>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2">
+          <mat-form-field class="gridCell" *ngIf="fDesignacion.inopia.value === true">
+            <textarea matInput formControlName="motivoInopia" placeholder="Motivo de la inopia"></textarea>
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2">
+          <mat-form-field class="gridCell" style="width: 95%; right: 2.5%">
+            <input matInput placeholder="P9/SHA" formControlName="numeroP9">
+            <mat-error *ngIf="fDesignacion.numeroP9.errors?.required && fDesignacion.numeroP9.touched">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="fDesignacion.numeroP9.errors?.required && fDesignacion.numeroP9.touched">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="fDesignacion.numeroP9.errors?.maxlength && fDesignacion.numeroP9.touched">
+              El máximo número de caracteres es 20
+            </mat-error>
+            <mat-error *ngIf="fDesignacion.numeroP9.errors?.pattern && fDesignacion.numeroP9.touched">
+              El formato del código es: P9/SHA-[números del 0 al 9]
+            </mat-error>
+
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <input type="file" (change)="onFileSelect($event)" />
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <mat-form-field style="width: 90%; right: 5%">
+            <input matInput [matDatepicker]="inicio" placeholder="Fecha de inicio" required readonly formControlName="fechaInicio">
+            <mat-datepicker-toggle matSuffix [for]="inicio"></mat-datepicker-toggle>
+            <mat-datepicker #inicio></mat-datepicker>
+
+            <mat-error *ngIf="fDesignacion.fechaInicio.errors?.required && fDesignacion.fechaInicio.touched">
+              Este campo es obligatorio
+            </mat-error>
+          </mat-form-field>
+
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1">
+          <mat-form-field style="width: 90%; right: 5%">
+            <input matInput [matDatepicker]="fin" placeholder="Fecha final" required readonly formControlName="fechaFinal">
+            <mat-datepicker-toggle matSuffix [for]="fin"></mat-datepicker-toggle>
+            <mat-datepicker #fin></mat-datepicker>
+
+            <mat-error *ngIf="fDesignacion.fechaFinal.errors?.required && fDesignacion.fechaFinal.touched">
+              Este campo es obligatorio
+            </mat-error>
+          </mat-form-field>
+
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1"></mat-grid-tile>
+
+        <mat-grid-tile colspan="3">
+          <mat-form-field class="gridCell">
+            <textarea matInput placeholder="Observaciones" formControlName="observaciones"></textarea>
+
+            <mat-error *ngIf="fDesignacion.observaciones.errors?.maxlength && fDesignacion.observaciones.touched">
+              El máximo número de caracteres es 500
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <mat-checkbox formControlName="tramitado" color="primary" style="margin-right: 70%">Tramitado</mat-checkbox>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+
+    </mat-card>
+  </form>
+
+  <div class="position-absolute">
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="aceptar()" [disabled]="formDesignacion.invalid || formEstudiante.invalid">Aceptar</button>
+    <button mat-button class="botonesAceptarCancelar" type="button" (click)="cancelar()">Cancelar</button>
+  </div>
+</div>

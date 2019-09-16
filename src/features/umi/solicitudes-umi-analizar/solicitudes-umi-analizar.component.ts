@@ -55,7 +55,6 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     this.umiService.consultarSolicitud(this.route.snapshot.params.id, this.route.snapshot.params.anno).then(res => {
       this.solicitud = res;
-      console.log(res);
       this.formSolicitud.controls.consecutivo.setValue(this.solicitud.id + '-' + this.solicitud.anno);
       this.formSolicitud.controls.nombreSolicitante.setValue(this.solicitud.nombreSolicitante);
       this.formSolicitud.controls.telefono.setValue(this.solicitud.telefono);
@@ -125,9 +124,8 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
       const formData = new FormData();
       formData.append('archivo', this.formSolicitud.get('archivo').value);
 
-      this.uploadService.subirArchivo(formData).subscribe(
+      this.uploadService.subirArchivo(formData, 'umi').subscribe(
         (res) => {
-          console.log(res);
           this.uploadResponse = res.url;
           this.uploadResponse = this.uploadResponse.substring(this.uploadResponse.indexOf('/uploads/'));
           this.analizarSolicitud();
@@ -151,7 +149,6 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
     solicitudActualizada.costoEstimado = this.formSolicitud.controls.costo.value;
     solicitudActualizada.observacionesAnalisis = this.formSolicitud.controls.observacionesAnalisis.value;
     solicitudActualizada.ubicacionArchivo = this.uploadResponse;
-    console.log(solicitudActualizada);
     this.umiService.analizarSolicitud(solicitudActualizada).subscribe(res => {
       this.routeService.navigate(['/umi/solicitudes', 'aprobadas']);
     }, error => {
@@ -160,7 +157,7 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
 }
 
   cancelar() {
-    this.routeService.navigate(['/']);
+    this.routeService.navigate(['/umi/solicitudes/aprobadas']);
   }
 
   onFileSelect(event) {
