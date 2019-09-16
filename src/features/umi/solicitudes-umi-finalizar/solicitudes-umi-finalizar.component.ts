@@ -101,7 +101,6 @@ export class SolicitudesUmiFinalizarComponent implements OnInit {
   }
 
   private descargar() {
-    console.log(this.solicitud.ubicacionArchivo);
     this.fileService.downloadFile(this.solicitud.ubicacionArchivo).subscribe(res => {
       const dataType = res.type;
       const binaryData = [];

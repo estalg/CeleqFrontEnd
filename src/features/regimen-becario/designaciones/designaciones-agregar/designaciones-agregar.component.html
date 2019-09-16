@@ -259,7 +259,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="1">
-          <button mat-button class="botonAgregar" style="right: 35%">Agregar</button>
+          <button mat-button class="botonAgregar" style="right: 35%" *ngIf="modoForm==='agregar'">Agregar</button>
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3">
@@ -287,7 +287,7 @@
 
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="2">
+        <mat-grid-tile colspan="1">
           <mat-form-field class="gridCell" style="width: 95%; right: 2.5%">
             <input matInput placeholder="P9/SHA" formControlName="numeroP9">
             <mat-error *ngIf="fDesignacion.numeroP9.errors?.required && fDesignacion.numeroP9.touched">
@@ -307,7 +307,22 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="1">
-          <input type="file" (change)="onFileSelect($event)" />
+          <div *ngIf="this.modoForm === 'agregar'">
+            <input type="file" (change)="onFileSelect($event)" />
+          </div>
+
+          <div *ngIf="this.modoForm === 'editar'">
+            <div *ngIf="this.nombreArchivo">
+              <mat-label>Archivo adjunto: {{this.nombreArchivo}}</mat-label>
+              <button mat-stroked-button class="botonDescargar" (click)="descargar()" type="button">Descargar</button>
+            </div>
+            <mat-label *ngIf="!this.nombreArchivo">No hay ningún archivo adjunto</mat-label>
+          </div>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <button mat-button class="botonAgregar" style="right: 30%" *ngIf="modoForm==='editar'">Agregar P9/SHA</button>
         </mat-grid-tile>
 
         <mat-grid-tile colspan="1">
@@ -356,7 +371,7 @@
   </form>
 
   <div class="position-absolute">
-    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="aceptar()" [disabled]="formDesignacion.invalid || formEstudiante.invalid">Aceptar</button>
+    <button *ngIf="modoForm === 'agregar'" mat-button class="botonesAceptarCancelar" type="submit" (click)="aceptar()" [disabled]="formDesignacion.invalid || formEstudiante.invalid">Aceptar</button>
     <button mat-button class="botonesAceptarCancelar" type="button" (click)="cancelar()">Cancelar</button>
   </div>
 </div>

@@ -15,6 +15,7 @@ import {max} from 'rxjs/operators';
 import {P9Entidad} from '../../../../shared/entidades/regimen becario/p9Entidad';
 import {UploadService} from '../../../../shared/servicios/upload/upload.service';
 import {DialogoConfirmacionComponent} from '../../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
+import {FileService} from '../../../../shared/servicios/archivos/file.service';
 
 @Component({
   selector: 'app-designaciones-agregar',
@@ -31,7 +32,7 @@ export class DesignacionesAgregarComponent implements OnInit {
   private titulo: string;
 
   // Usuario a editar/visualizar
-  private designacion: DesignacionEntidad;
+  private designacion: P9Entidad;
 
   // Modo del form
   private modoForm: string;
@@ -50,6 +51,8 @@ export class DesignacionesAgregarComponent implements OnInit {
 
   private uploadResponse: string;
 
+  private nombreArchivo: string;
+
   constructor(private fb: FormBuilder,
               private routeService: Router,
               private route: ActivatedRoute,
@@ -58,7 +61,8 @@ export class DesignacionesAgregarComponent implements OnInit {
               private usuariosService: UsuariosService,
               private unidadesService: UnidadesService,
               private presupuestoService: PresupuestosService,
-              private uploadService: UploadService) { }
+              private uploadService: UploadService,
+              private fileService: FileService) { }
 
   ngOnInit() {
     this.consultarEstudiantes();
@@ -67,7 +71,7 @@ export class DesignacionesAgregarComponent implements OnInit {
     this.consultarPresupuestos();
 
     this.modoForm = this.route.snapshot.params.modo;
-    this.designacion = new DesignacionEntidad();
+    this.designacion = new P9Entidad();
 
     this.formEstudiante = this.fb.group({
       id: ['', [
@@ -163,6 +167,58 @@ export class DesignacionesAgregarComponent implements OnInit {
         Validators.maxLength(500)
       ]]
     });
+
+    if (this.modoForm === 'agregar') {
+      this.titulo = 'Agregar designación';
+    } else if (this.modoForm === 'editar') {
+      this.titulo = 'Editar designacion';
+      this.formEstudiante.disable();
+      this.formDesignacion.get('ciclo').disable();
+      this.formDesignacion.get('anno').disable();
+      this.formDesignacion.get('modalidad').disable();
+      this.formDesignacion.get('adHonorem').disable();
+      this.formDesignacion.get('presupuesto').disable();
+      this.formDesignacion.get('convocatoria').disable();
+      this.formDesignacion.get('inopia').disable();
+      this.formDesignacion.get('motivoInopia').disable();
+      this.formDesignacion.get('numeroP9').disable();
+      this.formDesignacion.get('fechaInicio').disable();
+
+      this.designacionesService.consultarDesignacion(this.route.snapshot.params.id, this.route.snapshot.params.anno).subscribe(res => {
+        this.designacion = res;
+
+        this.formEstudiante.get('id').setValue(res.identificacion);
+        this.formEstudiante.get('tipoId').setValue(res.tipoId        );
+        this.formEstudiante.get('nombre').setValue(res.nombre        );
+        this.formEstudiante.get('apellido1').setValue(res.apellido1     );
+        this.formEstudiante.get('apellido2').setValue(res.apellido2     );
+        this.formEstudiante.get('carrera').setValue(res.carrera       );
+        this.formEstudiante.get('correo').setValue(res.correo        );
+        this.formEstudiante.get('celular').setValue(res.celular       );
+        this.formEstudiante.get('telefonoFijo').setValue(res.telefonoFijo  );
+
+        this.formDesignacion.get('anno').setValue(res.anno         );
+        this.formDesignacion.get('ciclo').setValue(res.ciclo        );
+        this.formDesignacion.get('fechaInicio').setValue(res.fechaInicio  );
+        this.formDesignacion.get('fechaFinal').setValue(res.fechaFinal   );
+        this.formDesignacion.get('convocatoria').setValue(res.convocatoria );
+        this.formDesignacion.get('horas').setValue(res.horas        );
+        this.formDesignacion.get('modalidad').setValue(res.modalidad    );
+        this.formDesignacion.get('inopia').setValue(res.inopia       );
+        this.formDesignacion.get('motivoInopia').setValue(res.motivoInopia );
+        this.formDesignacion.get('tramitado').setValue(res.tramitado    );
+        this.formDesignacion.get('observaciones').setValue(res.observaciones);
+        this.formDesignacion.get('presupuesto').setValue(res.presupuesto  );
+        this.formDesignacion.get('responsable').setValue(res.responsable  );
+        this.formDesignacion.get('unidad').setValue(res.unidad       );
+        this.formDesignacion.get('adHonorem').setValue(res.adHonorem    );
+        this.formDesignacion.get('numeroP9').setValue(res.numero       );
+
+        if (this.designacion.ubicacionArchivo !== '') {
+          this.nombreArchivo = this.designacion.ubicacionArchivo.substring(this.designacion.ubicacionArchivo.indexOf('-') + 1);
+        }
+      });
+    }
   }
 
   get estudiante() {
@@ -310,5 +366,21 @@ export class DesignacionesAgregarComponent implements OnInit {
         width: '350px',
         data: {mensaje, tipoMensaje: 'error'}
       });
+  }
+
+  private descargar() {
+    this.fileService.downloadFile(this.designacion.ubicacionArchivo).subscribe(res => {
+      const dataType = res.type;
+      const binaryData = [];
+      binaryData.push(res);
+      const downloadLink = document.createElement('a');
+      downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+      const filename = this.nombreArchivo;
+      downloadLink.setAttribute('download', filename);
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+    }, error => {
+      this.abrirDialogoError('Ha ocurrido un error descargando el archivo.');
+    });
   }
 }

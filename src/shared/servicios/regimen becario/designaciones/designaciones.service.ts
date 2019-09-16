@@ -22,4 +22,8 @@ export class DesignacionesService {
   agregarDesignacion(designacion: P9Entidad): Observable<P9Entidad> {
     return this.http.post<P9Entidad>(`${this.urlEndPoint}/agregar-designacion`, designacion, {headers: this.httpHeaders});
   }
+
+  consultarDesignacion(id: number, anno: number): Observable<P9Entidad> {
+    return this.http.get<P9Entidad>(this.urlEndPoint + '/consultar-designacion-id?id=' + id + '&anno=' + anno);
+  }
 }
