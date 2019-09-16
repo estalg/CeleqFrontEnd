@@ -1,4 +1,6 @@
-export class DesignacionEntidad {
+import {EstudianteEntidad} from './estudianteEntidad';
+
+export class DesignacionEntidad extends EstudianteEntidad {
   id: number;
   anno: number;
   ciclo: string;
@@ -14,7 +16,7 @@ export class DesignacionEntidad {
   observaciones: string;
   idEstudiante: string;
   presupuesto: string;
-  encargado: string;
+  responsable: string;
   unidad: string;
   adHonorem: boolean;
 }

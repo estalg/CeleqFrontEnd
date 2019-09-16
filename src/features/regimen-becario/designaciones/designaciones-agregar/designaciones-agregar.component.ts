@@ -9,6 +9,12 @@ import {UsuariosService} from '../../../../shared/servicios/usuarios/usuarios.se
 import {UsuarioEntidad} from '../../../../shared/entidades/usuarioEntidad';
 import {UnidadEntidad} from '../../../../shared/entidades/unidad/unidadEntidad';
 import {UnidadesService} from '../../../../shared/servicios/unidades/unidades.service';
+import {PresupuestoEntidad} from '../../../../shared/entidades/regimen becario/PresupuestoEntidad';
+import {PresupuestosService} from '../../../../shared/servicios/regimen becario/presupuestos/presupuestos.service';
+import {max} from 'rxjs/operators';
+import {P9Entidad} from '../../../../shared/entidades/regimen becario/p9Entidad';
+import {UploadService} from '../../../../shared/servicios/upload/upload.service';
+import {DialogoConfirmacionComponent} from '../../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
 
 @Component({
   selector: 'app-designaciones-agregar',
@@ -39,18 +45,26 @@ export class DesignacionesAgregarComponent implements OnInit {
   // Lista de unidades
   private listaUnidades: UnidadEntidad[];
 
+  // Lista de presupuestos
+  private listaPresupuesto: PresupuestoEntidad[];
+
+  private uploadResponse: string;
+
   constructor(private fb: FormBuilder,
               private routeService: Router,
               private route: ActivatedRoute,
               public dialog: MatDialog,
               private designacionesService: DesignacionesService,
               private usuariosService: UsuariosService,
-              private unidadesService: UnidadesService) { }
+              private unidadesService: UnidadesService,
+              private presupuestoService: PresupuestosService,
+              private uploadService: UploadService) { }
 
   ngOnInit() {
     this.consultarEstudiantes();
     this.consultarUsuarios();
     this.consultarUnidades();
+    this.consultarPresupuestos();
 
     this.modoForm = this.route.snapshot.params.modo;
     this.designacion = new DesignacionEntidad();
@@ -114,7 +128,8 @@ export class DesignacionesAgregarComponent implements OnInit {
       ]],
       horas: ['', [
         Validators.required,
-        Validators.pattern('[0-9]*')
+        Validators.pattern('[0-9]*'),
+        Validators.max(20),
       ]],
       modalidad: ['', [
         Validators.required
@@ -127,22 +142,24 @@ export class DesignacionesAgregarComponent implements OnInit {
         Validators.required,
         Validators.maxLength(10)
       ]],
-      inopia: [''],
+      inopia: [false],
       motivoInopia: ['', [
         Validators.maxLength(500)
       ]],
       numeroP9: ['', [
         Validators.required,
-        Validators.pattern('(P9\\-[0-9]+)|(SHA\\-[0-9]+)')
+        Validators.pattern('(P9\\-[0-9]+)|(SHA\\-[0-9]+)'),
+        Validators.maxLength(20)
       ]],
+      archivoP9: [''],
       fechaInicio: ['', [
         Validators.required
       ]],
-      fechafinal: ['', [
+      fechaFinal: ['', [
         Validators.required
       ]],
-      tramitado: [''],
-      obervaciones: ['', [
+      tramitado: [false],
+      observaciones: ['', [
         Validators.maxLength(500)
       ]]
     });
@@ -164,7 +181,7 @@ export class DesignacionesAgregarComponent implements OnInit {
 
   private buscarEstudiante(id: string, tipoId: string) {
     for (const estudiante of this.listaEstudiantes) {
-      if (estudiante.id === id && estudiante.tipoId === tipoId) {
+      if (estudiante.identificacion === id && estudiante.tipoId === tipoId) {
         return estudiante;
       }
     }
@@ -178,8 +195,14 @@ export class DesignacionesAgregarComponent implements OnInit {
   }
 
   private consultarUnidades() {
-    this.unidadesService.consultar().subscribe(res =>{
+    this.unidadesService.consultar().subscribe(res => {
       this.listaUnidades = res;
+    });
+  }
+
+  private consultarPresupuestos() {
+    this.presupuestoService.consultar().subscribe(res => {
+      this.listaPresupuesto = res;
     });
   }
 
@@ -204,5 +227,88 @@ export class DesignacionesAgregarComponent implements OnInit {
     this.formEstudiante.controls.celular.setValue('');
     this.formEstudiante.controls.telefonoFijo.setValue('');
     this.formEstudiante.controls.carrera.setValue('');
+  }
+
+  onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.formDesignacion.controls.archivoP9.setValue(file);
+    }
+  }
+
+  limpiarMotivoInopia() {
+    this.formDesignacion.controls.motivoInopia.setValue('');
+  }
+
+  aceptar() {
+    if (this.formDesignacion.controls.archivoP9.value !== '') {
+      const formData = new FormData();
+      formData.append('archivo', this.formDesignacion.get('archivoP9').value);
+
+      this.uploadService.subirArchivo(formData, 'regimen_becario').subscribe(
+        (res) => {
+          this.uploadResponse = res.url;
+          this.uploadResponse = this.uploadResponse.substring(this.uploadResponse.indexOf('/uploads/'));
+          this.crearDesignacion();
+        },
+        (err) => {
+          this.uploadResponse = 'error';
+          this.abrirDialogoError('Ha ocurrido un error subiendo el archivo');
+        }
+      );
+    } else {
+      this.uploadResponse = '';
+      this.crearDesignacion();
+    }
+  }
+
+  crearDesignacion() {
+    const designacion = new P9Entidad();
+    designacion.identificacion = this.formEstudiante.controls.id.value;
+    designacion.tipoId = this.formEstudiante.controls.tipoId.value;
+    designacion.nombre = this.formEstudiante.controls.nombre.value;
+    designacion.apellido1 = this.formEstudiante.controls.apellido1.value;
+    designacion.apellido2 = this.formEstudiante.controls.apellido2.value;
+    designacion.correo = this.formEstudiante.controls.correo.value;
+    designacion.celular = this.formEstudiante.controls.celular.value;
+    designacion.telefonoFijo = this.formEstudiante.controls.telefonoFijo.value;
+    designacion.carrera = this.formEstudiante.controls.carrera.value;
+
+    designacion.anno = this.formDesignacion.controls.anno.value;
+    designacion.ciclo = this.formDesignacion.controls.ciclo.value;
+    designacion.fechaInicio = this.formDesignacion.controls.fechaInicio.value;
+    designacion.fechaFinal = this.formDesignacion.controls.fechaFinal.value;
+    designacion.convocatoria = this.formDesignacion.controls.convocatoria.value;
+    designacion.horas = this.formDesignacion.controls.horas.value;
+    designacion.modalidad = this.formDesignacion.controls.modalidad.value;
+    designacion.inopia = this.formDesignacion.controls.inopia.value;
+    designacion.motivoInopia = this.formDesignacion.controls.motivoInopia.value;
+    designacion.tramitado = this.formDesignacion.controls.tramitado.value;
+    designacion.observaciones = this.formDesignacion.controls.observaciones.value;
+    designacion.presupuesto = this.formDesignacion.controls.presupuesto.value;
+    designacion.responsable = this.formDesignacion.controls.responsable.value;
+    designacion.unidad = this.formDesignacion.controls.unidad.value;
+    designacion.adHonorem = this.formDesignacion.controls.adHonorem.value;
+
+    designacion.numero = this.formDesignacion.controls.numeroP9.value;
+    designacion.fecha = new Date();
+    designacion.ubicacionArchivo = this.uploadResponse;
+    this.designacionesService.agregarDesignacion(designacion).subscribe(res => {
+      this.routeService.navigate(['/']);
+    }, err => {
+      this.abrirDialogoError('Error comunicandose con la base de datos');
+    });
+  }
+
+  cancelar() {
+    this.routeService.navigate(['/']);
+  }
+
+  private abrirDialogoError(mensaje: string) {
+    this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'error'}
+      });
   }
 }

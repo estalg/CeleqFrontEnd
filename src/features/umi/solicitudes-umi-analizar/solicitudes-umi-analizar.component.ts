@@ -124,9 +124,8 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
       const formData = new FormData();
       formData.append('archivo', this.formSolicitud.get('archivo').value);
 
-      this.uploadService.subirArchivo(formData).subscribe(
+      this.uploadService.subirArchivo(formData, 'umi').subscribe(
         (res) => {
-          console.log(res);
           this.uploadResponse = res.url;
           this.uploadResponse = this.uploadResponse.substring(this.uploadResponse.indexOf('/uploads/'));
           this.analizarSolicitud();
@@ -150,7 +149,6 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
     solicitudActualizada.costoEstimado = this.formSolicitud.controls.costo.value;
     solicitudActualizada.observacionesAnalisis = this.formSolicitud.controls.observacionesAnalisis.value;
     solicitudActualizada.ubicacionArchivo = this.uploadResponse;
-    console.log(solicitudActualizada);
     this.umiService.analizarSolicitud(solicitudActualizada).subscribe(res => {
       this.routeService.navigate(['/umi/solicitudes', 'aprobadas']);
     }, error => {

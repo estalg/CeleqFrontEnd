@@ -1,5 +1,5 @@
 export class EstudianteEntidad {
-  id: string;
+  identificacion: string;
   tipoId: string;
   nombre: string;
   apellido1: string;

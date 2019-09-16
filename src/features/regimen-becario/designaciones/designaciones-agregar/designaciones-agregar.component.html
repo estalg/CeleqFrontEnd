@@ -128,7 +128,7 @@
     <mat-card class="formContainer">
       <mat-card-header>Datos de la designacion</mat-card-header>
 
-      <mat-grid-list cols="3" rowHeight="60px">
+      <mat-grid-list cols="3" rowHeight="65px">
 
         <mat-grid-tile colspan="3">
           <mat-form-field class="gridCell">
@@ -161,14 +161,14 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2">
-          <mat-form-field style="width: 90%; right: 5%">
+          <mat-form-field style="width: 95%; right: 2.5%">
             <mat-label>Ciclo</mat-label>
             <mat-select required formControlName="ciclo">
               <mat-option value="I">
                 I
               </mat-option>
               <mat-option value="I I.C">
-                I
+                I I.C
               </mat-option>
               <mat-option value="II">
                 II
@@ -212,6 +212,9 @@
             <mat-error *ngIf="fDesignacion.horas.errors?.pattern && fDesignacion.horas.touched">
               Solo se permiten números
             </mat-error>
+            <mat-error *ngIf="fDesignacion.horas.errors?.max && fDesignacion.horas.touched">
+              El número máximo de horas es 20
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
 
@@ -237,11 +240,123 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="1">
-          <mat-checkbox formControlName="adHonorem" color="primary">Ad honorem</mat-checkbox>
+          <mat-checkbox formControlName="adHonorem" color="primary" style="margin-right: 60%">Ad honorem</mat-checkbox>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2">
+          <mat-form-field class="gridCell" style="width: 95%; right: 2.5%">
+            <mat-label>Presupuesto</mat-label>
+            <mat-select required formControlName="presupuesto">
+              <mat-option *ngFor="let presupuesto of listaPresupuesto" [value]="presupuesto.codigo">
+                {{presupuesto.codigo + ' - ' + presupuesto.nombre}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="fDesignacion.presupuesto.errors?.required && fDesignacion.presupuesto.touched">
+              Este campo es obligatorio
+            </mat-error>
+
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <button mat-button class="botonAgregar" style="right: 35%">Agregar</button>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="3">
+          <mat-form-field class="gridCell">
+            <input matInput required formControlName="convocatoria" placeholder="Convocatoria">
+
+            <mat-error *ngIf="fDesignacion.convocatoria.errors?.required && fDesignacion.convocatoria.touched">
+              Este campo es obligatorio
+            </mat-error>
+
+            <mat-error *ngIf="fDesignacion.anno.errors?.maxlength && fDesignacion.anno.touched">
+              El máximo número de caracteres es 10
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <mat-checkbox formControlName="inopia" color="primary" style="margin-right: 70%" (change)="limpiarMotivoInopia()">Inopia</mat-checkbox>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2">
+          <mat-form-field class="gridCell" *ngIf="fDesignacion.inopia.value === true">
+            <textarea matInput formControlName="motivoInopia" placeholder="Motivo de la inopia"></textarea>
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2">
+          <mat-form-field class="gridCell" style="width: 95%; right: 2.5%">
+            <input matInput placeholder="P9/SHA" formControlName="numeroP9">
+            <mat-error *ngIf="fDesignacion.numeroP9.errors?.required && fDesignacion.numeroP9.touched">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="fDesignacion.numeroP9.errors?.required && fDesignacion.numeroP9.touched">
+              Este campo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="fDesignacion.numeroP9.errors?.maxlength && fDesignacion.numeroP9.touched">
+              El máximo número de caracteres es 20
+            </mat-error>
+            <mat-error *ngIf="fDesignacion.numeroP9.errors?.pattern && fDesignacion.numeroP9.touched">
+              El formato del código es: P9/SHA-[números del 0 al 9]
+            </mat-error>
+
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <input type="file" (change)="onFileSelect($event)" />
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <mat-form-field style="width: 90%; right: 5%">
+            <input matInput [matDatepicker]="inicio" placeholder="Fecha de inicio" required readonly formControlName="fechaInicio">
+            <mat-datepicker-toggle matSuffix [for]="inicio"></mat-datepicker-toggle>
+            <mat-datepicker #inicio></mat-datepicker>
+
+            <mat-error *ngIf="fDesignacion.fechaInicio.errors?.required && fDesignacion.fechaInicio.touched">
+              Este campo es obligatorio
+            </mat-error>
+          </mat-form-field>
+
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1">
+          <mat-form-field style="width: 90%; right: 5%">
+            <input matInput [matDatepicker]="fin" placeholder="Fecha final" required readonly formControlName="fechaFinal">
+            <mat-datepicker-toggle matSuffix [for]="fin"></mat-datepicker-toggle>
+            <mat-datepicker #fin></mat-datepicker>
+
+            <mat-error *ngIf="fDesignacion.fechaFinal.errors?.required && fDesignacion.fechaFinal.touched">
+              Este campo es obligatorio
+            </mat-error>
+          </mat-form-field>
+
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1"></mat-grid-tile>
+
+        <mat-grid-tile colspan="3">
+          <mat-form-field class="gridCell">
+            <textarea matInput placeholder="Observaciones" formControlName="observaciones"></textarea>
+
+            <mat-error *ngIf="fDesignacion.observaciones.errors?.maxlength && fDesignacion.observaciones.touched">
+              El máximo número de caracteres es 500
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <mat-checkbox formControlName="tramitado" color="primary" style="margin-right: 70%">Tramitado</mat-checkbox>
         </mat-grid-tile>
 
       </mat-grid-list>
 
     </mat-card>
   </form>
+
+  <div class="position-absolute">
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="aceptar()" [disabled]="formDesignacion.invalid || formEstudiante.invalid">Aceptar</button>
+    <button mat-button class="botonesAceptarCancelar" type="button" (click)="cancelar()">Cancelar</button>
+  </div>
 </div>

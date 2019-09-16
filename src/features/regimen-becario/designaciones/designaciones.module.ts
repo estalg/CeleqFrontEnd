@@ -5,9 +5,9 @@ import {DesignacionesAgregarRoutingModule} from './designaciones-agregar/designa
 import {RouterModule} from '@angular/router';
 import {
   MatButtonModule,
-  MatCardModule, MatCheckboxModule, MatDialogModule,
+  MatCardModule, MatCheckboxModule, MatDatepickerModule, MatDialogModule,
   MatFormFieldModule, MatGridListModule,
-  MatInputModule,
+  MatInputModule, MatNativeDateModule,
   MatPaginatorModule, MatSelectModule,
   MatSortModule,
   MatTableModule
@@ -36,7 +36,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatDialogModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     DesignacionesAgregarComponent
