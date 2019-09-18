@@ -64,7 +64,7 @@ export class PresupuestoConsultarComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogoConfirmacionComponent,
       {
         width: '350px',
-        data: {mensaje: '¿Seguro que desea eliminar la cristalería?', tipoMensaje: 'confirmacion'}
+        data: {mensaje: '¿Seguro que desea eliminar el presupuesto?', tipoMensaje: 'confirmacion'}
       });
 
     dialogRef.afterClosed().subscribe(result => {

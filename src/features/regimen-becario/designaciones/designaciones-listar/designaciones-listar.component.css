@@ -36,11 +36,9 @@ th.mat-header-cell {
 }
 
 .botonesTabla {
+  margin-right: 5px;
   background-color: #78909C;
   color: white;
-  margin-top: 10px !important;
-  margin-right: 5px !important;
-  margin-bottom: 5px !important;
 }
 
 .botonAgregar {
@@ -51,17 +49,36 @@ th.mat-header-cell {
   color: white;
 }
 
-.mat-column-codigo{
-  width: 15%;
+mat-column-identificacion{
+  width: 20%;
 }
 
-.mat-column-nombre{
-  width: 65%;
+mat-column-estudiante{
+  width: 20%;
+}
+
+mat-column-anno{
+  width: 20%;
+}
+
+mat-column-ciclo{
+  width: 20%;
+}
+
+mat-column-modalidad{
+  width: 20%;
+}
+
+mat-column-carrera{
+  width: 20%;
+}
+
+mat-column-encargado{
+  width: 20%;
 }
 
 mat-column-acciones{
-  width: 15%;
+  width: 20%;
   display: flex;
   align-items: center;
 }
-

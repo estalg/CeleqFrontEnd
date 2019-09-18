@@ -6,6 +6,7 @@ import {PresupuestoAgregarRoutingModule} from './presupuesto-agregar/presupuesto
 import {PresupuestoConsultarRoutingModule} from './presupuesto-consultar/presupuesto-consultar-routing.module';
 import {MatCardModule, MatInputModule, MatPaginatorModule, MatTableModule} from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
+import {MatButtonModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatTableModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule
   ],
   exports: [
     PresupuestoAgregarComponent,

@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {EstudianteEntidad} from '../../../entidades/regimen becario/estudianteEntidad';
 import {P9Entidad} from '../../../entidades/regimen becario/p9Entidad';
+import {DesignacionEntidad} from '../../../entidades/regimen becario/designacionEntidad';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,10 @@ export class DesignacionesService {
 
   consultarEstudiantes(): Observable<EstudianteEntidad[]> {
     return this.http.get<EstudianteEntidad[]>(this.urlEndPoint + '/consultar-estudiantes');
+  }
+
+  consultar(): Observable<DesignacionEntidad[]> {
+    return this.http.get<DesignacionEntidad[]>(this.urlEndPoint + '/consultar-designaciones');
   }
 
   agregarDesignacion(designacion: P9Entidad): Observable<P9Entidad> {
