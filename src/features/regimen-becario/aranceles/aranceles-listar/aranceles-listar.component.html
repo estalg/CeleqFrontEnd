@@ -18,7 +18,7 @@
             <p *ngIf="arancel.tipo === 'HA'">
               Horas Asistente
             </p>
-            <p *ngIf="arancel.tipo === 'HP'">
+            <p *ngIf="arancel.tipo === 'HAP'">
               Horas Asistente Posgrado
             </p>
           </td>
@@ -26,7 +26,7 @@
 
         <ng-container matColumnDef="monto">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Monto</th>
-          <td mat-cell *matCellDef="let arancel">{{arancel.monto}}</td>
+          <td mat-cell *matCellDef="let arancel">₡ {{arancel.monto}}</td>
         </ng-container>
 
         <ng-container matColumnDef="acciones">

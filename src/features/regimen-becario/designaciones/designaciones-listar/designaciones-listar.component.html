@@ -1,0 +1,64 @@
+<div class="container">
+
+  <h2>Designaciones</h2>
+
+  <div style="margin-top: -3rem">
+
+    <mat-form-field class="barraBusqueda">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+    </mat-form-field>
+
+    <div class="mat-elevation-z2">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="identificacion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Identificación</th>
+          <td mat-cell *matCellDef="let designacion">{{designacion.idEstudiante}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="estudiante">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Estudiante</th>
+          <td mat-cell *matCellDef="let designacion">{{designacion.nombre}} {{designacion.apellido1}} {{designacion.apellido2}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="anno">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Año</th>
+          <td mat-cell *matCellDef="let designacion">{{designacion.anno}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="ciclo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Ciclo</th>
+          <td mat-cell *matCellDef="let designacion">{{designacion.ciclo}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="modalidad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Modalidad</th>
+          <td mat-cell *matCellDef="let designacion">{{designacion.modalidad}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="carrera">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Carrera</th>
+          <td mat-cell *matCellDef="let designacion">{{designacion.carrera}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="encargado">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Encargado</th>
+          <td mat-cell *matCellDef="let designacion">{{designacion.responsable}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let cristaleria">
+            <button mat-button class="botonesAceptarCancelar" [routerLink]="['/regencia/cristaleria', 'visualizar', cristaleria.nombre, cristaleria.material, cristaleria.capacidad]">Detalles</button>
+            <button mat-button class="botonesAceptarCancelar" [routerLink]="['/regencia/cristaleria', 'editar', cristaleria.nombre, cristaleria.material, cristaleria.capacidad]">Editar</button>
+          </td>
+
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+  </div>
+</div>

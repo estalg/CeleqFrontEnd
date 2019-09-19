@@ -2,22 +2,22 @@
   <form [formGroup]="formFiltro">
     <h4>Reporte Designaciones</h4>
 
+    <br>
+
     <mat-card class="formContainer">
 
-      <mat-card>
-        <div mat-dialog-content class="text-center">
-          <input style="width: 90px" atInput placeholder="Año" formControlName="monto" required type="number">
-        </div>
-      </mat-card>
+      <div mat-dialog-content class="text-center">
+        <input style="width: 40%" atInput placeholder="Año" formControlName="anno" required type="number">
+      </div>
 
       <label id="ciclo-label" style="margin-top: 32px">Ciclo: </label>
-      <mat-radio-group style="width: 20%" aria-labelledby="ciclo-label" [(ngModel)]="ciclo"
+      <mat-radio-group class="opciones" aria-labelledby="ciclo-label" [(ngModel)]="ciclo"
                        [ngModelOptions]="{standalone: true}" color="primary">
-        <mat-radio-button value="I"> I </mat-radio-button>
-        <mat-radio-button value="I I.C"> I I.C </mat-radio-button>
-        <mat-radio-button value="II"> II </mat-radio-button>
-        <mat-radio-button value="II I.C"> II I.C </mat-radio-button>
-        <mat-radio-button value="III"> III </mat-radio-button>
+        <mat-radio-button value="I">I </mat-radio-button>
+        <mat-radio-button value="I I.C">I I.C </mat-radio-button>
+        <mat-radio-button value="II">II </mat-radio-button>
+        <mat-radio-button value="II I.C">II I.C </mat-radio-button>
+        <mat-radio-button value="III">III </mat-radio-button>
       </mat-radio-group>
 
       <br>

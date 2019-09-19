@@ -4,7 +4,7 @@
 
   <div style="margin-top: -3rem">
 
-    <button mat-button class="botonAgregar" [routerLink]="['/regimen-becario/presupuestos', 'agregar']">Agregar</button>
+    <button mat-button class="botonAgregar" [routerLink]="['/regimen-becario/presupuestos', 'agregar', 'presupuesto']">Agregar</button>
 
     <mat-form-field class="barraBusqueda">
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
@@ -25,8 +25,8 @@
         <ng-container matColumnDef="acciones">
           <th mat-header-cell *matHeaderCellDef>Acciones</th>
           <td mat-cell *matCellDef="let presupuesto">
-            <button mat-button class="botonesTabla" [routerLink]="['/regimen-becario/presupuestos', 'editar', presupuesto.codigo]">Editar</button>
-            <button mat-button class="botonesTabla" (click)="abrirDialogoConfirmacion(presupuesto.codigo)">Eliminar</button>
+            <button mat-button class="botonesAceptarCancelar" [routerLink]="['/regimen-becario/presupuestos', 'editar', presupuesto.codigo]">Editar</button>
+            <button mat-button class="botonesAceptarCancelar" (click)="abrirDialogoConfirmacion(presupuesto.codigo)">Eliminar</button>
           </td>
 
         </ng-container>

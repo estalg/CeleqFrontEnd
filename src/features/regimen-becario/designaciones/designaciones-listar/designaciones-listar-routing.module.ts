@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {DesignacionesListarComponent} from './designaciones-listar.component';
 import {AuthGuard} from '../../../../shared/seguridad/auth.guard';
-import {PresupuestoAgregarComponent} from './presupuesto-agregar.component';
 
 const routes: Routes = [
   {
-    path: 'regimen-becario/presupuestos/:modo/:codigo',
-    component: PresupuestoAgregarComponent,
-    pathMatch: 'full',
+    path: 'regimen-becario/designaciones',
+    component: DesignacionesListarComponent,
     canActivate: [AuthGuard],
     data: {
-      permisos: ['38', '39']
+      permisos: ['35']
     }
   }
 ];
@@ -19,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class PresupuestoAgregarRoutingModule { }
+export class DesignacionesListarRoutingModule { }

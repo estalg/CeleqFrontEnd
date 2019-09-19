@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {DesignacionesAgregarComponent} from './designaciones-agregar/designaciones-agregar.component';
 import {DesignacionesAgregarRoutingModule} from './designaciones-agregar/designaciones-agregar-routing.module';
+import {DesignacionesListarComponent} from './designaciones-listar/designaciones-listar.component';
+import {DesignacionesListarRoutingModule} from './designaciones-listar/designaciones-listar-routing.module';
 import {RouterModule} from '@angular/router';
 import {
   MatButtonModule,
@@ -17,11 +19,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
-    DesignacionesAgregarComponent
+    DesignacionesAgregarComponent,
+    DesignacionesListarComponent
   ],
   imports: [
     CommonModule,
     DesignacionesAgregarRoutingModule,
+    DesignacionesListarRoutingModule,
     RouterModule,
     MatPaginatorModule,
     MatSortModule,
@@ -41,7 +45,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatNativeDateModule
   ],
   exports: [
-    DesignacionesAgregarComponent
+    DesignacionesAgregarComponent,
+    DesignacionesListarComponent
   ]
 })
 export class DesignacionesModule { }
