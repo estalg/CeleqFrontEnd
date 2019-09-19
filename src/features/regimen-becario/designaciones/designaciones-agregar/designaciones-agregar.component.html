@@ -289,7 +289,7 @@
 
         <mat-grid-tile colspan="1">
           <mat-form-field class="gridCell" style="width: 95%; right: 2.5%">
-            <input matInput placeholder="P9/SHA" formControlName="numeroP9">
+            <input matInput placeholder="P9/SHA" formControlName="numeroP9" (keyup)="resetearP9()">
             <mat-error *ngIf="fDesignacion.numeroP9.errors?.required && fDesignacion.numeroP9.touched">
               Este campo es obligatorio
             </mat-error>
@@ -307,11 +307,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="1">
-          <div *ngIf="this.modoForm === 'agregar'">
+          <div *ngIf="this.modoForm === 'agregar' || this.cambiandoArchivo">
             <input type="file" (change)="onFileSelect($event)" />
           </div>
 
-          <div *ngIf="this.modoForm === 'editar'">
+          <div *ngIf="this.modoForm === 'editar' && !this.cambiandoArchivo">
             <div *ngIf="this.nombreArchivo">
               <mat-label>Archivo adjunto: {{this.nombreArchivo}}</mat-label>
               <button mat-stroked-button class="botonDescargar" (click)="descargar()" type="button">Descargar</button>
@@ -322,7 +322,8 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="1">
-          <button mat-button class="botonAgregar" style="right: 30%" *ngIf="modoForm==='editar'">Agregar P9/SHA</button>
+          <button mat-button class="botonAgregar" style="margin-right: 5px" *ngIf="modoForm==='editar'">Agregar P9/SHA</button>
+          <button mat-button class="botonAgregar" *ngIf="modoForm==='editar'">Ver P9/SHA anteriores</button>
         </mat-grid-tile>
 
         <mat-grid-tile colspan="1">
@@ -372,6 +373,7 @@
 
   <div class="position-absolute">
     <button *ngIf="modoForm === 'agregar'" mat-button class="botonesAceptarCancelar" type="submit" (click)="aceptar()" [disabled]="formDesignacion.invalid || formEstudiante.invalid">Aceptar</button>
+    <button *ngIf="modoForm === 'editar'" mat-button class="botonesAceptarCancelar" type="submit" (click)="modificar()" [disabled]="formDesignacion.invalid || formEstudiante.invalid">Aceptar</button>
     <button mat-button class="botonesAceptarCancelar" type="button" (click)="cancelar()">Cancelar</button>
   </div>
 </div>

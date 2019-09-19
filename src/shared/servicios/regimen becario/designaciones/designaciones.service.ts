@@ -26,4 +26,8 @@ export class DesignacionesService {
   consultarDesignacion(id: number, anno: number): Observable<P9Entidad> {
     return this.http.get<P9Entidad>(this.urlEndPoint + '/consultar-designacion-id?id=' + id + '&anno=' + anno);
   }
+
+  editarDesignacion(designacion: P9Entidad): Observable<P9Entidad> {
+    return this.http.post<P9Entidad>(`${this.urlEndPoint}/editar-designacion`, designacion, {headers: this.httpHeaders});
+  }
 }

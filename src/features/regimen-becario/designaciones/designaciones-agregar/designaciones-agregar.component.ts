@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DesignacionEntidad} from '../../../../shared/entidades/regimen becario/designacionEntidad';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {EstudianteEntidad} from '../../../../shared/entidades/regimen becario/estudianteEntidad';
@@ -11,7 +10,6 @@ import {UnidadEntidad} from '../../../../shared/entidades/unidad/unidadEntidad';
 import {UnidadesService} from '../../../../shared/servicios/unidades/unidades.service';
 import {PresupuestoEntidad} from '../../../../shared/entidades/regimen becario/PresupuestoEntidad';
 import {PresupuestosService} from '../../../../shared/servicios/regimen becario/presupuestos/presupuestos.service';
-import {max} from 'rxjs/operators';
 import {P9Entidad} from '../../../../shared/entidades/regimen becario/p9Entidad';
 import {UploadService} from '../../../../shared/servicios/upload/upload.service';
 import {DialogoConfirmacionComponent} from '../../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
@@ -53,6 +51,10 @@ export class DesignacionesAgregarComponent implements OnInit {
 
   private nombreArchivo: string;
 
+  private cambiandoArchivo: boolean;
+
+  private p9Anterior: string;
+
   constructor(private fb: FormBuilder,
               private routeService: Router,
               private route: ActivatedRoute,
@@ -65,6 +67,7 @@ export class DesignacionesAgregarComponent implements OnInit {
               private fileService: FileService) { }
 
   ngOnInit() {
+    this.cambiandoArchivo = false;
     this.consultarEstudiantes();
     this.consultarUsuarios();
     this.consultarUnidades();
@@ -181,7 +184,7 @@ export class DesignacionesAgregarComponent implements OnInit {
       this.formDesignacion.get('convocatoria').disable();
       this.formDesignacion.get('inopia').disable();
       this.formDesignacion.get('motivoInopia').disable();
-      this.formDesignacion.get('numeroP9').disable();
+      // this.formDesignacion.get('numeroP9').disable();
       this.formDesignacion.get('fechaInicio').disable();
 
       this.designacionesService.consultarDesignacion(this.route.snapshot.params.id, this.route.snapshot.params.anno).subscribe(res => {
@@ -213,6 +216,7 @@ export class DesignacionesAgregarComponent implements OnInit {
         this.formDesignacion.get('unidad').setValue(res.unidad       );
         this.formDesignacion.get('adHonorem').setValue(res.adHonorem    );
         this.formDesignacion.get('numeroP9').setValue(res.numero       );
+        this.p9Anterior = res.numero;
 
         if (this.designacion.ubicacionArchivo !== '') {
           this.nombreArchivo = this.designacion.ubicacionArchivo.substring(this.designacion.ubicacionArchivo.indexOf('-') + 1);
@@ -318,6 +322,50 @@ export class DesignacionesAgregarComponent implements OnInit {
     }
   }
 
+  modificar() {
+    if (this.formDesignacion.controls.archivoP9.value !== '' && this.cambiandoArchivo) {
+      const formData = new FormData();
+      formData.append('archivo', this.formDesignacion.get('archivoP9').value);
+
+      this.uploadService.subirArchivo(formData, 'regimen_becario').subscribe(
+        (res) => {
+          this.uploadResponse = res.url;
+          this.uploadResponse = this.uploadResponse.substring(this.uploadResponse.indexOf('/uploads/'));
+          this.modificarDesignacion();
+        },
+        (err) => {
+          this.uploadResponse = 'error';
+          this.abrirDialogoError('Ha ocurrido un error subiendo el archivo');
+        }
+      );
+    } else {
+      this.uploadResponse = '';
+      this.modificarDesignacion();
+    }
+  }
+
+  modificarDesignacion() {
+    const designacionModificada = new P9Entidad();
+    designacionModificada.id = this.route.snapshot.params.id;
+    designacionModificada.anno = this.route.snapshot.params.anno;
+    designacionModificada.responsable = this.formDesignacion.controls.responsable.value;
+    designacionModificada.unidad = this.formDesignacion.controls.unidad.value;
+    designacionModificada.horas = this.formDesignacion.controls.horas.value;
+    designacionModificada.observaciones = this.formDesignacion.controls.observaciones.value;
+    designacionModificada.tramitado = this.formDesignacion.controls.tramitado.value;
+    designacionModificada.fechaFinal = this.formDesignacion.controls.fechaFinal.value;
+    designacionModificada.numero = this.formDesignacion.controls.numeroP9.value;
+    designacionModificada.ubicacionArchivo = this.uploadResponse;
+    designacionModificada.fecha = new Date();
+    console.log(designacionModificada);
+    this.designacionesService.editarDesignacion(designacionModificada).subscribe(result => {
+        this.abrirDialogoAfirmacion('Designación modificada correctamente');
+      },
+      error => {
+        this.abrirDialogoError('Error al modificar designación, inténtelo de nuevo');
+      });
+  }
+
   crearDesignacion() {
     const designacion = new P9Entidad();
     designacion.identificacion = this.formEstudiante.controls.id.value;
@@ -368,6 +416,14 @@ export class DesignacionesAgregarComponent implements OnInit {
       });
   }
 
+  private abrirDialogoAfirmacion(mensaje: string) {
+    const dialogRef = this.dialog.open(DialogoConfirmacionComponent,
+      {
+        width: '350px',
+        data: {mensaje, tipoMensaje: 'afirmacion'}
+      });
+  }
+
   private descargar() {
     this.fileService.downloadFile(this.designacion.ubicacionArchivo).subscribe(res => {
       const dataType = res.type;
@@ -382,5 +438,13 @@ export class DesignacionesAgregarComponent implements OnInit {
     }, error => {
       this.abrirDialogoError('Ha ocurrido un error descargando el archivo.');
     });
+  }
+
+  private resetearP9() {
+    if (this.modoForm === 'editar') {
+      this.formDesignacion.get('archivoP9').setValue('');
+      this.nombreArchivo = '';
+      this.cambiandoArchivo = true;
+    }
   }
 }
