@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { UsuariosModule } from '../features/usuarios/usuarios.module';
 import { DialogoConfirmacionModule } from '../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.module';
@@ -20,6 +20,7 @@ import {DesignacionesModule} from '../features/regimen-becario/designaciones/des
 import {ArancelesModule} from '../features/regimen-becario/aranceles/aranceles.module';
 import {PresupuestosModule} from '../features/regimen-becario/presupuestos/presupuestos.module';
 import {ReportesModule} from '../features/regimen-becario/reportes/reportes.module';
+import {TokenInterceptor} from '../shared/seguridad/token-interceptor';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,11 @@ import {ReportesModule} from '../features/regimen-becario/reportes/reportes.modu
     ReportesModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     BnNgIdleService
   ],
   bootstrap: [AppComponent]

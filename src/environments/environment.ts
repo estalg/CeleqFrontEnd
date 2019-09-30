@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'http://localhost:81/celeqBackEnd/api'
+  backendUrl: 'http://localhost:5000'
 };
 
 /*

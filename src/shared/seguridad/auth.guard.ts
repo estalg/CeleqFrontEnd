@@ -7,17 +7,16 @@ import { AuthenticationService } from '../servicios/seguridad/authentication.ser
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authService: AuthenticationService
   ) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const currentUser = this.authenticationService.currentUserValue;
-    if (currentUser) {
-      const permisos = this.authenticationService.getPermisos();
+  canActivate(route: ActivatedRouteSnapshot) {
+    if (this.authService.isLoggedIn()) {
+      const permisos = this.authService.getPermisos();
       if (permisos.some(r => route.data.permisos.includes(r))) {
         return true;
       }
-      // return true;
+      return true;
     }
     // not logged in so redirect to login page with the return url
     this.router.navigate(['/login']);

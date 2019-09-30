@@ -18,7 +18,7 @@ export class AppComponent {
     private authService: AuthenticationService,
     private bnIdle: BnNgIdleService
   ) {
-    this.authService.currentUser.subscribe(x => this.currentUser = x);
+    // this.authService.currentUser.subscribe(x => this.currentUser = x);
 
     // Timeout
     this.bnIdle.startWatching(2400).subscribe((res) => {

@@ -21,6 +21,9 @@ import {MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldModule, Mat
     FormsModule,
     MatCardModule,
     MatDialogModule
+  ],
+  exports: [
+    LoginComponent
   ]
 })
 export class LoginModule { }

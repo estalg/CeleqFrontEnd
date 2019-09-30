@@ -17,17 +17,16 @@ export class LoginComponent implements OnInit {
   formLogin: FormGroup;
   loading = false;
   submitted = false;
-  returnUrl: string;
 
   constructor(private usuarioService: UsuariosService,
               private fb: FormBuilder,
-              private _routeService: Router,
-              private _route: ActivatedRoute,
+              private routeService: Router,
+              private route: ActivatedRoute,
               private authService: AuthenticationService,
               public dialog: MatDialog) {
     // redirect to home if already logged in
-    if (this.authService.currentUserValue) {
-      this._routeService.navigate(['/']);
+    if (this.authService.isLoggedIn()) {
+      this.routeService.navigate(['/']);
     }
   }
 
@@ -52,24 +51,16 @@ export class LoginComponent implements OnInit {
   login() {
     this.submitted = true;
     this.loading = true;
-    this.authService.login(this.cedula.value, this.password.value)
-      .pipe(first())
+    const user = {cedula: this.cedula.value, contrasenna: this.password.value};
+    this.authService.login(user)
       .subscribe(
-        data => {
-          this._routeService.navigate(['/']);
-        },
-        error => {
-          this.abrirDialogoError('Usuario y contraseña no coinciden');
-          this.loading = false;
+        success => {
+          if (success) {
+            this.routeService.navigate(['/']);
+          } else {
+            this.loading = false;
+          }
         }
       );
-  }
-
-  private abrirDialogoError(mensaje: string) {
-    this.dialog.open(DialogoConfirmacionComponent,
-      {
-        width: '350px',
-        data: {mensaje, tipoMensaje: 'error'}
-      });
   }
 }

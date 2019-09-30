@@ -1,65 +1,110 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/internal/operators/tap';
+import {catchError, mapTo} from 'rxjs/operators';
+import {of} from 'rxjs/internal/observable/of';
+import {environment} from '../../../environments/environment';
+import {Tokens} from '../../seguridad/tokens';
 import * as jwt_decode from 'jwt-decode';
-
-import { UsuarioEntidad } from '../../entidades/usuarioEntidad';
 import {Router} from '@angular/router';
 
-@Injectable({ providedIn: 'root' })
+
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthenticationService {
 
-  private urlEndPoint = environment.backendUrl + '/seguridad';
-  private httpHeaders = new HttpHeaders({'Content-type': 'application/json'});
-
-  private currentUserSubject: BehaviorSubject<UsuarioEntidad>;
-  public currentUser: Observable<UsuarioEntidad>;
+  private readonly JWT_TOKEN = 'JWT_TOKEN';
+  private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
+  private loggedUser: string;
 
   constructor(private http: HttpClient,
-              private routeService: Router) {
-    this.currentUserSubject = new BehaviorSubject<UsuarioEntidad>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
-  }
+              private routeService: Router) {}
 
-  public get currentUserValue(): UsuarioEntidad {
-    return this.currentUserSubject.value;
-  }
-
-  login(username, pass) {
-    const datos = {
-      cedula: username,
-      password: pass
-    };
-    return this.http.post<any>(`${this.urlEndPoint}/authenticate`, datos, {headers: this.httpHeaders})
-      .pipe(map(user => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        return user;
-      }));
+  login(user: { cedula: string, contrasenna: string }): Observable<boolean> {
+    return this.http.post<any>(`${environment.backendUrl}/login`, user)
+      .pipe(
+        tap(tokens => this.doLoginUser(user.cedula, tokens)),
+        mapTo(true),
+        catchError(error => {
+          alert(error.error);
+          return of(false);
+        }));
   }
 
   logout() {
-    // remove user from local storage and set current user to null
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
+    /*
+    return this.http.post<any>(`${environment.backendUrl}/logout`, {
+      refreshToken: this.getRefreshToken()
+    }).pipe(
+      tap(() => this.doLogoutUser()),
+      mapTo(true),
+      catchError(error => {
+        alert(error.error);
+        return of(false);
+      }));
+     */
+    this.removeTokens();
     this.routeService.navigate(['/login']);
   }
 
-  getCedula() {
-    const datosToken = jwt_decode(JSON.parse(localStorage.getItem('currentUser')).token);
-    return datosToken.cedula;
+  isLoggedIn() {
+    return !!this.getJwtToken();
   }
 
-  getPermisos() {
-    const datosToken = jwt_decode(JSON.parse(localStorage.getItem('currentUser')).token);
-    return datosToken.permisos;
+  refreshToken() {
+    return this.http.post<any>(`${environment.backendUrl}/login/refresh`, {
+      refreshToken: this.getRefreshToken()
+    }).pipe(tap((tokens: Tokens) => {
+      this.storeJwtToken(tokens.jwt);
+    }));
   }
 
-  getNombreCompleto() {
-    const datosToken = jwt_decode(JSON.parse(localStorage.getItem('currentUser')).token);
-    return datosToken.nombre + ' ' + datosToken.apellido1 + ' ' + datosToken.apellido2;
+  getJwtToken() {
+    return localStorage.getItem(this.JWT_TOKEN);
+  }
+
+  private doLoginUser(username: string, tokens: Tokens) {
+    this.loggedUser = username;
+    this.storeTokens(tokens);
+  }
+
+  private doLogoutUser() {
+    this.loggedUser = null;
+    this.removeTokens();
+  }
+
+  private getRefreshToken() {
+    return localStorage.getItem(this.REFRESH_TOKEN);
+  }
+
+  private storeJwtToken(jwt: string) {
+    localStorage.setItem(this.JWT_TOKEN, jwt);
+  }
+
+  private storeTokens(tokens: Tokens) {
+    localStorage.setItem(this.JWT_TOKEN, tokens.jwt);
+    localStorage.setItem(this.REFRESH_TOKEN, tokens.refreshToken);
+  }
+
+  private removeTokens() {
+    localStorage.removeItem(this.JWT_TOKEN);
+    localStorage.removeItem(this.REFRESH_TOKEN);
+  }
+
+  public getNombreCompleto() {
+    const datosToken = jwt_decode(localStorage.getItem('JWT_TOKEN'));
+    return datosToken.identity.nombre + ' ' + datosToken.identity.apellido1 + ' ' + datosToken.identity.apellido2;
+  }
+
+  public getPermisos() {
+    const datosToken = jwt_decode(localStorage.getItem('JWT_TOKEN'));
+    return datosToken.identity.permisos;
+  }
+
+  public getCedula() {
+    const datosToken = jwt_decode(localStorage.getItem('JWT_TOKEN'));
+    return datosToken.identity.cedula;
   }
 }
