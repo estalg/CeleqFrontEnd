@@ -71,11 +71,13 @@
         <input matInput placeholder="Motivo del Rechazo" formControlName="motivoRechazo" readonly>
       </mat-form-field>
 
-      <div *ngIf="this.nombreArchivo">
-        <mat-label>Archivo adjunto: {{this.nombreArchivo}}</mat-label>
-        <button mat-stroked-button class="botonDescargar" (click)="descargar()" type="button">Descargar</button>
+      <div *ngIf="estado === 'Analizada' || estado === 'Finalizada'">
+        <div *ngIf="this.nombreArchivo">
+          <mat-label>Archivo adjunto: {{this.nombreArchivo}}</mat-label>
+          <button mat-stroked-button class="botonDescargar" (click)="descargar()" type="button">Descargar</button>
+        </div>
+        <mat-label *ngIf="!this.nombreArchivo">No hay ningún archivo adjunto</mat-label>
       </div>
-      <mat-label *ngIf="!this.nombreArchivo">No hay ningún archivo adjunto</mat-label>
 
     </mat-card>
 

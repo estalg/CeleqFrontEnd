@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import { SolicitudesRegenciaListarComponent } from './solicitudes-regencia-listar/solicitudes-regencia-listar.component';
 import { SolicitudesRegenciaAgregarComponent } from './solicitudes-regencia-agregar/solicitudes-regencia-agregar.component';
 import { SolicitudesRegenciaListarRoutingModule } from './solicitudes-regencia-listar/solicitudes-regencia-listar-routing.module';

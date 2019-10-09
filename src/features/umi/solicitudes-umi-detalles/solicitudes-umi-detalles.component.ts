@@ -75,8 +75,10 @@ export class SolicitudesUmiDetallesComponent implements OnInit {
 
       this.estado = this.solicitud.estado;
 
-      if (this.solicitud.ubicacionArchivo !== '') {
-        this.nombreArchivo = this.solicitud.ubicacionArchivo.substring(this.solicitud.ubicacionArchivo.indexOf('-') + 1);
+      if (this.estado !== 'Pendiente' && this.estado !== 'Rechazada') {
+        if (this.solicitud.ubicacionArchivo !== null || this.solicitud.ubicacionArchivo !== '') {
+          this.nombreArchivo = this.solicitud.ubicacionArchivo.substring(this.solicitud.ubicacionArchivo.indexOf('_') + 1);
+        }
       }
     });
   }

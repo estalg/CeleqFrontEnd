@@ -10,31 +10,31 @@ import {CristaleriaEntidad} from '../../../entidades/regencia/cristaleriaEntidad
 })
 export class SolicitudesRegenciaService {
 
-  private urlEndPoint = environment.backendUrl + '/regencia/solicitudes';
+  private urlEndPoint = environment.backendUrl + '/solicitudRegencia';
   private httpHeaders = new HttpHeaders({'Content-type': 'application/json'});
 
   constructor(private http: HttpClient) {}
 
   consultar(): Observable<SolicitudRegenciaEntidad[]> {
-    return this.http.get<SolicitudRegenciaEntidad[]>(this.urlEndPoint + '/consultar-solicitudes');
+    return this.http.get<SolicitudRegenciaEntidad[]>(this.urlEndPoint);
   }
 
   async consultarSolicitud(idSolicitud: string, annoSolicitud: string): Promise<any>  {
-    return this.http.get<SolicitudRegenciaEntidad>(`${this.urlEndPoint}/consultar-solicitudes-id?idSolicitud=` + idSolicitud +
+    return this.http.get<SolicitudRegenciaEntidad>(`${this.urlEndPoint}/id?idSolicitud=` + idSolicitud +
       `&annoSolicitud=` + annoSolicitud).toPromise();
   }
 
   consultarPendientes(): Observable<SolicitudRegenciaEntidad[]> {
-    return this.http.get<SolicitudRegenciaEntidad[]>(this.urlEndPoint + '/consultar-solicitudes-pendientes');
+    return this.http.get<SolicitudRegenciaEntidad[]>(this.urlEndPoint + '/pendientes');
   }
 
   consultarSolicitudesUsuario(cedulaUsuario: string): Observable<SolicitudRegenciaEntidad[]> {
-    return this.http.get<SolicitudRegenciaEntidad[]>(`${this.urlEndPoint}/consultar-solicitudes-usuario?cedula=` + cedulaUsuario,
+    return this.http.get<SolicitudRegenciaEntidad[]>(`${this.urlEndPoint}/usuario?cedula=` + cedulaUsuario,
       {headers: this.httpHeaders});
   }
 
   agregarSolicitud(solicitud: SolicitudRegenciaEntidad): Observable<SolicitudRegenciaEntidad> {
-    return this.http.post<SolicitudRegenciaEntidad>(`${this.urlEndPoint}/agregar-solicitud`, solicitud, {headers: this.httpHeaders});
+    return this.http.post<SolicitudRegenciaEntidad>(`${this.urlEndPoint}`, solicitud, {headers: this.httpHeaders});
   }
 
   modificarSolicitud(solicitud: SolicitudRegenciaEntidad): Observable<SolicitudRegenciaEntidad> {

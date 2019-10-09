@@ -16,26 +16,26 @@ export class UsuariosService {
   constructor(private http: HttpClient) { }
 
   consultar(): Observable<UsuarioEntidad[]> {
-    return this.http.get<UsuarioEntidad[]>(this.urlEndPoint + '/consultar-usuarios');
+    return this.http.get<UsuarioEntidad[]>(this.urlEndPoint);
   }
 
   async consultarUsuario(cedula: string): Promise<any> {
-    return this.http.get<UsuarioEntidad>(`${this.urlEndPoint}/consultar-usuario-id?cedula=` + cedula).toPromise();
+    return this.http.get<UsuarioEntidad>(`${this.urlEndPoint}/id?cedula=` + cedula).toPromise();
   }
 
   consultarPorGrupo(grupo: string): Observable<UsuarioEntidad[]> {
-    return this.http.get<UsuarioEntidad[]>(`${this.urlEndPoint}/consultar-usuarios-grupo?grupo=` + grupo);
+    return this.http.get<UsuarioEntidad[]>(`${this.urlEndPoint}/grupos?grupo=` + grupo);
   }
 
   agregar(usuario: UsuarioEntidad): Observable<UsuarioEntidad> {
-    return this.http.post<UsuarioEntidad>(`${this.urlEndPoint}/agregar-usuarios`, usuario, {headers: this.httpHeaders});
+    return this.http.post<UsuarioEntidad>(this.urlEndPoint, usuario, {headers: this.httpHeaders});
   }
 
   modificar(usuario: UsuarioEntidad): Observable<UsuarioEntidad> {
-    return this.http.put<UsuarioEntidad>(`${this.urlEndPoint}/editar-usuarios`, usuario, {headers: this.httpHeaders});
+    return this.http.post<UsuarioEntidad>(`${this.urlEndPoint}/editar`, usuario, {headers: this.httpHeaders});
   }
 
   eliminar(cedula: string): Observable<UsuarioEntidad> {
-    return this.http.delete<UsuarioEntidad>(`${this.urlEndPoint}/eliminar-usuarios?cedula=` + cedula, {headers: this.httpHeaders});
+    return this.http.delete<UsuarioEntidad>(`${this.urlEndPoint}?cedula=` + cedula, {headers: this.httpHeaders});
   }
 }

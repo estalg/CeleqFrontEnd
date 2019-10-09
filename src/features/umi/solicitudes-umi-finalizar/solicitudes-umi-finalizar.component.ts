@@ -60,7 +60,7 @@ export class SolicitudesUmiFinalizarComponent implements OnInit {
       this.formSolicitud.controls.observacionesAnalisis.setValue(this.solicitud.observacionesAnalisis);
 
       if (this.solicitud.ubicacionArchivo !== '') {
-        this.nombreArchivo = this.solicitud.ubicacionArchivo.substring(this.solicitud.ubicacionArchivo.indexOf('-') + 1);
+        this.nombreArchivo = this.solicitud.ubicacionArchivo.substring(this.solicitud.ubicacionArchivo.indexOf('_') + 1);
       }
     });
 

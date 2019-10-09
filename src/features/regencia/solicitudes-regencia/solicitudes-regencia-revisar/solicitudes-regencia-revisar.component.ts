@@ -11,8 +11,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReactivoEntidad} from '../../../../shared/entidades/regencia/reactivoEntidad';
 import {CristaleriaEntidad} from '../../../../shared/entidades/regencia/cristaleriaEntidad';
 import {SelectionModel} from '@angular/cdk/collections';
-import {formatDate} from '@angular/common';
-
 @Component({
   selector: 'app-solicitudes-regencia-revisar',
   templateUrl: './solicitudes-regencia-revisar.component.html',
@@ -137,8 +135,6 @@ export class SolicitudesRegenciaRevisarComponent implements OnInit {
       }
     }
     this.solicitud.estado = 'Aceptado';
-    this.solicitud.fechaAprobacion = new Date();
-
     this.solicitudesRegenciaService.modificarSolicitud(this.solicitud).subscribe(
       res => {
         this.routeService.navigate(['/regencia/solicitudes', 'pendientes']);

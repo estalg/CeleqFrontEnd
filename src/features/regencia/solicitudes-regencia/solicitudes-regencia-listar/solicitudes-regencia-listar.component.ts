@@ -48,7 +48,7 @@ export class SolicitudesRegenciaListarComponent implements OnInit {
     } else if (this.modoForm === 'pendientes') {
       this.titulo = 'Solicitudes Pendientes';
       this.consultarSolicitudesRegenciaPendientes();
-    } else if(this.modoForm === 'usuario') {
+    } else if (this.modoForm === 'usuario') {
       this.titulo = 'Solicitudes Usuario';
       this.consultarSolicitudesRegenciaUsuario();
     }

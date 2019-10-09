@@ -9,45 +9,45 @@ import {SolicitudUmiEntidad} from '../../entidades/umi/solicitudUmiEntidad';
 })
 export class UmiService {
 
-  private urlEndPoint = environment.backendUrl + '/umi';
+  private urlEndPoint = environment.backendUrl + '/solicitudMantenimiento';
   private httpHeaders = new HttpHeaders({'Content-type': 'application/json'});
 
   constructor(private http: HttpClient) { }
 
   agregarSolicitud(solicitud: SolicitudUmiEntidad): Observable<SolicitudUmiEntidad> {
-    return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}/agregar-solicitud`, solicitud, {headers: this.httpHeaders});
+    return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}`, solicitud, {headers: this.httpHeaders});
   }
 
   consultar(): Observable<SolicitudUmiEntidad[]> {
-    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/consultar-solicitudes');
+    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint);
   }
 
   consultarPendientes(): Observable<SolicitudUmiEntidad[]> {
-    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/consultar-pendientes');
+    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/pendientes');
   }
 
   consultarAnalizadas(cedula: string): Observable<SolicitudUmiEntidad[]> {
-    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/consultar-solicitudes-analizadas?cedula=' + cedula);
+    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/analizadas?cedula=' + cedula);
   }
 
   consultarAprobadas(cedula: string): Observable<SolicitudUmiEntidad[]> {
-    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/consultar-solicitudes-aprobadas?cedula=' + cedula);
+    return this.http.get<SolicitudUmiEntidad[]>(this.urlEndPoint + '/aprobadas?cedula=' + cedula);
   }
 
   finalizarSolicitud(solicitud: SolicitudUmiEntidad): Observable<SolicitudUmiEntidad> {
-    return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}/finalizar-solicitud`, solicitud, {headers: this.httpHeaders});
+    return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}/finalizar`, solicitud, {headers: this.httpHeaders});
   }
 
   async consultarSolicitud(idSolicitud: string, annoSolicitud: string): Promise<any>  {
-    return this.http.get<SolicitudUmiEntidad>(`${this.urlEndPoint}/consultar-solicitud-id?id=` + idSolicitud +
+    return this.http.get<SolicitudUmiEntidad>(`${this.urlEndPoint}/id?id=` + idSolicitud +
       `&anno=` + annoSolicitud).toPromise();
   }
 
   aprobarSolicitud(solicitud: SolicitudUmiEntidad): Observable<SolicitudUmiEntidad> {
-    return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}/aprobar-solicitudes`, solicitud, {headers: this.httpHeaders});
+    return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}/aprobar`, solicitud, {headers: this.httpHeaders});
   }
 
   analizarSolicitud(solicitud: SolicitudUmiEntidad): Observable<SolicitudUmiEntidad> {
-    return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}/analizar-solicitudes`, solicitud, {headers: this.httpHeaders});
+    return this.http.post<SolicitudUmiEntidad>(`${this.urlEndPoint}/analizar`, solicitud, {headers: this.httpHeaders});
   }
 }
