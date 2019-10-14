@@ -11,28 +11,28 @@ import {DesignacionEntidad} from '../../../entidades/regimen becario/designacion
 })
 export class DesignacionesService {
 
-  private urlEndPoint = environment.backendUrl + '/regimen-becario/designaciones';
+  private urlEndPoint = environment.backendUrl + '/designacion';
   private httpHeaders = new HttpHeaders({'Content-type': 'application/json'});
 
   constructor(private http: HttpClient) { }
 
   consultarEstudiantes(): Observable<EstudianteEntidad[]> {
-    return this.http.get<EstudianteEntidad[]>(this.urlEndPoint + '/consultar-estudiantes');
+    return this.http.get<EstudianteEntidad[]>(environment.backendUrl + '/estudiantes');
   }
 
   consultar(): Observable<DesignacionEntidad[]> {
-    return this.http.get<DesignacionEntidad[]>(this.urlEndPoint + '/consultar-designaciones');
+    return this.http.get<DesignacionEntidad[]>(this.urlEndPoint);
   }
 
   agregarDesignacion(designacion: P9Entidad): Observable<P9Entidad> {
-    return this.http.post<P9Entidad>(`${this.urlEndPoint}/agregar-designacion`, designacion, {headers: this.httpHeaders});
+    return this.http.post<P9Entidad>(`${this.urlEndPoint}`, designacion, {headers: this.httpHeaders});
   }
 
   consultarDesignacion(id: number, anno: number): Observable<P9Entidad> {
-    return this.http.get<P9Entidad>(this.urlEndPoint + '/consultar-designacion-id?id=' + id + '&anno=' + anno);
+    return this.http.get<P9Entidad>(this.urlEndPoint + '/id?id=' + id + '&anno=' + anno);
   }
 
   editarDesignacion(designacion: P9Entidad): Observable<P9Entidad> {
-    return this.http.post<P9Entidad>(`${this.urlEndPoint}/editar-designacion`, designacion, {headers: this.httpHeaders});
+    return this.http.post<P9Entidad>(`${this.urlEndPoint}/editar`, designacion, {headers: this.httpHeaders});
   }
 }

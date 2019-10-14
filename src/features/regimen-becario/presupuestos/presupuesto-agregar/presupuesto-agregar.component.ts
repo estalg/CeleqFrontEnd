@@ -49,7 +49,7 @@ export class PresupuestoAgregarComponent implements OnInit {
       this.titulo = 'Agregar Presupuesto';
     } else {
 
-      this.presupuestoService.consultarReactivo(this.route.snapshot.params.codigo).then(res => {
+      this.presupuestoService.consultarPresupuesto(this.route.snapshot.params.codigo).then(res => {
         this.presupuesto = res;
         this.formPresupuesto.controls.codigo.setValue(this.presupuesto.codigo);
         this.formPresupuesto.controls.nombre.setValue(this.presupuesto.nombre);

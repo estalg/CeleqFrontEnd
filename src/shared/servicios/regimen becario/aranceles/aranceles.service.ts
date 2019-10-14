@@ -8,16 +8,16 @@ import {ArancelEntidad} from '../../../entidades/regimen becario/arancelEntidad'
   providedIn: 'root'
 })
 export class ArancelesService {
-  private urlEndPoint = environment.backendUrl + '/regimen-becario/aranceles';
+  private urlEndPoint = environment.backendUrl + '/arancel';
   private httpHeaders = new HttpHeaders({'Content-type': 'application/json'});
 
   constructor(private http: HttpClient) { }
 
   consultar(): Observable<ArancelEntidad[]> {
-    return this.http.get<ArancelEntidad[]>(this.urlEndPoint + '/consultar-aranceles');
+    return this.http.get<ArancelEntidad[]>(this.urlEndPoint);
   }
 
   modificar(arancel: ArancelEntidad): Observable<ArancelEntidad> {
-    return this.http.put<ArancelEntidad>(`${this.urlEndPoint}/editar-aranceles`, arancel, {headers: this.httpHeaders});
+    return this.http.post<ArancelEntidad>(`${this.urlEndPoint}/editar`, arancel, {headers: this.httpHeaders});
   }
 }
