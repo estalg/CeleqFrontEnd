@@ -93,6 +93,10 @@ export class AuthenticationService {
     localStorage.removeItem(this.REFRESH_TOKEN);
   }
 
+  public genertePasswordChangeId(correo: string) {
+    return this.http.post<any>(environment.backendUrl + '/generatePassChangeId', correo);
+  }
+
   public getNombreCompleto() {
     const datosToken = jwt_decode(localStorage.getItem('JWT_TOKEN'));
     return datosToken.identity.nombre + ' ' + datosToken.identity.apellido1 + ' ' + datosToken.identity.apellido2;
