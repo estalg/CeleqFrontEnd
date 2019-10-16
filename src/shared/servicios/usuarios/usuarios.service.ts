@@ -22,6 +22,10 @@ export class UsuariosService {
   async consultarUsuario(cedula: string): Promise<any> {
     return this.http.get<UsuarioEntidad>(`${this.urlEndPoint}/id?cedula=` + cedula).toPromise();
   }
+  async consultarUsuarioCorreo(correo: string): Promise<any> {
+    return this.http.get<UsuarioEntidad>(`${this.urlEndPoint}/correo?correo=` + correo).toPromise();
+  }
+
 
   consultarPorGrupo(grupo: string): Observable<UsuarioEntidad[]> {
     return this.http.get<UsuarioEntidad[]>(`${this.urlEndPoint}/grupos?grupo=` + grupo);

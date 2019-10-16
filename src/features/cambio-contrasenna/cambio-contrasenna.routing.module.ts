@@ -4,7 +4,7 @@ import {CambioContrasennaComponent} from './cambio-contrasenna.component';
 
 const routes: Routes = [
   {
-    path: 'cambioContrasenna/:id',
+    path: 'cambioContrasenna/:id/:correo',
     component: CambioContrasennaComponent
   }
 ];

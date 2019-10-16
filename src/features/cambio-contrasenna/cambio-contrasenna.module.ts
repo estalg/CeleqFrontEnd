@@ -4,7 +4,7 @@ import {CambioContrasennaComponent} from './cambio-contrasenna.component';
 import {CambioContrasennaRoutingModule} from './cambio-contrasenna.routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
-import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule} from
     MatButtonModule,
     MatFormFieldModule,
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule
   ]
 })
 export class CambioContrasennaModule { }

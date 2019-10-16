@@ -97,6 +97,10 @@ export class AuthenticationService {
     return this.http.post<any>(environment.backendUrl + '/generatePassChangeId', correo);
   }
 
+  public checkPasswordChangeId(data: {correo: string, id: string}) {
+    return this.http.post<any>(environment.backendUrl + '/checkPassChangeId', data);
+  }
+
   public getNombreCompleto() {
     const datosToken = jwt_decode(localStorage.getItem('JWT_TOKEN'));
     return datosToken.identity.nombre + ' ' + datosToken.identity.apellido1 + ' ' + datosToken.identity.apellido2;
