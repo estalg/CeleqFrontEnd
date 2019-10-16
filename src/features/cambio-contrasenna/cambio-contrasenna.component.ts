@@ -102,7 +102,6 @@ export class CambioContrasennaComponent implements OnInit {
     this.usuariosService.modificar(usuario).subscribe(res => {
       this.abrirDialogoAfirmacion('Se ha cambiado la contraseña de manera correcta');
     }, err => {
-      console.log(err);
       this.abrirDialogoError('Ha ocurrido un error al cambiar la contraseña');
     });
   }

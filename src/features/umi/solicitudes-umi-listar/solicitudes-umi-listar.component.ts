@@ -84,7 +84,6 @@ export class SolicitudesUmiListarComponent implements OnInit {
 
   private consultarSolicitudesMantenimientoAnalizadas = () => {
     this.SolicitudRegenciaService.consultarAnalizadas(this.authService.getCedula()).subscribe(solicitudes => {
-      console.log(solicitudes);
       this.dataSource.data = solicitudes as SolicitudUmiEntidad[];
       this.solicitudes = this.dataSource.data;
         // tslint:disable-next-line:max-line-length

@@ -230,7 +230,6 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
       this.dataSourceCristaleria.data.forEach(function(cristaleria) {
         solicitud.cristaleriaSolicitada.push(cristaleria);
       })
-      console.log(solicitud);
       this.solicitudesService.agregarSolicitud(solicitud).subscribe(result =>{
         this._routeService.navigate(['/']);
       }, error => {
