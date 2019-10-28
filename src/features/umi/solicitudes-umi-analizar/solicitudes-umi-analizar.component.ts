@@ -127,7 +127,7 @@ export class SolicitudesUmiAnalizarComponent implements OnInit {
       this.uploadService.subirArchivo(formData, 'umi').subscribe(
         (res) => {
           this.uploadResponse = res.url;
-          this.uploadResponse = this.uploadResponse.substring(this.uploadResponse.indexOf('/uploads/'));
+          this.uploadResponse = this.uploadResponse.substring(this.uploadResponse.indexOf('\\files\\') + 1);
           this.analizarSolicitud();
         },
         (err) => {

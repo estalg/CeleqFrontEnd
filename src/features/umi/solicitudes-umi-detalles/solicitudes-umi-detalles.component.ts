@@ -92,8 +92,7 @@ export class SolicitudesUmiDetallesComponent implements OnInit {
   }
 
   private descargar() {
-    console.log(this.solicitud.ubicacionArchivo);
-    this.fileService.downloadFile(this.solicitud.ubicacionArchivo).subscribe(res => {
+    this.fileService.downloadDocument(this.solicitud.ubicacionArchivo).subscribe(res => {
       const dataType = res.type;
       const binaryData = [];
       binaryData.push(res);

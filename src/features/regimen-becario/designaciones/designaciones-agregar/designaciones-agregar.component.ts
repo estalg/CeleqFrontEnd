@@ -357,7 +357,6 @@ export class DesignacionesAgregarComponent implements OnInit {
     designacionModificada.numero = this.formDesignacion.controls.numeroP9.value;
     designacionModificada.ubicacionArchivo = this.uploadResponse;
     designacionModificada.fecha = new Date();
-    console.log(designacionModificada);
     this.designacionesService.editarDesignacion(designacionModificada).subscribe(result => {
         this.abrirDialogoAfirmacion('Designación modificada correctamente');
       },
@@ -425,7 +424,7 @@ export class DesignacionesAgregarComponent implements OnInit {
   }
 
   private descargar() {
-    this.fileService.downloadFile(this.designacion.ubicacionArchivo).subscribe(res => {
+    this.fileService.downloadDocument(this.designacion.ubicacionArchivo).subscribe(res => {
       const dataType = res.type;
       const binaryData = [];
       binaryData.push(res);

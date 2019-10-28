@@ -103,7 +103,6 @@ export class SolicitudesRegenciaRevisarComponent implements OnInit {
     }
     this.solicitud.estado = 'Rechazado';
     this.solicitud.fechaAprobacion = new Date();
-    console.log(this.solicitud.fechaAprobacion);
     this.solicitudesRegenciaService.modificarSolicitud(this.solicitud).subscribe(
       res => {
         this.routeService.navigate(['/regencia/solicitudes', 'pendientes']);

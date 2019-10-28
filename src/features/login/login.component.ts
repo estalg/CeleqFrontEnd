@@ -3,9 +3,7 @@ import {UsuariosService} from '../../shared/servicios/usuarios/usuarios.service'
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../../shared/servicios/seguridad/authentication.service';
-import {first} from 'rxjs/operators';
 import {MatDialog} from '@angular/material';
-import {DialogoConfirmacionComponent} from '../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
 
 @Component({
   selector: 'app-login',
@@ -62,5 +60,9 @@ export class LoginComponent implements OnInit {
           }
         }
       );
+  }
+
+  generarIdContrasenna() {
+    this.routeService.navigate(['/cambioContrasenna']);
   }
 }

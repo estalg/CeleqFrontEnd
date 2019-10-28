@@ -8,12 +8,12 @@ import {Observable} from 'rxjs';
 })
 export class FileService {
 
-  private urlEndPoint = environment.backendUrl + '/archivos';
+  private urlEndPoint = environment.backendUrl;
   private httpHeaders = new HttpHeaders({'Content-type': 'application/json'});
 
   constructor(private http: HttpClient) { }
 
-  downloadFile(direccion: string): Observable<any> {
-    return this.http.get(this.urlEndPoint + direccion, {headers: this.httpHeaders, responseType: 'blob' as 'json'});
+  downloadDocument(url: string): Observable<any> {
+    return this.http.get(this.urlEndPoint + '/downloadDocument?url=' + url, {headers: this.httpHeaders, responseType: 'blob' as 'json'});
   }
 }

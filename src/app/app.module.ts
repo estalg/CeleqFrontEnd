@@ -21,6 +21,7 @@ import {ArancelesModule} from '../features/regimen-becario/aranceles/aranceles.m
 import {PresupuestosModule} from '../features/regimen-becario/presupuestos/presupuestos.module';
 import {ReportesModule} from '../features/regimen-becario/reportes/reportes.module';
 import {TokenInterceptor} from '../shared/seguridad/token-interceptor';
+import {CambioContrasennaModule} from '../features/cambio-contrasenna/cambio-contrasenna.module';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {TokenInterceptor} from '../shared/seguridad/token-interceptor';
     UmiModule,
     ArancelesModule,
     PresupuestosModule,
-    ReportesModule
+    ReportesModule,
+    CambioContrasennaModule
   ],
   providers: [
     {
