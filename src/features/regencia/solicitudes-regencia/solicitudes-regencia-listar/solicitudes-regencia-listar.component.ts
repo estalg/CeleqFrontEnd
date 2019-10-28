@@ -25,7 +25,7 @@ export class SolicitudesRegenciaListarComponent implements OnInit {
   private titulo: string;
 
   // tslint:disable-next-line:max-line-length
-  public displayedColumns: string[] = ['consecutivo', 'fechaSolicitud', 'nombreSolicitante', 'nombreEncargado', 'correoSolicitante', 'unidad', 'estado'];
+  public displayedColumns: string[] = ['consecutivo', 'fechaSolicitud', 'nombreSolicitante', 'nombreEncargado', 'correoSolicitante', 'unidad', 'estado', 'acciones'];
 
   public dataSource = new MatTableDataSource<SolicitudRegenciaEntidad>();
 

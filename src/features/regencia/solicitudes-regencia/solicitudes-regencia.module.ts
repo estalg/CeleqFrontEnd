@@ -16,6 +16,8 @@ import {SolicitudesRegenciaReactivos} from './solicitudes-regencia-agregar/solic
 import {SolicitudesRegenciaCristaleria} from './solicitudes-regencia-agregar/solicitudes-regencia-agregar.component';
 import {SolicitudesRegenciaRevisarComponent} from './solicitudes-regencia-revisar/solicitudes-regencia-revisar.component';
 import {SolicitudesRegenciaRevisarRoutingModule} from './solicitudes-regencia-revisar/solicitudes-regencia-revisar-routing.module';
+import {SolicitudesRegenciaConsultarComponent} from './solicitudes-regencia-consultar/solicitudes-regencia-consultar.component';
+import {SolicitudesRegenciaConsultarRoutingModule} from './solicitudes-regencia-consultar/solicitudes-regencia-consultar-routing.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import {SolicitudesRegenciaRevisarRoutingModule} from './solicitudes-regencia-re
     SolicitudesRegenciaAgregarComponent,
     SolicitudesRegenciaReactivos,
     SolicitudesRegenciaCristaleria,
-    SolicitudesRegenciaRevisarComponent
+    SolicitudesRegenciaRevisarComponent,
+    SolicitudesRegenciaConsultarComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import {SolicitudesRegenciaRevisarRoutingModule} from './solicitudes-regencia-re
     SolicitudesRegenciaListarRoutingModule,
     SolicitudesRegenciaAgregarRoutingModule,
     SolicitudesRegenciaRevisarRoutingModule,
+    SolicitudesRegenciaConsultarRoutingModule,
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
@@ -50,7 +54,8 @@ import {SolicitudesRegenciaRevisarRoutingModule} from './solicitudes-regencia-re
   exports: [
     SolicitudesRegenciaListarComponent,
     SolicitudesRegenciaAgregarComponent,
-    SolicitudesRegenciaRevisarComponent
+    SolicitudesRegenciaRevisarComponent,
+    SolicitudesRegenciaConsultarComponent
   ],
   entryComponents: [
     SolicitudesRegenciaReactivos,

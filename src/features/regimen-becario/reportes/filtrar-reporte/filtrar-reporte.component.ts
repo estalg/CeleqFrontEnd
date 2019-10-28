@@ -39,13 +39,13 @@ export class FiltrarReporteComponent implements OnInit {
 
     if (tipo === 'estudiante') {
       // tslint:disable-next-line:max-line-length
-      window.open('http://localhost:81/celeqBackEnd/api/regimen-becario/reportes/reporte-designaciones-estudiante?anno=' + anno + '&ciclo=' + ciclo, '_self');
+      window.open('http://localhost:5000/designacion/reporte?tipo=estudiante&anno=' + anno + '&ciclo=' + ciclo, '_blank');
     } else if (tipo === 'responsable') {
       // tslint:disable-next-line:max-line-length
-      window.open('http://localhost:81/celeqBackEnd/api/regimen-becario/reportes/reporte-designaciones-responsable?anno=' + anno + '&ciclo=' + ciclo, '_self');
+      window.open('http://localhost:5000/designacion/reporte?tipo=responsable&anno=' + anno + '&ciclo=' + ciclo, '_blank');
     } else if (tipo === 'presupuesto') {
       // tslint:disable-next-line:max-line-length
-      window.open('http://localhost:81/celeqBackEnd/api/regimen-becario/reportes/reporte-designaciones-presupuesto?anno=' + anno + '&ciclo=' + ciclo, '_self');
+      window.open('http://localhost:5000/designacion/reporte?tipo=presupuesto&anno=' + anno + '&ciclo=' + ciclo, '_blank');
     }
   }
 
