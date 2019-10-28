@@ -112,7 +112,7 @@ export class GruposAgregarComponent implements OnInit {
       for (let i = 0; i < perm.length; ++i) {
         // tslint:disable-next-line:prefer-for-of
         for (let j = 0; j < this.permisos.length; ++j) {
-          if (perm[i].permiso === this.permisos[j].id) {
+          if (+perm[i].permiso === this.permisos[j].id) {
             this.selection.select(this.permisos[j]);
           }
         }

@@ -17,34 +17,34 @@ export class GruposService {
   constructor(private http: HttpClient) { }
 
   consultar(): Observable<GrupoEntidad[]> {
-    return this.http.get<GrupoEntidad[]>(this.urlEndPoint + '/consultar-grupos');
+    return this.http.get<GrupoEntidad[]>(this.urlEndPoint);
   }
 
   agregar(grupo: GrupoEntidad) {
-    return this.http.post<GrupoEntidad>(`${this.urlEndPoint}/agregar-grupo`, grupo, {headers: this.httpHeaders});
+    return this.http.post<GrupoEntidad>(`${this.urlEndPoint}`, grupo, {headers: this.httpHeaders});
   }
 
   editar(grupo: GrupoEntidad) {
-    return this.http.put<GrupoEntidad>(`${this.urlEndPoint}/editar-grupo`, grupo, {headers: this.httpHeaders});
+    return this.http.post<GrupoEntidad>(`${this.urlEndPoint}/editar`, grupo, {headers: this.httpHeaders});
   }
 
   eliminar(descripcion: string): Observable<GrupoEntidad> {
-    return this.http.delete<GrupoEntidad>(`${this.urlEndPoint}/eliminar-grupo?descripcion=` + descripcion, {headers: this.httpHeaders});
+    return this.http.delete<GrupoEntidad>(`${this.urlEndPoint}?descripcion=` + descripcion, {headers: this.httpHeaders});
   }
 
   consultarPermisos(): Observable<PermisoEntidad[]> {
-    return this.http.get<PermisoEntidad[]>(this.urlEndPoint + '/consultar-permisos');
+    return this.http.get<PermisoEntidad[]>(this.urlEndPoint + '/permisos');
   }
 
   consultarPermisosGrupo(grupo: string): Observable<PermisoEntidad[]> {
-    return this.http.get<PermisoEntidad[]>(`${this.urlEndPoint}/consultar-permisos-grupo?grupo=` + grupo);
+    return this.http.get<PermisoEntidad[]>(`${this.urlEndPoint}/permisosgrupo?grupo=` + grupo);
   }
 
   consultarUsuariosGrupo(grupo: string): Observable<UsuarioEntidad[]> {
-    return this.http.get<UsuarioEntidad[]>(`${this.urlEndPoint}/consultar-usuarios-grupo?grupo=` + grupo);
+    return this.http.get<UsuarioEntidad[]>(`${this.urlEndPoint}/usuarios?grupo=` + grupo);
   }
 
   asignarUsuariosGrupo(grupo: GrupoEntidad) {
-    return this.http.put<GrupoEntidad>(`${this.urlEndPoint}/asignar-usuarios-grupo`, grupo, {headers: this.httpHeaders});
+    return this.http.post<GrupoEntidad>(`${this.urlEndPoint}/asignarusuario`, grupo, {headers: this.httpHeaders});
   }
 }
