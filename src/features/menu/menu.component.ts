@@ -3,6 +3,7 @@ import {AuthenticationService} from '../../shared/servicios/seguridad/authentica
 import {element} from 'protractor';
 import {FiltrarReporteComponent} from '../regimen-becario/reportes/filtrar-reporte/filtrar-reporte.component';
 import {MatDialog} from '@angular/material';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-menu',
@@ -40,6 +41,14 @@ export class MenuComponent implements OnInit {
       {
         width: '600px'
       });
+  }
+
+  private  abrirReporteCristaleria() {
+    window.open(environment.backendUrl + '/cristaleria/reporte', '_blank');
+  }
+
+  private  abrirReporteReactivo() {
+    window.open(environment.backendUrl + '/reactivo/reporte', '_blank');
   }
 
 }
