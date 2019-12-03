@@ -16,10 +16,10 @@ import {PermisoEntidad} from '../../../shared/entidades/permisoEntidad';
 })
 export class GruposAsignarComponent implements OnInit {
 
-  private formGrupo: FormGroup;
+  formGrupo: FormGroup;
 
   // Grupos
-  private grupos: GrupoEntidad[];
+  grupos: GrupoEntidad[];
 
   public displayedColumns: string[] = ['select', 'cedula', 'nombre'];
 
@@ -69,7 +69,7 @@ export class GruposAsignarComponent implements OnInit {
     });
   }
 
-  private marcarUsuarios() {
+  marcarUsuarios() {
     this.gruposService.consultarUsuariosGrupo(this.formGrupo.controls.descripcion.value).subscribe(usuarios => {
       this.usuariosGrupo = usuarios as UsuarioEntidad[];
       this.selection.clear();
@@ -86,7 +86,7 @@ export class GruposAsignarComponent implements OnInit {
     });
   }
 
-  private asignar() {
+  asignar() {
     const grupo = new GrupoEntidad();
     grupo.descripcion = this.formGrupo.controls.descripcion.value;
     grupo.usuarios = this.selection.selected;
@@ -95,7 +95,7 @@ export class GruposAsignarComponent implements OnInit {
     });
   }
 
-  private cancelar() {
+  cancelar() {
     this._routeService.navigate(['/grupos']);
   }
 

@@ -22,7 +22,7 @@ export class SolicitudesRegenciaListarComponent implements OnInit {
   private modoForm: string;
 
   // Nombre de la página
-  private titulo: string;
+  titulo: string;
 
   // tslint:disable-next-line:max-line-length
   public displayedColumns: string[] = ['consecutivo', 'fechaSolicitud', 'nombreSolicitante', 'nombreEncargado', 'correoSolicitante', 'unidad', 'estado', 'acciones'];

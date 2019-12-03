@@ -15,8 +15,8 @@ import {FileService} from '../../../shared/servicios/archivos/file.service';
 export class SolicitudesUmiFinalizarComponent implements OnInit {
 
   private solicitud: SolicitudUmiEntidad;
-  private formSolicitud: FormGroup;
-  private nombreArchivo: string;
+  formSolicitud: FormGroup;
+  nombreArchivo: string;
 
   constructor(private solicitudUmiService: UmiService,
               private fb: FormBuilder,

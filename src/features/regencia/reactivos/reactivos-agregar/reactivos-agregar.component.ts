@@ -13,16 +13,16 @@ import {MatDialog} from '@angular/material';
 })
 export class ReactivosAgregarComponent implements OnInit {
 
-  private formReactivo: FormGroup;
+  formReactivo: FormGroup;
 
   // Nombre de la página
-  private titulo: string;
+  titulo: string;
 
   // Reactivo a editar/visualizar
-  private reactivo: ReactivoEntidad;
+  reactivo: ReactivoEntidad;
 
   // Modo del form
-  private modoForm: string;
+  modoForm: string;
 
   constructor(private reactivoService: ReactivosService,
               private fb: FormBuilder,
@@ -100,7 +100,7 @@ export class ReactivosAgregarComponent implements OnInit {
     return this.formReactivo.get('estante');
   }
 
-  private cancelar() {
+  cancelar() {
     this.routeService.navigate(['/regencia/reactivos']);
   }
 

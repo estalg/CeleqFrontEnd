@@ -23,7 +23,7 @@ export class SolicitudesUmiListarComponent implements OnInit {
   private modoForm: string;
 
   // Nombre de la página
-  private titulo: string;
+  titulo: string;
 
   // tslint:disable-next-line:max-line-length
   public displayedColumns: string[] = ['consecutivo', 'nombreSolicitante', 'urgencia', 'areaTrabajo',

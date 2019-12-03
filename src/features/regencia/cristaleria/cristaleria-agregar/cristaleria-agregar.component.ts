@@ -13,16 +13,16 @@ import {MatDialog} from '@angular/material';
 })
 export class CristaleriaAgregarComponent implements OnInit {
 
-  private formCristaleria: FormGroup;
+  formCristaleria: FormGroup;
 
   // Nombre de la página
-  private titulo: string;
+  titulo: string;
 
   // Usuario a editar/visualizar
-  private cristaleria: CristaleriaEntidad;
+  cristaleria: CristaleriaEntidad;
 
   // Modo del form
-  private modoForm: string;
+  modoForm: string;
 
   constructor(private cristaleriaService: CristaleriaService,
               private fb: FormBuilder,
@@ -99,7 +99,7 @@ export class CristaleriaAgregarComponent implements OnInit {
     return this.formCristaleria.get('caja');
   }
 
-  private cancelar() {
+  cancelar() {
     this.routeService.navigate(['/regencia/cristaleria']);
   }
 

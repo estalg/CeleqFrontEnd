@@ -14,7 +14,7 @@ import {DialogoConfirmacionComponent} from '../../../shared/componentes/dialogo-
 })
 export class SolicitudesUmiAgregarComponent implements OnInit {
 
-  private formSolicitud: FormGroup;
+  formSolicitud: FormGroup;
 
   constructor(private fb: FormBuilder,
               private _routeService: Router,

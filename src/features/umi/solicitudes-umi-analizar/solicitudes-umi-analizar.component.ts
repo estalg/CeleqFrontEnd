@@ -15,7 +15,7 @@ import {print} from 'util';
 })
 export class SolicitudesUmiAnalizarComponent implements OnInit {
 
-  private formSolicitud: FormGroup;
+  formSolicitud: FormGroup;
   private solicitud: SolicitudUmiEntidad;
   uploadResponse;
 

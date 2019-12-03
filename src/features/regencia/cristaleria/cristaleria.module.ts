@@ -10,11 +10,13 @@ import { MatPaginatorModule, MatSortModule, MatTableModule, MatInputModule, MatB
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import {CristaleriaReporteComponent} from './cristaleria-reporte/cristaleria-reporte.component';
 
 @NgModule({
   declarations: [
     CristaleriaListarComponent,
-    CristaleriaAgregarComponent
+    CristaleriaAgregarComponent,
+    CristaleriaReporteComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [
     CristaleriaListarComponent,
-    CristaleriaAgregarComponent
+    CristaleriaAgregarComponent,
+    CristaleriaReporteComponent
   ]
 })
 export class CristaleriaModule { }

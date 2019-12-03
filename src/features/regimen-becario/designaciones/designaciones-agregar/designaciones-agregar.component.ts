@@ -22,36 +22,36 @@ import {FileService} from '../../../../shared/servicios/archivos/file.service';
 })
 export class DesignacionesAgregarComponent implements OnInit {
 
-  private formDesignacion: FormGroup;
+  formDesignacion: FormGroup;
 
-  private formEstudiante: FormGroup;
+  formEstudiante: FormGroup;
 
   // Nombre de la página
-  private titulo: string;
+  titulo: string;
 
   // Usuario a editar/visualizar
   private designacion: P9Entidad;
 
   // Modo del form
-  private modoForm: string;
+  modoForm: string;
 
   // Lista de estudiantes del sistema
   private listaEstudiantes: EstudianteEntidad[];
 
   // Lista de usuarios en el sistema
-  private listaUsuarios: UsuarioEntidad[];
+  listaUsuarios: UsuarioEntidad[];
 
   // Lista de unidades
-  private listaUnidades: UnidadEntidad[];
+  listaUnidades: UnidadEntidad[];
 
   // Lista de presupuestos
-  private listaPresupuesto: PresupuestoEntidad[];
+  listaPresupuesto: PresupuestoEntidad[];
 
   private uploadResponse: string;
 
   private nombreArchivo: string;
 
-  private cambiandoArchivo: boolean;
+  cambiandoArchivo: boolean;
 
   private p9Anterior: string;
 
@@ -439,7 +439,7 @@ export class DesignacionesAgregarComponent implements OnInit {
     });
   }
 
-  private resetearP9() {
+  resetearP9() {
     if (this.modoForm === 'editar') {
       this.formDesignacion.get('archivoP9').setValue('');
       this.nombreArchivo = '';

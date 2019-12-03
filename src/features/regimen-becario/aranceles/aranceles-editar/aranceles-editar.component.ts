@@ -18,7 +18,7 @@ export interface EditarArancelDialog {
 })
 export class ArancelesEditarComponent implements OnInit {
 
-  private fromAranceles: FormGroup;
+  fromAranceles: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<ArancelesEditarComponent>,
               @Inject(MAT_DIALOG_DATA) public datos: EditarArancelDialog,

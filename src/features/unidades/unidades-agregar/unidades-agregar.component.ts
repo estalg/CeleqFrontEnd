@@ -15,20 +15,20 @@ import {UsuarioEntidad} from '../../../shared/entidades/usuarioEntidad';
 })
 export class UnidadesAgregarComponent implements OnInit {
 
-  private formUnidad: FormGroup;
+  formUnidad: FormGroup;
 
-  private selected: string;
+  selected: string;
 
   // Nombre de la página
-  private titulo: string;
+  titulo: string;
 
   // Reactivo a editar/visualizar
   private unidad: UnidadEntidad;
 
-  private usuarios: UsuarioEntidad[];
+  usuarios: UsuarioEntidad[];
 
   // Modo del form
-  private modoForm: string;
+  modoForm: string;
 
   private nombreViejo: string;
 
@@ -91,7 +91,7 @@ export class UnidadesAgregarComponent implements OnInit {
     return this.formUnidad.get('encargado');
   }
 
-  private cancelar() {
+  cancelar() {
     this.routeService.navigate(['unidades']);
   }
 

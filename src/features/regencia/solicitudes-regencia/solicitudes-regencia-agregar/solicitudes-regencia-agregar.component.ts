@@ -24,18 +24,18 @@ import {AuthenticationService} from '../../../../shared/servicios/seguridad/auth
 export class SolicitudesRegenciaAgregarComponent implements OnInit {
 
 
-  private formSolicitud: FormGroup;
+  formSolicitud: FormGroup;
 
   // Nombre de la página
-  private titulo: string;
+  titulo: string;
 
   // Usuario a editar/visualizar
   private solicitud: SolicitudRegenciaEntidad;
 
-  private unidades: UnidadEntidad[];
+  unidades: UnidadEntidad[];
 
   // Modo del form
-  private modoForm: string;
+  modoForm: string;
 
   public reactivosColumns: string[] = ['nombre', 'pureza', 'cantidad', 'acciones'];
 

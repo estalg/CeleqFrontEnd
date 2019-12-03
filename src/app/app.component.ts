@@ -15,7 +15,7 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    private authService: AuthenticationService,
+    public authService: AuthenticationService,
     private bnIdle: BnNgIdleService
   ) {
     // this.authService.currentUser.subscribe(x => this.currentUser = x);

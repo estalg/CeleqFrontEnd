@@ -19,7 +19,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 export class SolicitudesRegenciaConsultarComponent implements OnInit {
 
   private solicitud: SolicitudRegenciaEntidad;
-  private formSolicitud: FormGroup;
+  formSolicitud: FormGroup;
   public reactivosColumns: string[] = ['select', 'nombre', 'pureza', 'cantidad', 'justificacion'];
   public cristaleriaColumns: string[] = ['select', 'nombre', 'material', 'capacidad', 'cantidad', 'justificacion'];
   public dataSourceReactivos = new MatTableDataSource<ReactivoEntidad>();

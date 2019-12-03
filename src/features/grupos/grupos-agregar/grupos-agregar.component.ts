@@ -14,16 +14,16 @@ import {SelectionModel} from '@angular/cdk/collections';
 })
 export class GruposAgregarComponent implements OnInit {
 
-  private formGrupo: FormGroup;
+  formGrupo: FormGroup;
 
   // Nombre de la página
-  private titulo: string;
+  titulo: string;
 
   // Grupo a editar/visualizar
   private grupo: GrupoEntidad;
 
   // Modo del form
-  private modoForm: string;
+  modoForm: string;
 
   permisos: Array<PermisoEntidad>;
 
@@ -76,7 +76,7 @@ export class GruposAgregarComponent implements OnInit {
     return this.formGrupo.get('descripcion');
   }
 
-  private cancelar() {
+  cancelar() {
     this._routeService.navigate(['/grupos']);
   }
 

@@ -14,9 +14,9 @@ import {FileService} from '../../../shared/servicios/archivos/file.service';
 })
 export class SolicitudesUmiDetallesComponent implements OnInit {
 
-  private formDetalles: FormGroup;
+  formDetalles: FormGroup;
 
-  private estado: string;
+  estado: string;
 
   private nombreArchivo: string;
 

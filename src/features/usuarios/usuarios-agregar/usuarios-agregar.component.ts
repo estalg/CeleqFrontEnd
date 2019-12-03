@@ -12,17 +12,16 @@ import {MatDialog} from '@angular/material';
   styleUrls: ['./usuarios-agregar.component.css']
 })
 export class UsuariosAgregarComponent implements OnInit {
-
-  private formUsuario: FormGroup;
+  formUsuario: FormGroup;
 
   // Nombre de la página
-  private titulo: string;
+  titulo: string;
 
   // Usuario a editar/visualizar
-  private usuario: UsuarioEntidad;
+  usuario: UsuarioEntidad;
 
   // Modo del form
-  private modoForm: string;
+  modoForm: string;
 
   constructor(private usuarioService: UsuariosService,
               private fb: FormBuilder,
@@ -107,7 +106,7 @@ export class UsuariosAgregarComponent implements OnInit {
     return this.formUsuario.get('apellido2');
   }
 
-  private cancelar() {
+  cancelar() {
     this.routeService.navigate(['/usuarios']);
   }
 

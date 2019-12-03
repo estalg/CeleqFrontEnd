@@ -15,8 +15,8 @@ import {SolicitudUmiEntidad} from '../../../shared/entidades/umi/solicitudUmiEnt
 })
 export class SolicitudesUmiAprobarComponent implements OnInit {
 
-  private formSolicitud: FormGroup;
-  private estadoSolicitud: string;
+  formSolicitud: FormGroup;
+  estadoSolicitud: string;
   private usuariosUmi: UsuarioEntidad[];
   private solicitud: SolicitudUmiEntidad;
 

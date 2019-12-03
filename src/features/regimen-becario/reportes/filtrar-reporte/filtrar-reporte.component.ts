@@ -11,8 +11,8 @@ import { environment } from '../../../../environments/environment';
 })
 export class FiltrarReporteComponent implements OnInit {
 
-  private formFiltro: FormGroup;
-  private ciclo: string;
+  formFiltro: FormGroup;
+  ciclo: string;
 
   constructor(public dialogRef: MatDialogRef<FiltrarReporteComponent>,
               private fb: FormBuilder,

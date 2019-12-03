@@ -13,16 +13,16 @@ import {PresupuestosService} from '../../../../shared/servicios/regimen becario/
 })
 export class PresupuestoAgregarComponent implements OnInit {
 
-  private formPresupuesto: FormGroup;
+  formPresupuesto: FormGroup;
 
   // Nombre de la página
-  private titulo: string;
+  titulo: string;
 
   // Presupuesto a editar/visualizar
   private presupuesto: PresupuestoEntidad;
 
   // Modo del form
-  private modoForm: string;
+  modoForm: string;
 
   constructor(private presupuestoService: PresupuestosService,
               private fb: FormBuilder,
@@ -115,7 +115,7 @@ export class PresupuestoAgregarComponent implements OnInit {
       });
   }
 
-  private cancelar() {
+  cancelar() {
     this.routeService.navigate(['/regimen-becario/presupuestos']);
   }
 
