@@ -223,6 +223,57 @@ export class DesignacionesAgregarComponent implements OnInit {
         }
       });
     }
+    else if (this.modoForm === 'visualizar') {
+      this.titulo = 'Detalles designacion';
+      this.formEstudiante.disable();
+      this.formDesignacion.disable();
+      this.formDesignacion.get('ciclo').disable();
+      this.formDesignacion.get('anno').disable();
+      this.formDesignacion.get('modalidad').disable();
+      this.formDesignacion.get('adHonorem').disable();
+      this.formDesignacion.get('presupuesto').disable();
+      this.formDesignacion.get('convocatoria').disable();
+      this.formDesignacion.get('inopia').disable();
+      this.formDesignacion.get('motivoInopia').disable();
+      // this.formDesignacion.get('numeroP9').disable();
+      this.formDesignacion.get('fechaInicio').disable();
+
+      this.designacionesService.consultarDesignacion(this.route.snapshot.params.id, this.route.snapshot.params.anno).subscribe(res => {
+        this.designacion = res;
+
+        this.formEstudiante.get('id').setValue(res.identificacion);
+        this.formEstudiante.get('tipoId').setValue(res.tipoId        );
+        this.formEstudiante.get('nombre').setValue(res.nombre        );
+        this.formEstudiante.get('apellido1').setValue(res.apellido1     );
+        this.formEstudiante.get('apellido2').setValue(res.apellido2     );
+        this.formEstudiante.get('carrera').setValue(res.carrera       );
+        this.formEstudiante.get('correo').setValue(res.correo        );
+        this.formEstudiante.get('celular').setValue(res.celular       );
+        this.formEstudiante.get('telefonoFijo').setValue(res.telefonoFijo  );
+
+        this.formDesignacion.get('anno').setValue(res.anno         );
+        this.formDesignacion.get('ciclo').setValue(res.ciclo        );
+        this.formDesignacion.get('fechaInicio').setValue(res.fechaInicio  );
+        this.formDesignacion.get('fechaFinal').setValue(res.fechaFinal   );
+        this.formDesignacion.get('convocatoria').setValue(res.convocatoria );
+        this.formDesignacion.get('horas').setValue(res.horas        );
+        this.formDesignacion.get('modalidad').setValue(res.modalidad    );
+        this.formDesignacion.get('inopia').setValue(res.inopia       );
+        this.formDesignacion.get('motivoInopia').setValue(res.motivoInopia );
+        this.formDesignacion.get('tramitado').setValue(res.tramitado    );
+        this.formDesignacion.get('observaciones').setValue(res.observaciones);
+        this.formDesignacion.get('presupuesto').setValue(res.presupuesto  );
+        this.formDesignacion.get('responsable').setValue(res.responsable  );
+        this.formDesignacion.get('unidad').setValue(res.unidad       );
+        this.formDesignacion.get('adHonorem').setValue(res.adHonorem    );
+        this.formDesignacion.get('numeroP9').setValue(res.numero       );
+        this.p9Anterior = res.numero;
+
+        if (this.designacion.ubicacionArchivo !== '') {
+          this.nombreArchivo = this.designacion.ubicacionArchivo.substring(this.designacion.ubicacionArchivo.indexOf('-') + 1);
+        }
+      });
+    }
   }
 
   get estudiante() {

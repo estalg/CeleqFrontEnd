@@ -38,6 +38,6 @@ export class SolicitudesRegenciaService {
   }
 
   modificarSolicitud(solicitud: SolicitudRegenciaEntidad): Observable<SolicitudRegenciaEntidad> {
-    return this.http.post<SolicitudRegenciaEntidad>(`${this.urlEndPoint}/editar-solicitudes`, solicitud, {headers: this.httpHeaders});
+    return this.http.post<SolicitudRegenciaEntidad>(`${this.urlEndPoint}/editar`, solicitud, {headers: this.httpHeaders});
   }
 }

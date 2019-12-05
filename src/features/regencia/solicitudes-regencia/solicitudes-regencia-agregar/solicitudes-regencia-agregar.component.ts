@@ -141,8 +141,8 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
     });
   }
 
-  onKeyReactivo(event: any, reactivo: ReactivoEntidad) {
-    reactivo.cantidadSolicitada = event.target.value;
+  onKeyReactivo($event: any, reactivo: ReactivoEntidad) {
+    reactivo.cantidadSolicitada = $event.target.value;
   }
 
   borrarReactivo(reactivo: ReactivoEntidad){
@@ -167,8 +167,9 @@ export class SolicitudesRegenciaAgregarComponent implements OnInit {
     });
   }
 
-  onKeyCristaleria(event: any, cristaleria: CristaleriaEntidad) {
-    cristaleria.cantidadSolicitada = event.target.value;
+  onKeyCristaleria($event: any, cristaleria: CristaleriaEntidad) {
+    cristaleria.cantidadSolicitada = $event.target.value;
+    console.log($event.target.value);
   }
 
   borrarCristaleria(cristaleria: CristaleriaEntidad){
