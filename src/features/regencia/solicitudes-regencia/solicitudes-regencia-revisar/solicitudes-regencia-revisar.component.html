@@ -52,7 +52,7 @@
     </ng-container>
 
     <ng-container matColumnDef="cantidad">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad Solicitada</th>
       <td mat-cell *matCellDef="let reactivo">{{reactivo.cantidadSolicitada}}</td>
     </ng-container>
 
@@ -120,7 +120,7 @@
   </table>
   <div class="position-absolute">
     <button class="botonesAceptarCancelar" [disabled]="deshabilitarBotonAceptar()" mat-button type="submit" (click)="abrirDialogoConfirmacion()">Aceptar</button>
-    <button class="botonesAceptarCancelar" [disabled]="deshabilitarBotonRechazar()" mat-button type="submit" (click)="abrirDialogoRechazo()">Rechazar</button>
+    <button class="botonesAceptarCancelar" mat-button type="submit" (click)="abrirDialogoRechazo()">Rechazar</button>
     <button class="botonesAceptarCancelar" mat-button type="button" (click)="cancelar()">Cancelar</button>
   </div>
 
