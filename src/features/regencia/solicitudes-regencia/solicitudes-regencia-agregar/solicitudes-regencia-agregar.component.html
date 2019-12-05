@@ -71,7 +71,7 @@
 
     <ng-container matColumnDef="cantidad">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
-      <td mat-cell *matCellDef="let reactivo">
+      <td mat-cell *matCellDef="let reactivo">{{reactivo.cantidadSolicitada}}
         <input matInput placeholder="Seleccione la cantidad" (keyup)="onKeyReactivo($event, reactivo)" type="number">
       </td>
     </ng-container>
@@ -110,7 +110,7 @@
 
     <ng-container matColumnDef="cantidad">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
-      <td mat-cell *matCellDef="let cristaleria">
+      <td mat-cell *matCellDef="let cristaleria">{{cristaleria.cantidadSolicitada}}
         <input matInput placeholder="Seleccione la cantidad" (keyup)="onKeyCristaleria($event, cristaleria)" type="number">
       </td>
     </ng-container>
