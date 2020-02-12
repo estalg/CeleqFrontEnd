@@ -14,6 +14,10 @@ export class CristaleriaService {
 
   constructor(private http: HttpClient) { }
 
+  private  abrirReporteCristaleria() {
+    window.open(environment.backendUrl + '/cristaleria/reporte', '_blank');
+  }
+
   consultar(): Observable<CristaleriaEntidad[]> {
     return this.http.get<CristaleriaEntidad[]>(this.urlEndPoint);
   }

@@ -1,0 +1,74 @@
+<div class="container">
+
+  <h2>Feriados</h2>
+
+  <div style="margin-top: -3rem">
+
+    <button mat-button class="botonAgregar" [routerLink]="['/vinculo-externo/feriados', 'agregar', 'nuevo']">Agregar</button>
+
+    <mat-form-field class="barraBusqueda">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+    </mat-form-field>
+
+    <div class="mat-elevation-z2">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Feriado</th>
+          <td mat-cell *matCellDef="let feriado">{{feriado.descripcion}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+          <td mat-cell *matCellDef="let feriado">{{feriado.fecha}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let feriado">
+            <button mat-button class="botonesTabla" [routerLink]="['/vinculo-externo/feriados', 'editar', feriado.id]">Editar</button>
+            <button mat-button class="botonesTabla" (click)="abrirDialogoConfirmacion(feriado.id)">Eliminar</button>
+          </td>
+
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+    <div class="mat-elevation-z2">
+      <table mat-table [dataSource]="semanaSantaSource" matSort>
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Feriado</th>
+          <td mat-cell *matCellDef="let feriado">{{feriado.descripcion}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaInicio">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de Inicio</th>
+          <td mat-cell *matCellDef="let feriado">{{feriado.fechaInicio}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaFinal">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Final</th>
+          <td mat-cell *matCellDef="let feriado">{{feriado.fechaFinal}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let feriado">
+            <button mat-button class="botonesTabla" [routerLink]="['/vinculo-externo/feriados', 'editarSS', feriado.id]">Editar</button>
+          </td>
+
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsSemanaSanta"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsSemanaSanta;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+    <button mat-button class="botonesAceptarCancelar" [routerLink]="['/']">Volver</button>
+
+  </div>
+</div>

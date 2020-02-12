@@ -1,0 +1,71 @@
+<div class="container">
+  <form [formGroup]="formClientes">
+    <h2>{{titulo}}</h2>
+    <mat-card class="formContainer">
+
+      <mat-form-field>
+        <input matInput placeholder="Nombre" formControlName="nombre" required>
+        <mat-error *ngIf="nombre.errors?.required && nombre.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="nombre.errors?.maxlength && nombre.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="A la atención de" formControlName="atencionDe" required>
+        <mat-error *ngIf="atencionDe.errors?.required && atencionDe.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Telefono" formControlName="telefono" required>
+        <mat-error *ngIf="telefono.errors?.required && telefono.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="telefono.errors?.pattern && telefono2.touched">
+          El teléfono no cumple con un formto válido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Telefono 2" formControlName="telefono2" required>
+        <mat-error *ngIf="telefono2.errors?.required && telefono2.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="telefono2.errors?.pattern && telefono2.touched">
+          El teléfono no cumple con un formto válido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Correo" formControlName="correo" required>
+        <mat-error *ngIf="correo.errors?.required && correo.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Fax" formControlName="fax" required>
+        <mat-error *ngIf="fax.errors?.required && fax.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Dirección" formControlName="direccion" required>
+        <mat-error *ngIf="direccion.errors?.required && direccion.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+    </mat-card>
+
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="modificar()" *ngIf="modoForm === 'editar'" [disabled]="formClientes.invalid">Aceptar</button>
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="agregar()" *ngIf="modoForm === 'agregar'" [disabled]="formClientes.invalid">Aceptar</button>
+
+    <button mat-button class="botonesAceptarCancelar" type="button" (click)="cancelar()">Cancelar</button>
+  </form>
+</div>

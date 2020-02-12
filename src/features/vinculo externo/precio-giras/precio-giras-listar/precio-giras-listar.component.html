@@ -1,0 +1,48 @@
+<div class="container">
+
+  <h2>Precio para giras</h2>
+
+  <br><br><br>
+
+  <div style="margin-top: -3rem">
+
+    <div class="mat-elevation-z2">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="variable">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
+          <td mat-cell *matCellDef="let precioGiras">
+            <p *ngIf="precioGiras.variable === 'valorKilometro'">
+              Valor por kilómetro
+            </p>
+            <p *ngIf="precioGiras.variable === 'valorProfesional'">
+              Valor por hora profesional
+            </p>
+            <p *ngIf="precioGiras.variable === 'valorTecnico'">
+              Valor por hora técnica
+            </p>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="valor">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor</th>
+          <td mat-cell *matCellDef="let precioGira">₡ {{precioGira.valor}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let precioGira">
+            <button mat-button class="botonesTabla" (click)="abrirDialogoEditar(precioGira.variable, precioGira.valor)">Editar</button>
+          </td>
+
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+  </div>
+
+  <button mat-button class="botonesAceptarCancelar" [routerLink]="['/']">Volver</button>
+</div>

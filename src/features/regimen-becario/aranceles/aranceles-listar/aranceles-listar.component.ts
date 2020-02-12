@@ -4,7 +4,6 @@ import {ArancelesService} from '../../../../shared/servicios/regimen becario/ara
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {DialogoConfirmacionComponent} from '../../../../shared/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
 import {ArancelesEditarComponent} from '../aranceles-editar/aranceles-editar.component';
-import {ReactivoEntidad} from '../../../../shared/entidades/regencia/reactivoEntidad';
 
 @Component({
   selector: 'app-aranceles-listar',

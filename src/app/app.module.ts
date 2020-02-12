@@ -22,6 +22,11 @@ import {PresupuestosModule} from '../features/regimen-becario/presupuestos/presu
 import {ReportesModule} from '../features/regimen-becario/reportes/reportes.module';
 import {TokenInterceptor} from '../shared/seguridad/token-interceptor';
 import {CambioContrasennaModule} from '../features/cambio-contrasenna/cambio-contrasenna.module';
+import {PrecioGirasModule} from '../features/vinculo externo/precio-giras/precio-giras.module';
+import {FeriadosModule} from '../features/vinculo externo/feriados/feriados.module';
+import {AnalisisModule} from '../features/vinculo externo/analisis/analisis.module';
+import {ClienteModule} from '../features/vinculo externo/cliente/cliente.module';
+import {CotizacionModule} from '../features/vinculo externo/cotizacion/cotizacion.module';
 
 @NgModule({
   declarations: [
@@ -49,7 +54,12 @@ import {CambioContrasennaModule} from '../features/cambio-contrasenna/cambio-con
     ArancelesModule,
     PresupuestosModule,
     ReportesModule,
-    CambioContrasennaModule
+    CambioContrasennaModule,
+    PrecioGirasModule,
+    FeriadosModule,
+    AnalisisModule,
+    ClienteModule,
+    CotizacionModule
   ],
   providers: [
     {

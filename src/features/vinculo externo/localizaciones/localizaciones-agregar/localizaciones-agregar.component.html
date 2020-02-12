@@ -1,3 +1,57 @@
-<p>
-  localizaciones-agregar works!
-</p>
+<div class="container">
+  <form [formGroup]="formLocalizaciones">
+    <h2>{{titulo}}</h2>
+    <mat-card class="formContainer">
+
+      <mat-form-field>
+        <input matInput placeholder="Provincia" formControlName="provincia" required>
+        <mat-error *ngIf="provincia.errors?.required && provincia.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="provincia.errors?.maxlength && provincia.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Cantón" formControlName="canton" required>
+        <mat-error *ngIf="canton.errors?.required && canton.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="canton.errors?.maxlength && canton.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Localidad" formControlName="localidad" required>
+        <mat-error *ngIf="localidad.errors?.required && localidad.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="localidad.errors?.maxlength && localidad.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Distancia" formControlName="distancia" required>
+        <mat-error *ngIf="distancia.errors?.required && distancia.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Hospedaje" formControlName="hospedaje" required>
+        <mat-error *ngIf="hospedaje.errors?.required && hospedaje.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+    </mat-card>
+
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="modificar()" *ngIf="modoForm === 'editar'" [disabled]="formLocalizaciones.invalid">Aceptar</button>
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="agregar()" *ngIf="modoForm === 'agregar'" [disabled]="formLocalizaciones.invalid">Aceptar</button>
+
+    <button mat-button class="botonesAceptarCancelar" type="button" (click)="cancelar()">Cancelar</button>
+  </form>
+</div>

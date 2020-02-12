@@ -46,6 +46,21 @@
       </div>
     </mat-expansion-panel>
 
+    <mat-expansion-panel class="pannel" *ngIf="revisarAlgunPermiso(['48', '44', '50'])">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Vínculo externo</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="buttonContainer">
+        <button mat-stroked-button [routerLink]="['/vinculo-externo/precioGiras']" *ngIf="revisarPermiso('48')">Precios para giras</button>
+        <button mat-stroked-button routerLink="/vinculo-externo/localizaciones" *ngIf="revisarPermiso('44')">Localizaciones</button>
+        <button mat-stroked-button routerLink="/vinculo-externo/feriados" *ngIf="revisarPermiso('50')">Feriados</button>
+        <button mat-stroked-button routerLink="/vinculo-externo/analisis" *ngIf="revisarPermiso('54')">Análisis</button>
+        <button mat-stroked-button routerLink="/vinculo-externo/clientes" *ngIf="revisarPermiso('57')">Clientes</button>
+        <button mat-stroked-button routerLink="/vinculo-externo/cotizacion" *ngIf="revisarPermiso('60')">Cotizaciones</button>
+      </div>
+    </mat-expansion-panel>
+
   </mat-accordion>
 
 </div>

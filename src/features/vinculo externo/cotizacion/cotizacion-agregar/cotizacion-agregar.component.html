@@ -1,0 +1,302 @@
+<div style="width: 85%; margin: auto">
+  <form [formGroup]="formCotizacion">
+    <h2>{{titulo}}</h2>
+
+    <br>
+
+    <div style="width: 24%; border: 1px solid black;float: right">
+      <mat-form-field style="width: 95%;font-size: 26px; text-align: center">
+        <input matInput placeholder="Consecutivo" formControlName="consecutivo">
+      </mat-form-field>
+    </div>
+
+    <div style="border: 1px solid black; width: 75%; margin-bottom: 1%">
+      <mat-form-field style="width: 30%">
+        <input matInput [matDatepicker]="picker" placeholder="Fecha de emisión" formControlName="fechaCotizacion">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field style="width: 50%">
+        <mat-label>Cotizador</mat-label>
+        <mat-select formControlName="cotizador">
+          <mat-option *ngFor="let cotizador of cotizadores" [value]="cotizador.cedula">
+            {{cotizador.nombre + ' ' + cotizador.apellido1 + ' ' + cotizador.apellido2}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div style="border: 1px solid black; width: 75%; margin-bottom: 1%">
+      <mat-form-field style="width: 36%">
+        <mat-label>Cliente</mat-label>
+        <mat-select formControlName="cliente" (selectionChange)="consultarCliente($event.value)">
+          <mat-option *ngFor="let cliente of clientes" [value]="cliente.nombre">
+            {{cliente.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-button class="boton">Agregar</button>
+
+      <div style="float: right; flex-direction: column;display: flex; width: 45%">
+        <mat-form-field style="width: 95%">
+          <input matInput placeholder="A la atención de" formControlName="contacto">
+        </mat-form-field>
+
+        <mat-form-field style="width: 95%">
+          <input matInput placeholder="Correo" formControlName="correo">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field style="width: 14%">
+          <input matInput placeholder="Teléfono" formControlName="telefono">
+        </mat-form-field>
+
+        <mat-form-field style="width: 14%">
+          <input matInput placeholder="Teléfono2" formControlName="telefono2">
+        </mat-form-field>
+
+        <mat-form-field style="width: 14%; margin-left: 2%">
+          <input matInput placeholder="Fax" formControlName="fax">
+        </mat-form-field>
+      </div>
+
+      <mat-form-field style="width: 97%">
+        <input matInput placeholder="Dirección" formControlName="direccion">
+      </mat-form-field>
+    </div>
+
+    <div style="border: 1px solid black; width: 100%; margin-bottom: 1%">
+      <mat-form-field style="width: 15%">
+        <mat-label>Tipo de muestra</mat-label>
+        <mat-select formControlName="tipoMuestra">
+          <mat-option *ngFor="let tipo of listaTiposMuestra" [value]="tipo.tipo">
+            {{tipo.tipo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field style="width: 15%">
+        <input matInput placeholder="Especifique" formControlName="especifique" required>
+      </mat-form-field>
+
+      <mat-form-field style="width: 15%">
+        <input matInput type="number" placeholder="Número de muestras" formControlName="numeroMuestras" required>
+      </mat-form-field>
+
+      <mat-form-field style="width: 20%">
+        <span matSuffix>días hábiles</span>
+        <input matInput type="number" placeholder="Entrega de resultados" formControlName="entregaResultados" required>
+      </mat-form-field>
+
+      <mat-form-field style="width: 15%">
+        <input matInput type="number" placeholder="Cantidad necesaria" formControlName="cantidadNecesaria" required>
+      </mat-form-field>
+
+      <mat-form-field style="width: 7%">
+        <mat-label>Unidad</mat-label>
+        <mat-select required formControlName="unidades">
+          <mat-option [value]="1">
+            mL
+          </mat-option>
+          <mat-option [value]="2">
+            L
+          </mat-option>
+          <mat-option [value]="3">
+            cm
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="unidades.errors?.required && unidades.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mat-elevation-z2" style="border: 1px solid black; margin-bottom: 1%">
+      <button style="margin-left: 1%;margin-top: 1%" mat-button class="boton" (click)="abrirDialogoListaAnalisis(this.formCotizacion.controls.tipoMuestra.value)">Análisis</button>
+      <button style="margin-bottom: 1%" mat-button class="boton">Metales</button>
+
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</th>
+          <td mat-cell *matCellDef="let analisis">{{analisis.descripcion}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="metodo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Método</th>
+          <td mat-cell *matCellDef="let analisis">{{analisis.metodo}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="precio">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
+          <td mat-cell *matCellDef="let analisis">{{analisis.precio}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let analisis">
+            <button mat-button class="botonesTabla">Borrar</button>
+          </td>
+
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+    <div style="margin-bottom: 1%">
+      <div style="border: 1px solid black; margin-right: 1%; width: 33%; display: table-cell">
+        <mat-checkbox style="margin-left: 2%" formControlName="requiereGira">Requiere gira</mat-checkbox>
+        <div>
+          <div style="float: left;flex-direction: column;display: flex; width: 45%; margin-left: 2%">
+            <mat-form-field>
+              <input matInput type="number" placeholder="Cantidad de profesionales" formControlName="cantidadProfesionales" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput type="number" placeholder="Cantidad de técnicos" formControlName="cantidadTecnicos" required>
+            </mat-form-field>
+          </div>
+
+          <div style="float: right;flex-direction: column;display: flex; width: 45%; margin-right: 2%; margin-bottom: 2%">
+            <mat-form-field>
+              <input matInput type="number" placeholder="Horas de muestreo" formControlName="horasMuestreo" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput type="number" placeholder="Noches de alojamiento" formControlName="nochesAlojamiento" required>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div style="flex-direction: column;display: flex; width: 90%;margin: auto">
+          <mat-form-field>
+            <mat-label>Provincia de destino</mat-label>
+            <mat-select formControlName="provincia" (selectionChange)="cargarCantones($event.value)">
+              <mat-option *ngFor="let localizacion of provincias" [value]="localizacion.provincia">
+                {{localizacion.provincia}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Cantón de destino</mat-label>
+            <mat-select formControlName="canton" (selectionChange)="cargarLocalidades($event.value)">
+              <mat-option *ngFor="let localizacion of cantones" [value]="localizacion.canton">
+                {{localizacion.canton}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Localidad de destino</mat-label>
+            <mat-select formControlName="localidad">
+              <mat-option *ngFor="let localizacion of localidades" [value]="localizacion.localidad">
+                {{localizacion.localidad}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div style="margin-left: 30%">
+          <button mat-button class="boton">Calcular Total</button>
+
+          <mat-form-field>
+            <span matPrefix>$ </span>
+            <input matInput placeholder="" formControlName="totalGira" required>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div style="border: 1px solid black; margin-right: 2%; width: 30%; display: table-cell">
+        <mat-checkbox style="margin-left: 2%" formControlName="licitacion">¿Se require la cotización para una licitación?</mat-checkbox>
+
+        <mat-form-field style="margin-left: 8%; width: 80%">
+          <textarea matInput placeholder="Observaciones" formControlName="observaciones"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div style="border: 1px solid black; width: 30%; display: table-cell">
+        <div style="flex-direction: column;display: flex; width: 90%; margin: auto">
+          <mat-form-field>
+            <input matInput placeholder="Precio unitario por muestra" formControlName="precioUnitario" required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Precio del muestreo" formControlName="precioMuestreo" required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Subtotal" formControlName="subtotal" required>
+          </mat-form-field>
+
+          <div>
+            <mat-form-field style="width: 33%">
+              <input matInput type="number" placeholder="Descuento(%)" formControlName="descuento" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Monto descuento" formControlName="descuento2" required>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field style="width: 33%">
+              <input matInput type="number" placeholder="Gastos adm.(%)" formControlName="gastosAdm" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Monto Gastos adm." formControlName="gastosAdm2" required>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field>
+            <input matInput placeholder="Saldo a favor" formControlName="saldoAfavor" required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Gran Total" formControlName="granTotal" required>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div style="border: 1px solid black">
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker2" placeholder="Fecha de la solicitud del cliente" formControlName="fechaSolicitud">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field style="width: 30%">
+        <mat-label>Químico que analiza la solicitud</mat-label>
+        <mat-select formControlName="usuarioQuimico">
+          <mat-option *ngFor="let localizacion of localidades" [value]="localizacion.localidad">
+            {{localizacion.localidad}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker3" placeholder="Fecha de respuesta" formControlName="fechaRespuesta">
+        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field style="width: 30%">
+        <mat-label>Firmante</mat-label>
+        <mat-select formControlName="usuarioFirmante">
+          <mat-option *ngFor="let localizacion of localidades" [value]="localizacion.localidad">
+            {{localizacion.localidad}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,72 @@
+<div class="container">
+  <form [formGroup]="formAnalisis">
+    <h2>{{titulo}}</h2>
+    <mat-card class="formContainer">
+
+      <mat-form-field>
+        <input matInput placeholder="Descripción" formControlName="descripcion" required>
+        <mat-error *ngIf="descripcion.errors?.required && descripcion.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="descripcion.errors?.maxlength && descripcion.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
+      </mat-form-field>
+
+      <mat-grid-list cols="3" rowHeight="65px">
+        <mat-grid-tile colspan="3">
+          <mat-form-field class="gridCell">
+            <mat-label>Tipo de muestra</mat-label>
+            <mat-select required formControlName="tipoMuestra">
+              <mat-option *ngFor="let tipo of listaTipoMuestras" [value]="tipo.tipo">
+                {{tipo.tipo}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="tipoMuestra.errors?.required && tipoMuestra.touched">
+              Este campo es obligatorio
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-form-field>
+        <input matInput placeholder="Método" formControlName="metodo" required>
+        <mat-error *ngIf="metodo.errors?.required && metodo.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Precio" formControlName="precio" required>
+        <mat-error *ngIf="precio.errors?.required && precio.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Acreditación</mat-label>
+        <mat-select required formControlName="acreditacion">
+          <mat-option [value]="1">
+            Método de Ensayo acreditado ante el ECA (INTE-ISO/IEC 17025:2005)
+          </mat-option>
+          <mat-option [value]="2">
+            Método de Inspección acreditado ante el ECA (INTE-ISO/IEC 17020:2012)
+          </mat-option>
+          <mat-option [value]="3">
+            Método no acreditado
+          </mat-option>
+        </mat-select>
+
+        <mat-error *ngIf="acreditacion.errors?.required && acreditacion.touched">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+    </mat-card>
+
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="modificar()" *ngIf="modoForm === 'editar'" [disabled]="formAnalisis.invalid">Aceptar</button>
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="agregar()" *ngIf="modoForm === 'agregar'" [disabled]="formAnalisis.invalid">Aceptar</button>
+
+    <button mat-button class="botonesAceptarCancelar" type="button" (click)="cancelar()">Cancelar</button>
+  </form>
+</div>

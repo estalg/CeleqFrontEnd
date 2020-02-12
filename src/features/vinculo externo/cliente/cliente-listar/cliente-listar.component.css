@@ -1,0 +1,86 @@
+table {
+  text-align: center !important;
+  width: 100%;
+}
+
+tr.mat-header-row {
+  background-color: #78909C !important;
+}
+
+th.mat-header-cell {
+  color: white !important;
+}
+
+.mat-row:nth-child(even){
+  background-color:white;
+  font-size: medium;
+}
+
+.mat-row:nth-child(odd){
+  background-color: #ECEFF1;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-header-cell {
+  text-align: center;
+}
+
+.barraBusqueda {
+  display: flex;
+  justify-content: flex-end;
+  right: 10px;
+}
+
+.botonesTabla {
+  margin-right: 5px;
+  background-color: #78909C;
+  color: white;
+}
+
+.botonAgregar {
+  position: relative;
+  top: 50px;
+  z-index: 2;
+  background-color: #78909C;
+  color: white;
+}
+
+mat-column-nombre{
+  width: 14%;
+}
+
+mat-column-telefono{
+  width: 14%;
+}
+
+mat-column-telefono2{
+  width: 14%;
+}
+
+mat-column-correo{
+  width: 14%;
+}
+
+mat-column-fax{
+  width: 14%;
+}
+
+mat-column-direccion{
+  width: 14%;
+}
+
+mat-column-acciones{
+  width: 15%;
+  display: flex;
+  align-items: center;
+}
+
+td:nth-child(7){
+  overflow: hidden;
+  max-width: 20px;
+  text-overflow: ellipsis;
+}

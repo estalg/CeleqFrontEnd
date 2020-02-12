@@ -1,0 +1,42 @@
+<div class="container">
+  <form [formGroup]="formFeriados">
+    <h2>{{titulo}}</h2>
+    <mat-card class="formContainer">
+
+      <mat-form-field>
+        <input matInput placeholder="Feriado" formControlName="descripcion" required>
+        <mat-error *ngIf="descripcion.errors?.required && descripcion.touched">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="descripcion.errors?.maxlength && descripcion.touched">
+          El máximo de caracteres es de 255
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="modoForm=='editar'|| modoForm=='agregar'">
+        <input matInput [matDatepicker]="picker" placeholder="Escoja una fecha" formControlName="fecha">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="modoForm=='editarSS'">
+        <input matInput [matDatepicker]="picker3" placeholder="Escoja la fecha de inicio" formControlName="fecha1">
+        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="modoForm=='editarSS'">
+        <input matInput [matDatepicker]="picker2" placeholder="Escoja la fecha final" formControlName="fecha2">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+    </mat-card>
+
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="modificar()" *ngIf="modoForm === 'editar'" [disabled]="formFeriados.invalid">Aceptar</button>
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="modificar()" *ngIf="modoForm === 'editarSS'" [disabled]="formFeriados.invalid">Aceptar</button>
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="agregar()" *ngIf="modoForm === 'agregar'" [disabled]="formFeriados.invalid">Aceptar</button>
+
+    <button mat-button class="botonesAceptarCancelar" type="button" (click)="cancelar()">Cancelar</button>
+  </form>
+</div>

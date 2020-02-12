@@ -1,0 +1,62 @@
+table {
+  text-align: center !important;
+  width: 98%;
+  margin-left: 1%;
+  margin-bottom: 1%;
+}
+
+tr.mat-header-row {
+  background-color: #78909C !important;
+}
+
+th.mat-header-cell {
+  color: white !important;
+}
+
+.mat-row:nth-child(even){
+  background-color:white;
+  font-size: medium;
+}
+
+.mat-row:nth-child(odd){
+  background-color: #ECEFF1;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-header-cell {
+  text-align: center;
+}
+
+.botonesTabla {
+  margin-right: 5px;
+  background-color: #78909C;
+  color: white;
+}
+
+th, td {
+  overflow: hidden;
+  max-width: 20%;
+  text-overflow: ellipsis;
+}
+
+td:nth-child(4){
+  overflow: hidden;
+  max-width: 40%;
+  text-overflow: ellipsis;
+}
+
+.mat-form-field{
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+.boton {
+  position: relative;
+  background-color: #78909C;
+  color: white;
+  margin-right: 1%;
+}

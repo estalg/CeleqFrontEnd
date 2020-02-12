@@ -1,0 +1,114 @@
+table {
+  text-align: center !important;
+  width: 100%;
+}
+
+tr.mat-header-row {
+  background-color: #78909C !important;
+}
+
+th.mat-header-cell {
+  color: white !important;
+}
+
+.mat-row:nth-child(even){
+  background-color:white;
+  font-size: medium;
+}
+
+.mat-row:nth-child(odd){
+  background-color: #ECEFF1;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-header-cell {
+  text-align: center;
+}
+
+.barraBusqueda {
+  display: flex;
+  justify-content: flex-end;
+  right: 10px;
+}
+
+.botonesTabla {
+  margin-right: 5px;
+  background-color: #78909C;
+  color: white;
+}
+
+.botonAgregar {
+  position: relative;
+  top: 50px;
+  z-index: 2;
+  background-color: #78909C;
+  color: white;
+}
+
+.gridCell {
+  position: relative;
+  top: 10px;
+  left: 270px;
+  z-index: 3;
+}
+
+.botonAgregar2 {
+  position: relative;
+  top: -45px;
+  float: right;
+  z-index: 3;
+  background-color: #78909C;
+  color: white;
+}
+
+.botonEliminar {
+  position: relative;
+  top: -45px;
+  float: right;
+  z-index: 3;
+  background-color: #78909C;
+  color: white;
+  margin-right: 5px;
+}
+
+mat-column-descripcion{
+  width: 10%;
+}
+
+mat-column-tipoMuestra{
+  width: 10%;
+}
+
+mat-column-metodo{
+  width: 10%;
+}
+
+mat-column-precio{
+  width: 10%;
+}
+
+mat-column-acreditacion{
+  width: 10%;
+}
+
+mat-column-acciones{
+  width: 10%;
+  display: flex;
+  align-items: center;
+}
+
+th, td {
+  overflow: hidden;
+  max-width: 20px;
+  text-overflow: ellipsis;
+}
+
+td:nth-child(6){
+  overflow: hidden;
+  max-width: 40px;
+  text-overflow: ellipsis;
+}
