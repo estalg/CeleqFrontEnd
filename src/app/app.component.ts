@@ -21,7 +21,7 @@ export class AppComponent {
     // this.authService.currentUser.subscribe(x => this.currentUser = x);
 
     // Timeout
-    this.bnIdle.startWatching(2400).subscribe((res) => {
+    this.bnIdle.startWatching(900).subscribe((res) => {
       if (res) {
         this.authService.logout();
       }

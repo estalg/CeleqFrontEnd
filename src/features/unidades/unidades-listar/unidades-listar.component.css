@@ -58,6 +58,7 @@ th.mat-header-cell {
 }
 
 mat-column-acciones{
+  min-width: 15%;
   width: 15%;
   display: flex;
   align-items: center;

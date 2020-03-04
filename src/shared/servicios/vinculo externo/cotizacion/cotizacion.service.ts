@@ -41,4 +41,12 @@ export class CotizacionService {
       idCotizacion + `&annoCotizacion=` + annoCotizacion + `&descripcion=` + descripcion +
       `&tipoMuestra=` + tipoMuestra, {headers: this.httpHeaders});
   }
+
+  consultar_tipo_cambio() {
+    return this.http.get(environment.backendUrl + '/webService');
+  }
+
+  consultarAnalisis(id: number, anno: number): Observable<CotizacionAnalisisEntidad[]> {
+    return this.http.get<CotizacionAnalisisEntidad[]>(`${this.urlEndPoint}/analisis?id=` + id + `&anno=` + anno);
+  }
 }

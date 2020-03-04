@@ -64,7 +64,7 @@
     </mat-card>
 
     <button mat-button class="botonesAceptarCancelar" type="submit" (click)="modificar()" *ngIf="modoForm === 'editar'" [disabled]="formClientes.invalid">Aceptar</button>
-    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="agregar()" *ngIf="modoForm === 'agregar'" [disabled]="formClientes.invalid">Aceptar</button>
+    <button mat-button class="botonesAceptarCancelar" type="submit" (click)="agregar()" *ngIf="modoForm === 'agregar' || modoForm === 'agregarEnCotizacion'" [disabled]="formClientes.invalid">Aceptar</button>
 
     <button mat-button class="botonesAceptarCancelar" type="button" (click)="cancelar()">Cancelar</button>
   </form>

@@ -61,7 +61,7 @@ export class ClienteAgregarComponent implements OnInit {
       ]]
     });
 
-    if (this.modoForm === 'agregar') {
+    if (this.modoForm === 'agregar' || this.modoForm === 'agregarEnCotizacion') {
       this.titulo = 'Agregar Cliente';
     } else {
 
@@ -109,7 +109,11 @@ export class ClienteAgregarComponent implements OnInit {
   }
 
   cancelar() {
-    this.routeService.navigate(['/vinculo-externo/clientes']);
+    if (this.modoForm === 'agregar') {
+      this.routeService.navigate(['/vinculo-externo/clientes']);
+    } else {
+      this.routeService.navigate(['/vinculo-externo/cotizacion', 'agregar', 'nuevo', 'nuevo']);
+    }
   }
 
   async agregar() {
@@ -124,7 +128,11 @@ export class ClienteAgregarComponent implements OnInit {
     clienteNuevo.contacto = this.formClientes.controls.atencionDe.value;
 
     this.clienteService.agregar(clienteNuevo).subscribe(result => {
+      if (this.modoForm === 'agregar') {
         this.routeService.navigate(['/vinculo-externo/clientes']);
+      } else {
+        this.routeService.navigate(['/vinculo-externo/cotizacion', 'agregar', 'nuevo', 'nuevo']);
+      }
       },
       error => {
         this.abrirDialogoError('Error al agregar cliente, inténtelo de nuevo');

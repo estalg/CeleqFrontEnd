@@ -9,7 +9,7 @@ export class CotizacionEntidad {
   fechaCotizacion: Date;
   fechaSolicitud: Date;
   fechaRespuesta: Date;
-  saldoAfavor: number;
+  iva: number;
   granTotal: number;
   moneda: string;
   cotizador: string;
@@ -18,8 +18,9 @@ export class CotizacionEntidad {
   diasEntregaRes: number;
   subTotal: number;
   numeroMuestras: number;
-  quimico: string;
-  firmante: string;
+  cantidadNecesaria: number;
+  unidadMedida: string;
+  especifique: string;
   usuarioQuimico: string;
   usuarioFirmante: string;
 }

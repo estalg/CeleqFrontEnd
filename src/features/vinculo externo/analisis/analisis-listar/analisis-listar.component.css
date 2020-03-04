@@ -103,12 +103,12 @@ mat-column-acciones{
 
 th, td {
   overflow: hidden;
-  max-width: 20px;
+  max-width: 15%;
   text-overflow: ellipsis;
 }
 
 td:nth-child(6){
   overflow: hidden;
-  max-width: 40px;
+  min-width: 20%;
   text-overflow: ellipsis;
 }
